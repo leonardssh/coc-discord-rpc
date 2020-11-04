@@ -1,20 +1,20 @@
 <p align="center">
-    <img src="https://github.com/LeonardSSH/typescript-template/blob/main/typescript.svg" alt="Typescript" align="center" width="128" height="128">
+    <img src="https://i.imgur.com/eNbd9uD.png" alt="Icon" align="center" width="256">
 <p>
 
 <h3 align="center">
-    😎 An awesome Typescript Template for awesome projects!
+    😎 An awesome coc-extension to get Discord Rich Presence integration with <a href="https://neovim.io/"><b>NeoVim</b></a>.
 </h3>
 
 ---
 
 Remember to 🌟 this Github if you 💖 it.
 
-## 👨‍💻 Developing on typescript-template
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-### Requirements
-
-### Contributing
+## 👨‍💻 Contributing
 
 To contribute to this repository, feel free to create a new fork of the repository and submit a pull request.
 
@@ -22,18 +22,27 @@ To contribute to this repository, feel free to create a new fork of the reposito
 2. Create a new branch in your fork.
 3. Make your changes.
 4. Commit your changes, and push them.
-5. Submit a Pull Request [here](https://github.com/LeonardSSH//typescript-template/pulls)!
-
-## ☕ Help
-
-## 🤝 Support
-
-## 🚧 Roadmap
-
-## 🏗️ Built With
-
-## 🔗 Useful links
+5. Submit a Pull Request [here](https://github.com/LeonardSSH/coc-discord-rpc/pulls)!
 
 ## 📋 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://leonard.sh"><img src="https://avatars1.githubusercontent.com/u/35312043?v=4" width="100px;" alt=""/><br /><sub><b>₿. Narcis Ionuț</b></sub></a><br /><a href="https://github.com/LeonardSSH/coc-discord-rpc/commits?author=LeonardSSH" title="Code">💻</a> <a href="https://github.com/LeonardSSH/coc-discord-rpc/commits?author=LeonardSSH" title="Documentation">📖</a> <a href="#design-LeonardSSH" title="Design">🎨</a> <a href="#ideas-LeonardSSH" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-LeonardSSH" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-LeonardSSH" title="Maintenance">🚧</a> <a href="#plugin-LeonardSSH" title="Plugin/utility libraries">🔌</a> <a href="#talk-LeonardSSH" title="Talks">📢</a> <a href="#tutorial-LeonardSSH" title="Tutorials">✅</a> <a href="#example-LeonardSSH" title="Examples">💡</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

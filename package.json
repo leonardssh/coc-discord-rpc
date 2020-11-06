@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
 	"main": "lib/index.js",
+	"private": false,
 	"scripts": {
 		"lint": "eslint src --ext ts --fix",
 		"format": "prettier --write src/**/*.ts",
@@ -17,6 +18,17 @@
 	"engines": {
 		"coc": ">=0.0.77"
 	},
+	"keywords": [
+		"discord",
+		"rich",
+		"presence",
+		"rich presence",
+		"rpc",
+		"neovim",
+		"nvim",
+		"coc",
+		"coc.nvim"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/LeonardSSH/coc-discord-rpc.git"

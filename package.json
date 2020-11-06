@@ -1,10 +1,11 @@
 {
 	"name": "coc-discord-rpc",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
 	"main": "lib/index.js",
 	"private": false,
 	"scripts": {
+		"prepublishOnly": "yarn build",
 		"lint": "eslint src --ext ts --fix",
 		"format": "prettier --write src/**/*.ts",
 		"format:check": "prettier --check src/**/*.ts",

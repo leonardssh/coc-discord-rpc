@@ -1,6 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import type { Presence } from 'discord-rpc';
 
+import { extensions } from 'coc.nvim';
 import lang from '../language/languages.json';
 
 const knownExtensions: { [key: string]: { image: string } } = lang.knownExtensions;
@@ -40,13 +41,17 @@ export const getActivity = (startTimestamp: number | Date, workspace?: string, f
 			})!
 		];
 
+	const coc_explorer = extensions.isActivated('coc-explorer') && '%5Bcoc-explorer%5D-1'.includes(fileName);
+
 	state = {
 		...state,
 		details: `Workspace: ${workspace}`,
-		state: `Editing ${fileName}`,
+		state: coc_explorer ? `In explorer` : `Editing ${fileName}`,
 		startTimestamp,
 		largeImageKey: largeImageKey ? largeImageKey.image || largeImageKey : 'neovim-logo',
-		largeImageText: `Editing a ${largeImageKey ? (largeImageKey.image || largeImageKey).toUpperCase() : 'TXT'} file`
+		largeImageText: coc_explorer
+			? 'In explorer'
+			: `Editing a ${largeImageKey ? (largeImageKey.image || largeImageKey).toUpperCase() : 'TXT'} file`
 	};
 
 	return state;

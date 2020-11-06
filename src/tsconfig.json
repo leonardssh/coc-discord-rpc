@@ -2,9 +2,11 @@
 	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
 		"rootDir": "./",
-		"outDir": "../dist",
+		"outDir": "../lib",
 		"composite": true,
-		"preserveConstEnums": true
+		"preserveConstEnums": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true
 	},
-	"include": ["."]
+	"include": [".", "./language/languages.json"]
 }

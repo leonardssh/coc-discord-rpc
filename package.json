@@ -1,8 +1,8 @@
 {
-	"name": "typescript-template",
+	"name": "coc-discord-rpc",
 	"version": "1.0.0",
-	"description": "An awesome Typescript Template for awesome projects!",
-	"main": "dist/index.js",
+	"description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
+	"main": "lib/index.js",
 	"scripts": {
 		"lint": "eslint src --ext ts --fix",
 		"format": "prettier --write src/**/*.ts",
@@ -14,23 +14,31 @@
 		"commit": "git-cz",
 		"cz": "git-cz"
 	},
+	"engines": {
+		"coc": ">=0.0.77"
+	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/LeonardSSH/typescript-template.git"
+		"url": "git+https://github.com/LeonardSSH/coc-discord-rpc.git"
 	},
 	"author": "LeonardSSH <leonardssh22@gmail.com> (https://leonard.pw)",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/LeonardSSH/typescript-template/issues"
+		"url": "https://github.com/LeonardSSH/coc-discord-rpc/issues"
 	},
-	"homepage": "https://github.com/LeonardSSH/typescript-template#readme",
-	"dependencies": {},
+	"homepage": "https://github.com/LeonardSSH/coc-discord-rpc#readme",
+	"dependencies": {
+		"discord-rpc": "^3.1.4"
+	},
 	"devDependencies": {
 		"@commitlint/cli": "^11.0.0",
 		"@commitlint/config-conventional": "^11.0.0",
+		"@types/discord-rpc": "^3.0.4",
 		"@types/node": "^14.14.0",
+		"@types/ws": "^7.2.9",
 		"@typescript-eslint/eslint-plugin": "^4.5.0",
 		"@typescript-eslint/parser": "^4.5.0",
+		"coc.nvim": "^0.0.79",
 		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^7.11.0",
 		"eslint-config-prettier": "^6.13.0",

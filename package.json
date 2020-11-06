@@ -5,7 +5,6 @@
 	"main": "lib/index.js",
 	"private": false,
 	"scripts": {
-		"prepublishOnly": "yarn build",
 		"lint": "eslint src --ext ts --fix",
 		"format": "prettier --write src/**/*.ts",
 		"format:check": "prettier --check src/**/*.ts",

@@ -25,6 +25,11 @@ Remember to 🌟 this Github if you 💖 it.
 * Shows what you are working on in NeoVim
 * Respects Discords 15sec limit when it comes to updating your status
 
+## 📋 Todo
+
+- [ ] Support for more programming languages
+- [ ] Custom string support
+
 ## 📥 Installation
 
 ### Prerequisites

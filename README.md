@@ -22,38 +22,41 @@ Remember to 🌟 this Github if you 💖 it.
 
 ## 📌 Features
 
-* Shows what you are working on in NeoVim
-* Respects Discords 15sec limit when it comes to updating your status
+-   Shows what you are working on in NeoVim
+-   Respects Discords 15sec limit when it comes to updating your status
+-   Support for over 110+ of the most popular languages
 
 ## 📋 Todo
 
-- [ ] Support for more programming languages
-- [ ] Custom string support
+-   [x] Support for more programming languages
+-   [ ] Custom string support
 
 ## 📥 Installation
 
 ### Prerequisites
 
-* [NeoVim](https://neovim.io/) - hyperextensible Vim-based text editor
-* [coc.nvim](https://github.com/neoclide/coc.nvim) - Intellisense engine for Vim8 & Neovim
+-   [NeoVim](https://neovim.io/) - hyperextensible Vim-based text editor
+-   [coc.nvim](https://github.com/neoclide/coc.nvim) - Intellisense engine for Vim8 & Neovim
 
 ### Install
+
 ```
 :CocInstall coc-discord-rpc
 ```
 
 ## 🤖 Commands
 
-|        Command       |                    Description                    |
-| -------------------- | ------------------------------------------------- |
-| `rpc.disconnect`     | Disconnects you from Discord Gateway              |
-| `rpc.reconnect`      | Reconnects you to Discord Gateway                 |
-| `rpc.version`        | Returns extension's version                       |
+| Command          | Description                          |
+| ---------------- | ------------------------------------ |
+| `rpc.disconnect` | Disconnects you from Discord Gateway |
+| `rpc.reconnect`  | Reconnects you to Discord Gateway    |
+| `rpc.version`    | Returns extension's version          |
 
 ## 🚧 WIP
 
-![a1](https://i.imgur.com/DsHv9D4.png)
-![a2](https://i.imgur.com/3qLrh2Y.png) 
+![a1](https://i.imgur.com/cx7kcoN.png)
+![a2](https://i.imgur.com/9xuxuos.png)
+![a3](https://i.imgur.com/FnGi6EU.png)
 
 ## 👨‍💻 Contributing
 
@@ -69,7 +72,7 @@ To contribute to this repository, feel free to create a new fork of the reposito
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contributors ✨
+## ✨ Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 

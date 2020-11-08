@@ -16,7 +16,39 @@ Remember to 🌟 this Github if you 💖 it.
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
+[![npm](https://img.shields.io/npm/v/coc-discord-rpc?color=crimson&logo=npm&style=flat-square)](https://www.npmjs.com/package/coc-discord-rpc)
+
 > NOTE: Much of the code in this repository is inspired and based on the ideas from [coc-cord] & [discord-vscode].
+
+## 📌 Features
+
+* Shows what you are working on in NeoVim
+* Respects Discords 15sec limit when it comes to updating your status
+
+## 📥 Installation
+
+### Prerequisites
+
+* [NeoVim](https://neovim.io/) - hyperextensible Vim-based text editor
+* [coc.nvim](https://github.com/neoclide/coc.nvim) - Intellisense engine for Vim8 & Neovim
+
+### Install
+```
+:CocInstall coc-discord-rpc
+```
+
+## 🤖 Commands
+
+|        Command       |                    Description                    |
+| -------------------- | ------------------------------------------------- |
+| `rpc.disconnect`     | Disconnects you from Discord Gateway              |
+| `rpc.reconnect`      | Reconnects you to Discord Gateway                 |
+| `rpc.version`        | Returns extension's version                       |
+
+## 🚧 WIP
+
+![a1](https://i.imgur.com/DsHv9D4.png)
+![a2](https://i.imgur.com/3qLrh2Y.png) 
 
 ## 👨‍💻 Contributing
 

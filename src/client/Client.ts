@@ -89,7 +89,7 @@ export default class Client implements Disposable {
 		);
 
 		ctx.subscriptions.push(
-			commands.registerCommand('rpc.connect', () => {
+			commands.registerCommand('rpc.reconnect', () => {
 				log(`Trying to connect to Discord Gateway`, LogLevel.Info);
 				void this.connect(ctx);
 			})

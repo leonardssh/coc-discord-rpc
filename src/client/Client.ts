@@ -1,8 +1,9 @@
-import { commands, Disposable, ExtensionContext, workspace } from 'coc.nvim';
+import { commands, Disposable, ExtensionContext, workspace, WorkspaceConfiguration } from 'coc.nvim';
 import { Client as RPClient } from 'discord-rpc';
 import { log, LogLevel } from '../structures/Logger';
-import { getActivity } from '../structures/Activity';
 import { version } from '../version/version';
+
+import Activity from '../structures/Activity';
 
 // eslint-disable-next-line @typescript-eslint/init-declarations
 let activityTimer: NodeJS.Timer | undefined;
@@ -10,11 +11,9 @@ let activityTimer: NodeJS.Timer | undefined;
 export default class Client implements Disposable {
 	private rpc?: RPClient;
 
-	public constructor(private readonly clientId: string) {}
+	private readonly activity = new Activity(this);
 
-	public get client() {
-		return this.rpc;
-	}
+	public constructor(public config: WorkspaceConfiguration) {}
 
 	public async connect(ctx?: ExtensionContext) {
 		if (this.rpc) {
@@ -28,7 +27,7 @@ export default class Client implements Disposable {
 		this.rpc.once('ready', () => this.ready(ctx));
 
 		try {
-			await this.rpc.login({ clientId: this.clientId });
+			await this.rpc.login({ clientId: this.config.get<string>('id')! });
 		} catch (error) {
 			throw error;
 		}
@@ -45,22 +44,27 @@ export default class Client implements Disposable {
 			clearInterval(activityTimer);
 		}
 
-		this.setActivity();
+		void this.setActivity();
+
+		activityTimer = setInterval(() => {
+			this.config = workspace.getConfiguration('rpc');
+
+			void this.setActivity();
+		}, 1000);
 	}
 
-	public setActivity() {
+	public async setActivity() {
 		if (!this.rpc) {
 			return;
 		}
 
-		const startTimestamp = new Date();
+		const activity = await this.activity.generate();
 
-		activityTimer = setInterval(() => {
-			const workspaceName = workspace.root.split('/').pop();
-			const fileName = workspace.getDocument(workspace.uri)?.uri.split('/').pop();
+		if (!activity) {
+			return;
+		}
 
-			void this.rpc!.setActivity(getActivity(startTimestamp, workspaceName, fileName));
-		}, 1000);
+		void this.rpc.setActivity(activity);
 	}
 
 	public async dispose() {
@@ -90,7 +94,7 @@ export default class Client implements Disposable {
 
 		ctx.subscriptions.push(
 			commands.registerCommand('rpc.reconnect', () => {
-				log(`Trying to connect to Discord Gateway`, LogLevel.Info);
+				log(`Trying to reconnect to Discord Gateway`, LogLevel.Info);
 				void this.connect(ctx);
 			})
 		);

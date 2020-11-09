@@ -1,11 +1,11 @@
 import Client from './client/Client';
 import { log, LogLevel } from './structures/Logger';
 
-import type { ExtensionContext } from 'coc.nvim';
+import { ExtensionContext, workspace } from 'coc.nvim';
 
-const clientId = '768090036633206815';
+const config = workspace.getConfiguration('rpc');
 
-const client: Client = new Client(clientId);
+const client: Client = new Client(config);
 
 export const activate = async (ctx: ExtensionContext) => {
 	log('Extension activated, trying to connect to Discord gateway', LogLevel.Info);

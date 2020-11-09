@@ -1,3 +1,13 @@
 import type { Presence } from 'discord-rpc';
-export declare const getActivity: (startTimestamp: number | Date, workspace?: string | undefined, fileName?: string | undefined) => Presence;
+import type RPClient from '../client/Client';
+import { Disposable } from 'coc.nvim';
+export default class Activity implements Disposable {
+    private readonly client;
+    private _state;
+    constructor(client: RPClient);
+    generate(): Promise<Presence | undefined>;
+    dispose(): void;
+    private _generateDetails;
+    private _generateFileDetails;
+}
 //# sourceMappingURL=Activity.d.ts.map

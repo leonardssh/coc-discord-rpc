@@ -25,11 +25,12 @@ Remember to 🌟 this Github if you 💖 it.
 -   Shows what you are working on in NeoVim
 -   Respects Discords 15sec limit when it comes to updating your status
 -   Support for over 110+ of the most popular languages
+-   Custom string support
 
 ## 📋 Todo
 
 -   [x] Support for more programming languages
--   [ ] Custom string support
+-   [x] Custom string support
 
 ## 📥 Installation
 
@@ -51,6 +52,86 @@ Remember to 🌟 this Github if you 💖 it.
 | `rpc.disconnect` | Disconnects you from Discord Gateway |
 | `rpc.reconnect`  | Reconnects you to Discord Gateway    |
 | `rpc.version`    | Returns extension's version          |
+
+## 🔧 Settings
+
+#### **rpc.id**
+Application ID. Change only if you known exactly what you're doing.
+
+Default: `768090036633206815`
+
+#### **rpc.detailsEditing** 
+Custom string for the details section of the rich presence
+
+Default: `Editing {filename} {problems}`
+
+- `{null}` will be replaced with an empty space
+- `{filename}` will be replaced with the current file name
+- `{workspace}` will be replaced with the current workspace name, if any
+- `{currentcolumn}` will get replaced with the current column of the current line
+- `{currentline}` will get replaced with the current line number
+- `{totallines}` will get replaced with the total line number
+- `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
+
+#### **rpc.detailsIdle**
+Custom string for the details section of the rich presence when idling
+
+Default: `Idling`
+
+- `{null}` will be replaced with an empty space.
+
+#### **rpc.lowerDetailsEditing**
+Custom string for the state section of the rich presence
+
+Default: `Workspace: {workspace}`
+
+- `{null}` will be replaced with an empty space
+- `{filename}` will be replaced with the current file name
+- `{workspace}` will be replaced with the current workspace name, if any
+- `{currentcolumn}` will get replaced with the current column of the current line
+- `{currentline}` will get replaced with the current line number
+- `{totallines}` will get replaced with the total line number
+- `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
+
+#### **rpc.lowerDetailsIdle**
+Custom string for the state section of the rich presence when idling
+
+Default: `Idling`
+
+- `{null}` will be replaced with an empty space.
+
+#### **rpc.largeImage**
+Custom string for the largeImageText section of the rich presence
+
+Default: `Editing a {LANG} file`
+
+- `{lang}` will be replaced with the lowercased language ID
+- `{Lang}` will be replaced with the language ID, first letter being uppercase
+- `{LANG}` will be replaced with the uppercased language ID.
+
+#### **rpc.largeImageIdle**
+Custom string for the largeImageText section of the rich presence when idling
+
+Default: `Idling`
+
+#### **rpc.smallImage**
+Custom string for the smallImageText section of the rich presence
+
+Default: `{appname}`
+
+- `{appname}` will get replaced with NeoVim text.
+
+#### **rpc.showProblems**
+Controls if the RPC should show the count of problems (warnings, errors) present in your workspace.
+
+Default: `true`
+
+#### **rpc.problemsText**
+Custom string of the text displaying the amount of problems in your workspace
+
+Default: `- {count} problems found`
+
+- `{count}` will be replaced by the respective amount of problems.
 
 ## 🚧 WIP
 

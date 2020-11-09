@@ -1,13 +1,12 @@
-import { Disposable, ExtensionContext } from 'coc.nvim';
-import { Client as RPClient } from 'discord-rpc';
+import { Disposable, ExtensionContext, WorkspaceConfiguration } from 'coc.nvim';
 export default class Client implements Disposable {
-    private readonly clientId;
+    config: WorkspaceConfiguration;
     private rpc?;
-    constructor(clientId: string);
-    get client(): RPClient | undefined;
+    private readonly activity;
+    constructor(config: WorkspaceConfiguration);
     connect(ctx?: ExtensionContext): Promise<void>;
     ready(ctx?: ExtensionContext): void;
-    setActivity(): void;
+    setActivity(): Promise<void>;
     dispose(): Promise<void>;
     disconnect(): Promise<void>;
     private registerCommands;

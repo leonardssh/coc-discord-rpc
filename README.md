@@ -24,13 +24,8 @@ Remember to 🌟 this Github if you 💖 it.
 
 -   Shows what you are working on in NeoVim
 -   Respects Discords 15sec limit when it comes to updating your status
--   Support for over 110+ of the most popular languages
+-   Support for over 130+ of the most popular languages
 -   Custom string support
-
-## 📋 Todo
-
--   [x] Support for more programming languages
--   [x] Custom string support
 
 ## 📥 Installation
 

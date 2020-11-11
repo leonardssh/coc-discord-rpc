@@ -33,7 +33,7 @@
 		"type": "git",
 		"url": "git+https://github.com/LeonardSSH/coc-discord-rpc.git"
 	},
-	"author": "LeonardSSH <leonardssh22@gmail.com> (https://leonard.pw)",
+	"author": "LeonardSSH <leonardssh22@gmail.com> (https://leonard.sh)",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/LeonardSSH/coc-discord-rpc/issues"

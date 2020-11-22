@@ -8,11 +8,34 @@ const config = workspace.getConfiguration('rpc');
 const client: Client = new Client(config);
 
 export const activate = async (ctx: ExtensionContext) => {
-	if (config.get<boolean>('enabled') && !config.get<boolean>('hideStartupMessage')) {
-		log('Extension activated, trying to connect to Discord Gateway', LogLevel.Info);
+	const workspaceName = workspace.root.split('/').pop();
+	const excludePatterns = config.get<string[]>('ignoreWorkspaces');
+
+	let isWorkspaceExcluded = false;
+
+	if (excludePatterns?.length) {
+		for (const pattern of excludePatterns) {
+			const regex = new RegExp(pattern);
+			const folders = workspace.workspaceFolders;
+
+			if (!folders && !workspaceName) {
+				break;
+			}
+
+			if (folders.some((folder) => regex.test(folder.name)) || regex.test(workspaceName!)) {
+				isWorkspaceExcluded = true;
+				break;
+			}
+		}
 	}
 
-	await client.connect(ctx);
+	if (config.get<boolean>('enabled') && !isWorkspaceExcluded) {
+		if (!config.get<boolean>('hideStartupMessage')) {
+			log('Extension activated, trying to connect to Discord Gateway', LogLevel.Info);
+		}
+
+		await client.connect(ctx);
+	}
 };
 
 export const deactivate = async () => {

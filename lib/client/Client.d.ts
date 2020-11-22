@@ -4,8 +4,8 @@ export default class Client implements Disposable {
     private rpc?;
     private readonly activity;
     constructor(config: WorkspaceConfiguration);
-    connect(ctx?: ExtensionContext): Promise<void>;
-    ready(ctx?: ExtensionContext): void;
+    connect(ctx?: ExtensionContext, _log?: boolean): Promise<void>;
+    ready(ctx?: ExtensionContext, _log?: boolean): void;
     setActivity(): Promise<void>;
     dispose(): Promise<void>;
     disconnect(): Promise<void>;

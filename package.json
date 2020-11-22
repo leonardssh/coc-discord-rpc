@@ -91,6 +91,11 @@
 					"default": "768090036633206815",
 					"description": "Application ID. Change only if you known exactly what you're doing."
 				},
+				"rpc.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Controls if the Discord Presence should show across all workspaces."
+				},
 				"rpc.hideStartupMessage": {
 					"type": "boolean",
 					"default": false,

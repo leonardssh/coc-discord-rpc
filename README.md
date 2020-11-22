@@ -42,11 +42,13 @@ Remember to 🌟 this Github if you 💖 it.
 
 ## 🤖 Commands
 
-| Command          | Description                          |
-| ---------------- | ------------------------------------ |
-| `rpc.disconnect` | Disconnects you from Discord Gateway |
-| `rpc.reconnect`  | Reconnects you to Discord Gateway    |
-| `rpc.version`    | Returns extension's version          |
+| Command          | Description                            |
+| ---------------- | ---------------------------------------|
+| `rpc.disconnect` | Disconnects you from Discord Gateway   |
+| `rpc.reconnect`  | Reconnects you to Discord Gateway      |
+| `rpc.version`    | Returns extension's version            |
+| `rpc.enable`     | Enables RPC in the current workspace   |
+| `rpc.disable`    | Disables RPC in the current workspace  |
 
 ## 🔧 Settings
 
@@ -55,10 +57,15 @@ Application ID. Change only if you known exactly what you're doing.
 
 Default: `768090036633206815`
 
+#### **rpc.enabled**
+Controls if the Discord Presence should show across all workspaces.
+
+Default: `true`
+
 #### **rpc.hideStartupMessage**
 Controls whether the RPC should show the startup message.
 
-Default: `false`
+Default: `true`
 
 #### **rpc.detailsEditing** 
 Custom string for the details section of the rich presence

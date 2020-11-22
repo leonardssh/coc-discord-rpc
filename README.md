@@ -55,13 +55,13 @@ Application ID. Change only if you known exactly what you're doing.
 
 Default: `768090036633206815`
 
-#### **rpc.id**
-Application ID. Change only if you known exactly what you're doing.
-
-Default: `768090036633206815`
-
 #### **rpc.enabled**
 Controls if the Discord Presence should show across all workspaces.
+
+Default: `true`
+
+### **rpc.hideStartupMessage**
+Controls whether the RPC should show the startup message.
 
 Default: `true`
 

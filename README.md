@@ -178,6 +178,8 @@ Default: `- {count} problems found`
 ![a1](https://i.imgur.com/cx7kcoN.png)
 ![a2](https://i.imgur.com/9xuxuos.png)
 ![a3](https://i.imgur.com/FnGi6EU.png)
+![a4](https://i.imgur.com/TN3ezU1.png)
+![a5](https://i.imgur.com/yJPCxMC.png)
 
 ## 👨‍💻 Contributing
 

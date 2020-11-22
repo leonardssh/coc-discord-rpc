@@ -55,6 +55,11 @@ Application ID. Change only if you known exactly what you're doing.
 
 Default: `768090036633206815`
 
+#### **rpc.hideStartupMessage**
+Controls whether the RPC should show the startup message.
+
+Default: `false`
+
 #### **rpc.detailsEditing** 
 Custom string for the details section of the rich presence
 

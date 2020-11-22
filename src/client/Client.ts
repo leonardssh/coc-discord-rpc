@@ -110,5 +110,29 @@ export default class Client implements Disposable {
 				log(`v${version}`, LogLevel.Info);
 			})
 		);
+
+		ctx.subscriptions.push(
+			commands.registerCommand('rpc.enable', () => {
+				void this.disconnect();
+
+				this.config.update('enabled', true);
+				this.config = workspace.getConfiguration('rpc');
+
+				void this.connect();
+
+				log(`Enabled Discord Rich Presence for this workspace.`, LogLevel.Info);
+			})
+		);
+
+		ctx.subscriptions.push(
+			commands.registerCommand('rpc.disable', () => {
+				this.config.update('enabled', false);
+				this.config = workspace.getConfiguration('rpc');
+
+				void this.disconnect();
+
+				log(`Disabled Discord Rich Presence for this workspace.`, LogLevel.Info);
+			})
+		);
 	}
 }

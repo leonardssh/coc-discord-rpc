@@ -170,6 +170,14 @@
 					"type": "string",
 					"default": "- {count} problems found",
 					"description": "Custom string of the text displaying the amount of problems in your workspace\n\t- {count} will be replaced by the respective amount of problems."
+				},
+				"rpc.ignoreWorkspaces": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": [],
+					"description": "List of patterns to match workspace names that should prevent the extension from starting"
 				}
 			}
 		}

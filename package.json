@@ -177,7 +177,7 @@
 						"type": "string"
 					},
 					"default": [],
-					"description": "List of patterns to match workspace names that should prevent the extension from starting"
+					"description": "List of patterns to match workspace names that should prevent the extension from starting."
 				}
 			}
 		}

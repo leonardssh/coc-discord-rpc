@@ -67,6 +67,11 @@ Controls whether the RPC should show the startup message.
 
 Default: `true`
 
+#### **rpc.ignoreWorkspaces**
+List of patterns to match workspace names that should prevent the extension from starting
+
+Default: `[]`
+
 #### **rpc.detailsEditing** 
 Custom string for the details section of the rich presence
 

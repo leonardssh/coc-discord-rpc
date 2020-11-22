@@ -29,7 +29,7 @@ export default class Client implements Disposable {
 		try {
 			await this.rpc.login({ clientId: this.config.get<string>('id')! });
 		} catch (error) {
-			throw error;
+			log(error, LogLevel.Err);
 		}
 	}
 

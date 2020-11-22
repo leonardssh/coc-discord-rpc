@@ -96,20 +96,40 @@
 					"default": "Editing {filename} {problems}",
 					"description": "Custom string for the details section of the rich presence\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
 				},
+				"rpc.detailsInExplorer": {
+					"type": "string",
+					"default": "Workspace: {workspace}",
+					"description": "Custom string for the details section of the rich presence when browsing the explorer.\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
+				},
 				"rpc.detailsIdle": {
 					"type": "string",
 					"default": "Idling",
 					"description": "Custom string for the details section of the rich presence when idling\n\t- {null} will be replaced with an empty space."
+				},
+				"rpc.detailsIdleInExplorer": {
+					"type": "string",
+					"default": "Idling",
+					"description": "Custom string for the details section of the rich presence when idling browsing the explorer\n\t- {null} will be replaced with an empty space."
 				},
 				"rpc.lowerDetailsEditing": {
 					"type": "string",
 					"default": "Workspace: {workspace}",
 					"description": "Custom string for the state section of the rich presence\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
 				},
+				"rpc.lowerDetailsInExplorer": {
+					"type": "string",
+					"default": "In explorer",
+					"description": "Custom string for the state section of the rich presence when browsing the explorer."
+				},
 				"rpc.lowerDetailsIdle": {
 					"type": "string",
 					"default": "Idling",
 					"description": "Custom string for the state section of the rich presence when idling\n\t- {null} will be replaced with an empty space."
+				},
+				"rpc.lowerDetailsIdleInExplorer": {
+					"type": "string",
+					"default": "Idling",
+					"description": "Custom string for the state section of the rich presence when idling browsing the explorer\n\t- {null} will be replaced with an empty space."
 				},
 				"rpc.largeImage": {
 					"type": "string",
@@ -120,6 +140,11 @@
 					"type": "string",
 					"default": "Idling",
 					"description": "Custom string for the largeImageText section of the rich presence when idling."
+				},
+				"rpc.largeImageInExplorer": {
+					"type": "string",
+					"default": "In explorer",
+					"description": "Custom string for the largeImageText section of the rich presence when browsing the explorer."
 				},
 				"rpc.smallImage": {
 					"type": "string",

@@ -68,8 +68,28 @@ Default: `Editing {filename} {problems}`
 - `{totallines}` will get replaced with the total line number
 - `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
 
+#### **rpc.detailsInExplorer** 
+Custom string for the details section of the rich presence when browsing the explorer.
+
+Default: `Workspace: {workspace}`
+
+- `{null}` will be replaced with an empty space
+- `{filename}` will be replaced with the current file name
+- `{workspace}` will be replaced with the current workspace name, if any
+- `{currentcolumn}` will get replaced with the current column of the current line
+- `{currentline}` will get replaced with the current line number
+- `{totallines}` will get replaced with the total line number
+- `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
+
 #### **rpc.detailsIdle**
 Custom string for the details section of the rich presence when idling
+
+Default: `Idling`
+
+- `{null}` will be replaced with an empty space.
+
+#### **rpc.detailsIdleInExplorer**
+Custom string for the details section of the rich presence when idling browsing the explorer
 
 Default: `Idling`
 
@@ -88,8 +108,28 @@ Default: `Workspace: {workspace}`
 - `{totallines}` will get replaced with the total line number
 - `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
 
+#### **rpc.lowerDetailsInExplorer**
+Custom string for the state section of the rich presence when browsing the explorer.
+
+Default: `In explorer`
+
+- `{null}` will be replaced with an empty space
+- `{filename}` will be replaced with the current file name
+- `{workspace}` will be replaced with the current workspace name, if any
+- `{currentcolumn}` will get replaced with the current column of the current line
+- `{currentline}` will get replaced with the current line number
+- `{totallines}` will get replaced with the total line number
+- `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
+
 #### **rpc.lowerDetailsIdle**
 Custom string for the state section of the rich presence when idling
+
+Default: `Idling`
+
+- `{null}` will be replaced with an empty space.
+
+#### **rpc.lowerDetailsIdleInExplorer**
+Custom string for the state section of the rich presence when idling browsing the explorer
 
 Default: `Idling`
 
@@ -103,6 +143,11 @@ Default: `Editing a {LANG} file`
 - `{lang}` will be replaced with the lowercased language ID
 - `{Lang}` will be replaced with the language ID, first letter being uppercase
 - `{LANG}` will be replaced with the uppercased language ID.
+
+#### **rpc.largeImageInExplorer**
+Custom string for the largeImageText section of the rich presence when browsing the explorer.
+
+Default: `In explorer`
 
 #### **rpc.largeImageIdle**
 Custom string for the largeImageText section of the rich presence when idling
@@ -133,6 +178,8 @@ Default: `- {count} problems found`
 ![a1](https://i.imgur.com/cx7kcoN.png)
 ![a2](https://i.imgur.com/9xuxuos.png)
 ![a3](https://i.imgur.com/FnGi6EU.png)
+![a4](https://i.imgur.com/TN3ezU1.png)
+![a5](https://i.imgur.com/yJPCxMC.png)
 
 ## 👨‍💻 Contributing
 

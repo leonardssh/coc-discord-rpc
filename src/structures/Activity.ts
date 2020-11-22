@@ -3,7 +3,7 @@ import type { Presence } from 'discord-rpc';
 
 import type RPClient from '../client/Client';
 
-import { Disposable, workspace, diagnosticManager } from 'coc.nvim';
+import { Disposable, workspace, diagnosticManager, extensions } from 'coc.nvim';
 
 import lang from '../language/languages.json';
 
@@ -29,8 +29,23 @@ export default class Activity implements Disposable {
 		const workspaceName = workspace.root.split('/').pop();
 		const fileName = workspace.getDocument(workspace.uri)?.uri.split('/').pop();
 
-		if (fileName) {
-			if (fileName.endsWith('%5Bcoc-explorer%5D-1')) {
+		if (workspaceName && fileName) {
+			const coc_explorer = extensions.isActivated('coc-explorer') && fileName.endsWith('%5Bcoc-explorer%5D-1');
+
+			if (coc_explorer) {
+				this._state = {
+					...this._state,
+					details: await this._generateDetails('detailsInExplorer', 'detailsIdleInExplorer', largeImageKey),
+					state: await this._generateDetails(
+						'lowerDetailsInExplorer',
+						'lowerDetailsIdleInExplorer',
+						largeImageKey
+					),
+
+					largeImageKey,
+					largeImageText: this.client.config.get<string>('largeImageInExplorer')
+				};
+
 				return this._state;
 			}
 

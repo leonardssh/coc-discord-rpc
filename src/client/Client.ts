@@ -22,7 +22,9 @@ export default class Client implements Disposable {
 
 		this.rpc = new RPClient({ transport: 'ipc' });
 
-		log('Logging into RPC...', LogLevel.Info);
+		if (!this.config.get<boolean>('hideStartupMessage')) {
+			log('Logging into RPC...', LogLevel.Info);
+		}
 
 		this.rpc.once('ready', () => this.ready(ctx));
 
@@ -34,7 +36,9 @@ export default class Client implements Disposable {
 	}
 
 	public ready(ctx?: ExtensionContext) {
-		log('Successfully connected to Discord Gateway.', LogLevel.Info);
+		if (!this.config.get<boolean>('hideStartupMessage')) {
+			log('Successfully connected to Discord Gateway.', LogLevel.Info);
+		}
 
 		if (ctx) {
 			this.registerCommands(ctx);

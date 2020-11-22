@@ -10,6 +10,5 @@ export default class Client implements Disposable {
     dispose(): Promise<void>;
     disconnect(): Promise<void>;
     private registerCommands;
-    private isWorkspaceIgnored;
 }
 //# sourceMappingURL=Client.d.ts.map

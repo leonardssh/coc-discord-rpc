@@ -22,16 +22,18 @@ export default class Client implements Disposable {
 
 		this.rpc = new RPClient({ transport: 'ipc' });
 
-		if (!this.config.get<boolean>('hideStartupMessage')) {
-			log('Logging into RPC...', LogLevel.Info);
-		}
-
 		this.rpc.once('ready', () => this.ready(ctx));
 
-		try {
-			await this.rpc.login({ clientId: this.config.get<string>('id')! });
-		} catch (error) {
-			log(error, LogLevel.Err);
+		if (this.config.get<boolean>('enabled')) {
+			try {
+				if (!this.config.get<boolean>('hideStartupMessage')) {
+					log('Logging into RPC...', LogLevel.Info);
+				}
+
+				await this.rpc.login({ clientId: this.config.get<string>('id')! });
+			} catch (error) {
+				log(error, LogLevel.Err);
+			}
 		}
 	}
 

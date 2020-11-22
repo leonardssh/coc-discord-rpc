@@ -24,7 +24,12 @@ export default class Client implements Disposable {
 
 		this.rpc.once('ready', () => this.ready(ctx, _log));
 
-		if (this.config.get<boolean>('enabled')) {
+		const workspaceName = workspace.root.split('/').pop();
+
+		if (
+			this.config.get<boolean>('enabled') &&
+			!this.isWorkspaceIgnored(workspaceName!, this.config.get<string[]>('ignoreWorkspaces')!)
+		) {
 			try {
 				if (!this.config.get<boolean>('hideStartupMessage')) {
 					log('Logging into RPC...', LogLevel.Info);
@@ -134,5 +139,15 @@ export default class Client implements Disposable {
 				log(`Disabled Discord Rich Presence for this workspace.`, LogLevel.Info);
 			})
 		);
+	}
+
+	private isWorkspaceIgnored(workspaceName: string, expressions: string[]) {
+		for (const expression of expressions) {
+			if (new RegExp(`/${expression}/`).test(workspaceName)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

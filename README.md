@@ -68,12 +68,12 @@ Controls whether the RPC should show the startup message.
 Default: `true`
 
 #### **rpc.ignoreWorkspaces**
-List of patterns to match workspace names that should prevent the extension from starting
+List of patterns to match workspace names that should prevent the extension from starting.
 
 Default: `[]`
 
 #### **rpc.detailsEditing** 
-Custom string for the details section of the rich presence
+Custom string for the details section of the rich presence.
 
 Default: `Editing {filename} {problems}`
 
@@ -99,21 +99,21 @@ Default: `Workspace: {workspace}`
 - `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
 
 #### **rpc.detailsIdle**
-Custom string for the details section of the rich presence when idling
+Custom string for the details section of the rich presence when idling.
 
 Default: `Idling`
 
 - `{null}` will be replaced with an empty space.
 
 #### **rpc.detailsIdleInExplorer**
-Custom string for the details section of the rich presence when idling browsing the explorer
+Custom string for the details section of the rich presence when idling browsing the explorer.
 
 Default: `Idling`
 
 - `{null}` will be replaced with an empty space.
 
 #### **rpc.lowerDetailsEditing**
-Custom string for the state section of the rich presence
+Custom string for the state section of the rich presence.
 
 Default: `Workspace: {workspace}`
 
@@ -139,21 +139,21 @@ Default: `In explorer`
 - `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
 
 #### **rpc.lowerDetailsIdle**
-Custom string for the state section of the rich presence when idling
+Custom string for the state section of the rich presence when idling.
 
 Default: `Idling`
 
 - `{null}` will be replaced with an empty space.
 
 #### **rpc.lowerDetailsIdleInExplorer**
-Custom string for the state section of the rich presence when idling browsing the explorer
+Custom string for the state section of the rich presence when idling browsing the explorer.
 
 Default: `Idling`
 
 - `{null}` will be replaced with an empty space.
 
 #### **rpc.largeImage**
-Custom string for the largeImageText section of the rich presence
+Custom string for the largeImageText section of the rich presence.
 
 Default: `Editing a {LANG} file`
 
@@ -167,12 +167,12 @@ Custom string for the largeImageText section of the rich presence when browsing 
 Default: `In explorer`
 
 #### **rpc.largeImageIdle**
-Custom string for the largeImageText section of the rich presence when idling
+Custom string for the largeImageText section of the rich presence when idling.
 
 Default: `Idling`
 
 #### **rpc.smallImage**
-Custom string for the smallImageText section of the rich presence
+Custom string for the smallImageText section of the rich presence.
 
 Default: `{appname}`
 
@@ -184,7 +184,7 @@ Controls if the RPC should show the count of problems (warnings, errors) present
 Default: `true`
 
 #### **rpc.problemsText**
-Custom string of the text displaying the amount of problems in your workspace
+Custom string of the text displaying the amount of problems in your workspace.
 
 Default: `- {count} problems found`
 

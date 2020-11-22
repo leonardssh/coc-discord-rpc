@@ -15,28 +15,30 @@ export default class Client implements Disposable {
 
 	public constructor(public config: WorkspaceConfiguration) {}
 
-	public async connect(ctx?: ExtensionContext) {
+	public async connect(ctx?: ExtensionContext, _log = true) {
 		if (this.rpc) {
 			await this.dispose();
 		}
 
 		this.rpc = new RPClient({ transport: 'ipc' });
 
-		if (!this.config.get<boolean>('hideStartupMessage')) {
-			log('Logging into RPC...', LogLevel.Info);
-		}
+		this.rpc.once('ready', () => this.ready(ctx, _log));
 
-		this.rpc.once('ready', () => this.ready(ctx));
+		if (this.config.get<boolean>('enabled')) {
+			try {
+				if (!this.config.get<boolean>('hideStartupMessage')) {
+					log('Logging into RPC...', LogLevel.Info);
+				}
 
-		try {
-			await this.rpc.login({ clientId: this.config.get<string>('id')! });
-		} catch (error) {
-			log(error, LogLevel.Err);
+				await this.rpc.login({ clientId: this.config.get<string>('id')! });
+			} catch (error) {
+				log(error, LogLevel.Err);
+			}
 		}
 	}
 
-	public ready(ctx?: ExtensionContext) {
-		if (!this.config.get<boolean>('hideStartupMessage')) {
+	public ready(ctx?: ExtensionContext, _log = true) {
+		if (!this.config.get<boolean>('hideStartupMessage') && _log) {
 			log('Successfully connected to Discord Gateway.', LogLevel.Info);
 		}
 
@@ -106,6 +108,30 @@ export default class Client implements Disposable {
 		ctx.subscriptions.push(
 			commands.registerCommand('rpc.version', () => {
 				log(`v${version}`, LogLevel.Info);
+			})
+		);
+
+		ctx.subscriptions.push(
+			commands.registerCommand('rpc.enable', () => {
+				void this.dispose();
+
+				this.config.update('enabled', true);
+				this.config = workspace.getConfiguration('rpc');
+
+				void this.connect(ctx, false);
+
+				log(`Enabled Discord Rich Presence for this workspace.`, LogLevel.Info);
+			})
+		);
+
+		ctx.subscriptions.push(
+			commands.registerCommand('rpc.disable', () => {
+				this.config.update('enabled', false);
+				this.config = workspace.getConfiguration('rpc');
+
+				void this.dispose();
+
+				log(`Disabled Discord Rich Presence for this workspace.`, LogLevel.Info);
 			})
 		);
 	}

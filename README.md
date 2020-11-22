@@ -42,11 +42,13 @@ Remember to 🌟 this Github if you 💖 it.
 
 ## 🤖 Commands
 
-| Command          | Description                          |
-| ---------------- | ------------------------------------ |
-| `rpc.disconnect` | Disconnects you from Discord Gateway |
-| `rpc.reconnect`  | Reconnects you to Discord Gateway    |
-| `rpc.version`    | Returns extension's version          |
+| Command          | Description                            |
+| ---------------- | ---------------------------------------|
+| `rpc.disconnect` | Disconnects you from Discord Gateway   |
+| `rpc.reconnect`  | Reconnects you to Discord Gateway      |
+| `rpc.version`    | Returns extension's version            |
+| `rpc.enable`     | Enables RPC in the current workspace   |
+| `rpc.disable`    | Disables RPC in the current workspace  |
 
 ## 🔧 Settings
 

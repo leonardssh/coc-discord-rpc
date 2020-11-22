@@ -5,7 +5,7 @@ export default class Activity implements Disposable {
     private readonly client;
     private _state;
     constructor(client: RPClient);
-    generate(): Promise<Presence | undefined>;
+    generate(): Promise<Presence>;
     dispose(): void;
     private _generateDetails;
     private _generateFileDetails;

@@ -15,14 +15,14 @@ export default class Client implements Disposable {
 
 	public constructor(public config: WorkspaceConfiguration) {}
 
-	public async connect(ctx?: ExtensionContext) {
+	public async connect(ctx?: ExtensionContext, _log = true) {
 		if (this.rpc) {
 			await this.dispose();
 		}
 
 		this.rpc = new RPClient({ transport: 'ipc' });
 
-		this.rpc.once('ready', () => this.ready(ctx));
+		this.rpc.once('ready', () => this.ready(ctx, _log));
 
 		if (this.config.get<boolean>('enabled')) {
 			try {
@@ -37,8 +37,8 @@ export default class Client implements Disposable {
 		}
 	}
 
-	public ready(ctx?: ExtensionContext) {
-		if (!this.config.get<boolean>('hideStartupMessage')) {
+	public ready(ctx?: ExtensionContext, _log = true) {
+		if (!this.config.get<boolean>('hideStartupMessage') && _log) {
 			log('Successfully connected to Discord Gateway.', LogLevel.Info);
 		}
 
@@ -113,12 +113,12 @@ export default class Client implements Disposable {
 
 		ctx.subscriptions.push(
 			commands.registerCommand('rpc.enable', () => {
-				void this.disconnect();
+				void this.dispose();
 
 				this.config.update('enabled', true);
 				this.config = workspace.getConfiguration('rpc');
 
-				void this.connect();
+				void this.connect(ctx, false);
 
 				log(`Enabled Discord Rich Presence for this workspace.`, LogLevel.Info);
 			})
@@ -129,7 +129,7 @@ export default class Client implements Disposable {
 				this.config.update('enabled', false);
 				this.config = workspace.getConfiguration('rpc');
 
-				void this.disconnect();
+				void this.dispose();
 
 				log(`Disabled Discord Rich Presence for this workspace.`, LogLevel.Info);
 			})

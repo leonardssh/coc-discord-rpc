@@ -8,7 +8,10 @@ const config = workspace.getConfiguration('rpc');
 const client: Client = new Client(config);
 
 export const activate = async (ctx: ExtensionContext) => {
-	log('Extension activated, trying to connect to Discord gateway', LogLevel.Info);
+	if (!config.get<boolean>('hideStartupMessage')) {
+		log('Extension activated, trying to connect to Discord gateway', LogLevel.Info);
+	}
+
 	await client.connect(ctx);
 };
 

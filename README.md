@@ -60,7 +60,7 @@ Controls if the Discord Presence should show across all workspaces.
 
 Default: `true`
 
-### **rpc.hideStartupMessage**
+#### **rpc.hideStartupMessage**
 Controls whether the RPC should show the startup message.
 
 Default: `true`

@@ -10,13 +10,19 @@
 
 Remember to 🌟 this Github if you 💖 it.
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-[![npm](https://img.shields.io/npm/v/coc-discord-rpc?color=crimson&logo=npm&style=flat-square)](https://www.npmjs.com/package/coc-discord-rpc)
+<div align="center">
+  <p>
+    <a href="https://www.npmjs.com/package/coc-discord-rpc">
+        <img src="https://img.shields.io/npm/v/coc-discord-rpc.svg?maxAge=3600&color=crimson&logo=npm&style=flat-square" alt="NPM version" />
+    </a>
+    <a href="https://www.npmjs.com/package/coc-discord-rpc">
+        <img src="https://img.shields.io/npm/dt/coc-discord-rpc.svg?maxAge=3600&logo=npm&style=flat-square" alt="NPM downloads" />
+    </a>
+    <a href="#contributors-">
+        <img src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square" alt="NPM downloads" />
+    </a>
+  </p>
+</div>
 
 > NOTE: Much of the code in this repository is inspired and based on the ideas from [coc-cord] & [discord-vscode].
 

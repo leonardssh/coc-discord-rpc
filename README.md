@@ -6,9 +6,6 @@
     😎 An awesome and fully customizable coc-extension to get Discord Rich Presence integration with <a href="https://neovim.io/"><b>NeoVim</b></a>.
 </h3>
 
----
-
-Remember to 🌟 this Github if you 💖 it.
 
 <div align="center">
   <p>
@@ -23,6 +20,10 @@ Remember to 🌟 this Github if you 💖 it.
     </a>
   </p>
 </div>
+
+---
+
+Remember to 🌟 this Github if you 💖 it.
 
 > NOTE: Much of the code in this repository is inspired and based on the ideas from [coc-cord] & [discord-vscode].
 

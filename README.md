@@ -25,15 +25,21 @@
 
 Remember to 🌟 this Github if you 💖 it.
 
-> NOTE: Much of the code in this repository is inspired and based on the ideas from [coc-cord] & [discord-vscode].
+> NOTE: Much of the code in this repository is inspired and based on the ideas from [coc-cord], [discord-vscode] & [vscode-discord].
 
 ## 📌 Features
 
--   Shows what you are working on in NeoVim
+-   Shows what you're working on in NeoVim
+-   Shows the amount of problems in your workspace
+-   Shows the number of lines in your file and which line you're editing
 -   Respects Discords 15sec limit when it comes to updating your status
 -   Support for over 130+ of the most popular languages
 -   Enable/Disable RPC for individual workspaces
+-   Enable/Disable RPC startup message
+-   [coc-explorer] support
 -   Custom string support
+
+> All texts is fully customizable using variables and a multitude of config options
 
 ## 📥 Installation
 
@@ -73,7 +79,7 @@ Default: `true`
 #### **rpc.hideStartupMessage**
 Controls whether the RPC should show the startup message.
 
-Default: `true`
+Default: `false`
 
 #### **rpc.ignoreWorkspaces**
 List of patterns to match workspace names that should prevent the extension from starting.
@@ -240,5 +246,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-[coc-cord]: https://github.com/dakyskye/coc-cord
-[discord-vscode]: https://github.com/iCrawl/discord-vscode/
+[coc-cord]:             https://github.com/dakyskye/coc-cord
+[discord-vscode]:       https://github.com/iCrawl/discord-vscode/
+[vscode-discord]:       https://github.com/Satoqz/vscode-discord
+[coc-explorer]:         https://github.com/weirongxu/coc-explorer

@@ -1,11 +1,19 @@
 /* eslint-disable prefer-destructuring */
-import type { Presence } from 'discord-rpc';
-
 import type RPClient from '../client/Client';
 
 import { Disposable, workspace, diagnosticManager, extensions } from 'coc.nvim';
 
 import lang from '../language/languages.json';
+
+interface State {
+	details?: string;
+	state?: string;
+	startTimestamp?: number | null;
+	largeImageKey?: string;
+	largeImageText?: string;
+	smallImageKey?: string;
+	smallImageText?: string;
+}
 
 interface FileDetail {
 	totalLines?: string;
@@ -19,11 +27,11 @@ const knownLanguages: string[] = lang.knownLanguages;
 const empty = '\u200b\u200b';
 
 export default class Activity implements Disposable {
-	private _state: Presence | undefined;
+	private _state: State | null = null;
 
 	public constructor(private readonly client: RPClient) {}
 
-	public async generate() {
+	public async generate(workspaceElapsedTime = false) {
 		let largeImageKey: any = 'neovim-logo';
 
 		const workspaceName = workspace.root.split('/').pop();
@@ -82,12 +90,13 @@ export default class Activity implements Disposable {
 
 		this._state = {
 			...this._state,
-			startTimestamp:
-				workspaceName && fileName && previousTimestamp
+			startTimestamp: workspaceElapsedTime
+				? workspaceName && fileName && previousTimestamp
 					? previousTimestamp
 					: workspaceName && fileName
 					? new Date().getTime()
-					: undefined,
+					: null
+				: null,
 			details: await this._generateDetails('detailsEditing', 'detailsIdle', largeImageKey),
 			state: await this._generateDetails('lowerDetailsEditing', 'lowerDetailsIdle', largeImageKey),
 			smallImageKey: 'neovim-logo',
@@ -117,7 +126,7 @@ export default class Activity implements Disposable {
 	}
 
 	public dispose() {
-		this._state = undefined;
+		this._state = null;
 	}
 
 	private async _generateDetails(editing: string, idling: string, largeImageKey: any) {

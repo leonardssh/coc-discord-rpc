@@ -171,6 +171,11 @@
 					"default": "- {count} problems found",
 					"description": "Custom string of the text displaying the amount of problems in your workspace\n\t- {count} will be replaced by the respective amount of problems."
 				},
+				"rpc.workspaceElapsedTime": {
+					"type": "boolean",
+					"default": false,
+					"description": "Controls if the RPC should display elapsed time for a workspace or a single file."
+				},
 				"rpc.ignoreWorkspaces": {
 					"type": "array",
 					"items": {

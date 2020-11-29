@@ -9,7 +9,7 @@ import Activity from '../structures/Activity';
 let activityTimer: NodeJS.Timer | undefined;
 
 export default class Client implements Disposable {
-	private rpc?: RPClient;
+	private rpc?: any;
 
 	private readonly activity = new Activity(this);
 
@@ -48,27 +48,27 @@ export default class Client implements Disposable {
 			clearInterval(activityTimer);
 		}
 
-		void this.setActivity();
+		void this.setActivity(this.config.get<boolean>('workspaceElapsedTime'));
 
 		activityTimer = setInterval(() => {
 			this.config = workspace.getConfiguration('rpc');
 
-			void this.setActivity();
+			void this.setActivity(this.config.get<boolean>('workspaceElapsedTime'));
 		}, 1000);
 	}
 
-	public async setActivity() {
+	public async setActivity(workspaceElapsedTime = false) {
 		if (!this.rpc) {
 			return;
 		}
 
-		const activity = await this.activity.generate();
+		const activity = await this.activity.generate(workspaceElapsedTime);
 
 		if (!activity) {
 			return;
 		}
 
-		void this.rpc.setActivity(activity);
+		this.rpc.setActivity(activity);
 	}
 
 	public async dispose() {

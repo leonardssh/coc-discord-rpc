@@ -86,6 +86,11 @@ List of patterns to match workspace names that should prevent the extension from
 
 Default: `[]`
 
+#### **rpc.workspaceElapsedTime**
+Controls if the RPC should display elapsed time for a workspace or a single file.
+
+Default: `false`
+
 #### **rpc.detailsEditing** 
 Custom string for the details section of the rich presence.
 

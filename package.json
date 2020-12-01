@@ -1,6 +1,6 @@
 {
 	"name": "coc-discord-rpc",
-	"version": "3.0.3",
+	"version": "3.0.4",
 	"description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
 	"main": "lib/index.js",
 	"private": false,
@@ -31,7 +31,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/LeonardSSH/coc-discord-rpc.git"
+		"url": "https://github.com/LeonardSSH/coc-discord-rpc.git"
 	},
 	"author": "LeonardSSH <leonardssh22@gmail.com> (https://leonard.sh)",
 	"license": "MIT",

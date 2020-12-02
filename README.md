@@ -40,6 +40,11 @@ Remember to 🌟 this Github if you 💖 it.
 
 > All texts is fully customizable using variables and a multitude of config options
 
+![a1](https://i.imgur.com/yJPCxMC.png)
+![a2](https://i.imgur.com/1Fy1xoK.png)
+![a3](https://i.imgur.com/TN3ezU1.png)
+![a4](https://i.imgur.com/NQsTHII.png)
+
 ## 📥 Installation
 
 ### Prerequisites
@@ -226,14 +231,6 @@ Custom string of the text displaying the amount of problems in your workspace.
 Default: `- {count} problems found`
 
 -   `{count}` will be replaced by the respective amount of problems.
-
-## 🚧 WIP
-
-![a1](https://i.imgur.com/cx7kcoN.png)
-![a2](https://i.imgur.com/9xuxuos.png)
-![a3](https://i.imgur.com/FnGi6EU.png)
-![a4](https://i.imgur.com/TN3ezU1.png)
-![a5](https://i.imgur.com/yJPCxMC.png)
 
 ## 👨‍💻 Contributing
 

@@ -103,7 +103,7 @@
 				},
 				"rpc.detailsEditing": {
 					"type": "string",
-					"default": "Editing {filename} {problems}",
+					"default": "{workspace} {problems}",
 					"description": "Custom string for the details section of the rich presence\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
 				},
 				"rpc.detailsInExplorer": {
@@ -123,7 +123,7 @@
 				},
 				"rpc.lowerDetailsEditing": {
 					"type": "string",
-					"default": "Workspace: {workspace}",
+					"default": "Working on {filename}:{currentline}:{currentcolumn}",
 					"description": "Custom string for the state section of the rich presence\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
 				},
 				"rpc.lowerDetailsInExplorer": {

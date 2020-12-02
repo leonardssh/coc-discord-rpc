@@ -6,7 +6,6 @@
     😎 An awesome and fully customizable coc-extension to get Discord Rich Presence integration with <a href="https://neovim.io/"><b>NeoVim</b></a>.
 </h3>
 
-
 <div align="center">
   <p>
     <a href="https://www.npmjs.com/package/coc-discord-rpc">
@@ -56,158 +55,177 @@ Remember to 🌟 this Github if you 💖 it.
 
 ## 🤖 Commands
 
-| Command          | Description                            |
-| ---------------- | ---------------------------------------|
-| `rpc.disconnect` | Disconnects you from Discord Gateway   |
-| `rpc.reconnect`  | Reconnects you to Discord Gateway      |
-| `rpc.version`    | Returns extension's version            |
-| `rpc.enable`     | Enables RPC in the current workspace   |
-| `rpc.disable`    | Disables RPC in the current workspace  |
+| Command          | Description                           |
+| ---------------- | ------------------------------------- |
+| `rpc.disconnect` | Disconnects you from Discord Gateway  |
+| `rpc.reconnect`  | Reconnects you to Discord Gateway     |
+| `rpc.version`    | Returns extension's version           |
+| `rpc.enable`     | Enables RPC in the current workspace  |
+| `rpc.disable`    | Disables RPC in the current workspace |
 
 ## 🔧 Settings
 
 #### **rpc.id**
+
 Application ID. Change only if you known exactly what you're doing.
 
 Default: `768090036633206815`
 
 #### **rpc.enabled**
+
 Controls if the Discord Presence should show across all workspaces.
 
 Default: `true`
 
 #### **rpc.hideStartupMessage**
+
 Controls whether the RPC should show the startup message.
 
 Default: `false`
 
 #### **rpc.ignoreWorkspaces**
+
 List of patterns to match workspace names that should prevent the extension from starting.
 
 Default: `[]`
 
 #### **rpc.workspaceElapsedTime**
+
 Controls if the RPC should display elapsed time for a workspace or a single file.
 
 Default: `false`
 
-#### **rpc.detailsEditing** 
+#### **rpc.detailsEditing**
+
 Custom string for the details section of the rich presence.
 
-Default: `Editing {filename} {problems}`
+Default: `{workspace} {problems}`
 
-- `{null}` will be replaced with an empty space
-- `{filename}` will be replaced with the current file name
-- `{workspace}` will be replaced with the current workspace name, if any
-- `{currentcolumn}` will get replaced with the current column of the current line
-- `{currentline}` will get replaced with the current line number
-- `{totallines}` will get replaced with the total line number
-- `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
+-   `{null}` will be replaced with an empty space
+-   `{filename}` will be replaced with the current file name
+-   `{workspace}` will be replaced with the current workspace name, if any
+-   `{currentcolumn}` will get replaced with the current column of the current line
+-   `{currentline}` will get replaced with the current line number
+-   `{totallines}` will get replaced with the total line number
+-   `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
 
-#### **rpc.detailsInExplorer** 
+#### **rpc.detailsInExplorer**
+
 Custom string for the details section of the rich presence when browsing the explorer.
 
 Default: `Workspace: {workspace}`
 
-- `{null}` will be replaced with an empty space
-- `{filename}` will be replaced with the current file name
-- `{workspace}` will be replaced with the current workspace name, if any
-- `{currentcolumn}` will get replaced with the current column of the current line
-- `{currentline}` will get replaced with the current line number
-- `{totallines}` will get replaced with the total line number
-- `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
+-   `{null}` will be replaced with an empty space
+-   `{filename}` will be replaced with the current file name
+-   `{workspace}` will be replaced with the current workspace name, if any
+-   `{currentcolumn}` will get replaced with the current column of the current line
+-   `{currentline}` will get replaced with the current line number
+-   `{totallines}` will get replaced with the total line number
+-   `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
 
 #### **rpc.detailsIdle**
+
 Custom string for the details section of the rich presence when idling.
 
 Default: `Idling`
 
-- `{null}` will be replaced with an empty space.
+-   `{null}` will be replaced with an empty space.
 
 #### **rpc.detailsIdleInExplorer**
+
 Custom string for the details section of the rich presence when idling browsing the explorer.
 
 Default: `Idling`
 
-- `{null}` will be replaced with an empty space.
+-   `{null}` will be replaced with an empty space.
 
 #### **rpc.lowerDetailsEditing**
+
 Custom string for the state section of the rich presence.
 
-Default: `Workspace: {workspace}`
+Default: `Working on {filename}:{currentline}:{currentcolumn}`
 
-- `{null}` will be replaced with an empty space
-- `{filename}` will be replaced with the current file name
-- `{workspace}` will be replaced with the current workspace name, if any
-- `{currentcolumn}` will get replaced with the current column of the current line
-- `{currentline}` will get replaced with the current line number
-- `{totallines}` will get replaced with the total line number
-- `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
+-   `{null}` will be replaced with an empty space
+-   `{filename}` will be replaced with the current file name
+-   `{workspace}` will be replaced with the current workspace name, if any
+-   `{currentcolumn}` will get replaced with the current column of the current line
+-   `{currentline}` will get replaced with the current line number
+-   `{totallines}` will get replaced with the total line number
+-   `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
 
 #### **rpc.lowerDetailsInExplorer**
+
 Custom string for the state section of the rich presence when browsing the explorer.
 
 Default: `In explorer`
 
-- `{null}` will be replaced with an empty space
-- `{filename}` will be replaced with the current file name
-- `{workspace}` will be replaced with the current workspace name, if any
-- `{currentcolumn}` will get replaced with the current column of the current line
-- `{currentline}` will get replaced with the current line number
-- `{totallines}` will get replaced with the total line number
-- `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
+-   `{null}` will be replaced with an empty space
+-   `{filename}` will be replaced with the current file name
+-   `{workspace}` will be replaced with the current workspace name, if any
+-   `{currentcolumn}` will get replaced with the current column of the current line
+-   `{currentline}` will get replaced with the current line number
+-   `{totallines}` will get replaced with the total line number
+-   `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace.
 
 #### **rpc.lowerDetailsIdle**
+
 Custom string for the state section of the rich presence when idling.
 
 Default: `Idling`
 
-- `{null}` will be replaced with an empty space.
+-   `{null}` will be replaced with an empty space.
 
 #### **rpc.lowerDetailsIdleInExplorer**
+
 Custom string for the state section of the rich presence when idling browsing the explorer.
 
 Default: `Idling`
 
-- `{null}` will be replaced with an empty space.
+-   `{null}` will be replaced with an empty space.
 
 #### **rpc.largeImage**
+
 Custom string for the largeImageText section of the rich presence.
 
 Default: `Editing a {LANG} file`
 
-- `{lang}` will be replaced with the lowercased language ID
-- `{Lang}` will be replaced with the language ID, first letter being uppercase
-- `{LANG}` will be replaced with the uppercased language ID.
+-   `{lang}` will be replaced with the lowercased language ID
+-   `{Lang}` will be replaced with the language ID, first letter being uppercase
+-   `{LANG}` will be replaced with the uppercased language ID.
 
 #### **rpc.largeImageInExplorer**
+
 Custom string for the largeImageText section of the rich presence when browsing the explorer.
 
 Default: `In explorer`
 
 #### **rpc.largeImageIdle**
+
 Custom string for the largeImageText section of the rich presence when idling.
 
 Default: `Idling`
 
 #### **rpc.smallImage**
+
 Custom string for the smallImageText section of the rich presence.
 
 Default: `{appname}`
 
-- `{appname}` will get replaced with NeoVim text.
+-   `{appname}` will get replaced with NeoVim text.
 
 #### **rpc.showProblems**
+
 Controls if the RPC should show the count of problems (warnings, errors) present in your workspace.
 
 Default: `true`
 
 #### **rpc.problemsText**
+
 Custom string of the text displaying the amount of problems in your workspace.
 
 Default: `- {count} problems found`
 
-- `{count}` will be replaced by the respective amount of problems.
+-   `{count}` will be replaced by the respective amount of problems.
 
 ## 🚧 WIP
 
@@ -251,7 +269,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-[coc-cord]:             https://github.com/dakyskye/coc-cord
-[discord-vscode]:       https://github.com/iCrawl/discord-vscode/
-[vscode-discord]:       https://github.com/Satoqz/vscode-discord
-[coc-explorer]:         https://github.com/weirongxu/coc-explorer
+[coc-cord]: https://github.com/dakyskye/coc-cord
+[discord-vscode]: https://github.com/iCrawl/discord-vscode/
+[vscode-discord]: https://github.com/Satoqz/vscode-discord
+[coc-explorer]: https://github.com/weirongxu/coc-explorer

@@ -24,7 +24,9 @@
 
 Remember to 🌟 this Github if you 💖 it.
 
-> NOTE: Much of the code in this repository is inspired and based on the ideas from [coc-cord], [discord-vscode] & [vscode-discord].
+For something in between a [dakyskye/coc-cord](https://github.com/dakyskye/coc-cord), [iCrawl/discord-vscode](https://github.com/iCrawl/discord-vscode/) and a [Satoqz/vscode-discord](https://github.com/Satoqz/vscode-discord).
+
+This may not be the best coc-extension, but it is a coc-extension. 😁
 
 ## 📌 Features
 

@@ -4,24 +4,35 @@ import { log, LogLevel } from '../structures/Logger';
 
 import Activity from '../structures/Activity';
 
-// eslint-disable-next-line @typescript-eslint/init-declarations
-let activityTimer: NodeJS.Timer | undefined;
+let activityTimer: NodeJS.Timer | undefined = undefined;
 
 export default class Client implements Disposable {
-	private rpc?: any;
+	private rpc?: any = undefined;
+
+	private ready = false;
 
 	private readonly activity = new Activity(this);
 
 	public constructor(public config: WorkspaceConfiguration) {}
 
 	public async connect() {
-		if (this.rpc) {
-			await this.dispose();
-		}
+		this.dispose();
 
 		this.rpc = new RPClient({ transport: 'ipc' });
 
-		this.rpc.once('ready', () => this.ready());
+		this.ready = false;
+
+		this.rpc.transport.once('close', () => {
+			const { enabled } = this.config;
+
+			if (!enabled) {
+				return;
+			}
+
+			this.dispose();
+		});
+
+		this.rpc.once('ready', () => this.handleReady());
 
 		try {
 			if (!this.config.get<boolean>('hideStartupMessage')) {
@@ -34,7 +45,9 @@ export default class Client implements Disposable {
 		}
 	}
 
-	public ready() {
+	public handleReady() {
+		this.ready = true;
+
 		if (!this.config.get<boolean>('hideStartupMessage')) {
 			log('Successfully connected to Discord Gateway.', LogLevel.Info);
 		}
@@ -53,7 +66,7 @@ export default class Client implements Disposable {
 	}
 
 	public async setActivity(workspaceElapsedTime = false) {
-		if (!this.rpc) {
+		if (!this.rpc || !this.ready) {
 			return;
 		}
 
@@ -63,25 +76,26 @@ export default class Client implements Disposable {
 			return;
 		}
 
-		this.rpc.setActivity(activity);
+		this.rpc.setActivity(activity).catch(() => this.dispose());
 	}
 
-	public async dispose() {
+	public dispose() {
 		this.activity.dispose();
 
-		if (this.rpc) {
-			await this.rpc.destroy();
+		if (this.rpc && this.ready) {
+			this.rpc.destroy();
 		}
 
 		this.rpc = undefined;
+		this.ready = false;
 
 		if (activityTimer) {
 			clearInterval(activityTimer);
 		}
 	}
 
-	public async disconnect() {
-		await this.dispose();
+	public disconnect() {
+		this.dispose();
 		log(`Successfully disconnected from Discord Gateway`, LogLevel.Info);
 	}
 }

@@ -35,7 +35,7 @@ export const activate = async (ctx: ExtensionContext) => {
 		config.update('enabled', false);
 		client.config = workspace.getConfiguration('rpc');
 
-		void client.dispose();
+		client.dispose();
 
 		log(`Disabled Discord Rich Presence for this workspace.`, LogLevel.Info);
 	});
@@ -53,7 +53,7 @@ export const activate = async (ctx: ExtensionContext) => {
 
 	const disconnectCommand = commands.registerCommand('rpc.disconnect', () => {
 		log(`Trying to disconnect from Discord Gateway`, LogLevel.Info);
-		void client.disconnect();
+		client.disconnect();
 	});
 
 	const reconnectCommand = commands.registerCommand('rpc.reconnect', () => {
@@ -76,14 +76,14 @@ export const activate = async (ctx: ExtensionContext) => {
 			await client.connect();
 		} catch (error) {
 			log(error, LogLevel.Err);
-			void client.dispose();
+			client.dispose();
 		}
 	}
 };
 
-export const deactivate = async () => {
+export const deactivate = () => {
 	log('Extension deactivated, trying to disconnect from Discord Gateway', LogLevel.Info);
-	return client.disconnect();
+	client.disconnect();
 };
 
 process.on('unhandledRejection', (err) => log(err as string, LogLevel.Err));

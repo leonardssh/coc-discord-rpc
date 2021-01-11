@@ -1,89 +1,21 @@
-import Client from './client/Client';
-import { log, LogLevel } from './structures/Logger';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { ExtensionContext, workspace, commands } from 'coc.nvim';
+import type { ExtensionContext } from 'coc.nvim';
+// @ts-ignore
+import { name as EXTENSION_NAME, version as EXTENSION_VERSION } from '../package.json';
+import { LoggingService } from './services/logging';
 
-import { version } from './version/version';
+const extensionName = EXTENSION_NAME || 'dev.coc-discord-rpc';
+const extensionVersion = EXTENSION_VERSION || '0.0.0';
 
-const config = workspace.getConfiguration('rpc');
+const loggingService = new LoggingService();
 
-const client: Client = new Client(config);
-
-export const activate = async (ctx: ExtensionContext) => {
-	const workspaceName = workspace.root.split('/').pop();
-	const excludePatterns = config.get<string[]>('ignoreWorkspaces');
-
-	let isWorkspaceExcluded = false;
-
-	if (excludePatterns?.length) {
-		for (const pattern of excludePatterns) {
-			const regex = new RegExp(pattern);
-			const folders = workspace.workspaceFolders;
-
-			if (!folders && !workspaceName) {
-				break;
-			}
-
-			if (folders.some((folder) => regex.test(folder.name)) || regex.test(workspaceName!)) {
-				isWorkspaceExcluded = true;
-				break;
-			}
-		}
-	}
-
-	const enableCommand = commands.registerCommand('rpc.disable', () => {
-		config.update('enabled', false);
-		client.config = workspace.getConfiguration('rpc');
-
-		client.dispose();
-
-		log(`Disabled Discord Rich Presence for this workspace.`, LogLevel.Info);
-	});
-
-	const disableCommand = commands.registerCommand('rpc.enable', () => {
-		void client.dispose();
-
-		config.update('enabled', true);
-		client.config = workspace.getConfiguration('rpc');
-
-		void client.connect();
-
-		log(`Enabled Discord Rich Presence for this workspace.`, LogLevel.Info);
-	});
-
-	const disconnectCommand = commands.registerCommand('rpc.disconnect', () => {
-		log(`Trying to disconnect from Discord Gateway`, LogLevel.Info);
-		client.disconnect();
-	});
-
-	const reconnectCommand = commands.registerCommand('rpc.reconnect', () => {
-		log(`Trying to reconnect to Discord Gateway`, LogLevel.Info);
-		void client.connect();
-	});
-
-	const versionCommand = commands.registerCommand('rpc.version', () => {
-		log(`v${version}`, LogLevel.Info);
-	});
-
-	ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, versionCommand);
-
-	if (config.get<boolean>('enabled') && !isWorkspaceExcluded) {
-		if (!config.get<boolean>('hideStartupMessage')) {
-			log('Extension activated, trying to connect to Discord Gateway', LogLevel.Info);
-		}
-
-		try {
-			await client.connect();
-		} catch (error) {
-			log(error, LogLevel.Err);
-			client.dispose();
-		}
-	}
+export const activate = (ctx: ExtensionContext) => {
+	loggingService.logInfo(`=== Extension activate ===`, ctx);
+	loggingService.logInfo(`Extension Name: ${extensionName}.`, ctx);
+	loggingService.logInfo(`Extension Version: ${extensionVersion}.`, ctx);
 };
 
 export const deactivate = () => {
-	log('Extension deactivated, trying to disconnect from Discord Gateway', LogLevel.Info);
-	client.disconnect();
+	loggingService.logInfo(`=== Extension deactivate ===`);
 };
-
-process.on('unhandledRejection', (err) => log(err as string, LogLevel.Err));

@@ -8,5 +8,5 @@
 		"resolveJsonModule": true,
 		"esModuleInterop": true
 	},
-	"include": ["."]
+	"include": [".", "./icons.json"]
 }

@@ -107,3 +107,5 @@ lib
 
 # old src
 old_src
+
+build.sh

@@ -13,7 +13,11 @@ interface FileDetail {
 	currentColumn?: string;
 }
 
-const defaultIcon = 'neovim-logo';
+const enum defaultIcons {
+	standard_neovim = 'neovim-logo',
+	standard_neovim_idle = 'idle-neovim'
+}
+
 const empty = '\u200b\u200b';
 
 const knownExtensions: { [key: string]: { image: string } } = icon.knownExtensions;
@@ -61,9 +65,9 @@ export class Activity implements Disposable {
 
 		this.presence.details = detailsIdle.replace('{null}', empty);
 		this.presence.state = lowerDetailsIdle.replace('{null}', empty);
-		this.presence.largeImageKey = defaultIcon;
+		this.presence.largeImageKey = defaultIcons.standard_neovim_idle;
 		this.presence.largeImageText = largeImageIdle;
-		this.presence.smallImageKey = defaultIcon;
+		this.presence.smallImageKey = defaultIcons.standard_neovim;
 		this.presence.smallImageText = smallImage
 			.replace('{appname}', isNeoVim)
 			.replace('{appversion}', workspace.env.version);
@@ -72,7 +76,7 @@ export class Activity implements Disposable {
 	}
 
 	public async onFileSwitch(bufnr: number | string) {
-		let icon = defaultIcon;
+		let icon = defaultIcons.standard_neovim_idle as string;
 
 		const document = workspace.getDocument(bufnr);
 
@@ -104,7 +108,7 @@ export class Activity implements Disposable {
 				document
 			);
 
-			this.presence.largeImageKey = coc_explorer ? defaultIcon : icon;
+			this.presence.largeImageKey = coc_explorer ? defaultIcons.standard_neovim_idle : icon;
 
 			this.presence.largeImageText = coc_explorer
 				? largeImageInExplorer
@@ -123,7 +127,7 @@ export class Activity implements Disposable {
 	}
 
 	public async onFileEdit(bufnr: number) {
-		let icon = defaultIcon;
+		let icon = defaultIcons.standard_neovim_idle as string;
 
 		const document = workspace.getDocument(bufnr);
 

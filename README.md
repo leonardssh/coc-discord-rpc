@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://i.imgur.com/eNbd9uD.png" alt="Icon" align="center" width="256">
+    <img src="https://i.imgur.com/gpcIEF4.png" alt="Icon" align="center" width="256">
 <p>
 
 <h3 align="center">
@@ -26,7 +26,7 @@ Remember to 🌟 this Github if you 💖 it.
 
 For something in between a [dakyskye/coc-cord](https://github.com/dakyskye/coc-cord), [iCrawl/discord-vscode](https://github.com/iCrawl/discord-vscode/) and a [Satoqz/vscode-discord](https://github.com/Satoqz/vscode-discord).
 
-This may not be the best coc-extension, but it is a coc-extension. 😁
+This may not be the best discord rpc, but it is a discord rpc. 😁
 
 ## 📌 Features
 
@@ -36,7 +36,6 @@ This may not be the best coc-extension, but it is a coc-extension. 😁
 -   Respects Discords 15sec limit when it comes to updating your status
 -   Support for over 130+ of the most popular languages
 -   Enable/Disable RPC for individual workspaces
--   Enable/Disable RPC startup message
 -   [coc-explorer] support
 -   Custom string support
 
@@ -83,12 +82,6 @@ Default: `768090036633206815`
 Controls if the Discord Presence should show across all workspaces.
 
 Default: `true`
-
-#### **rpc.hideStartupMessage**
-
-Controls whether the RPC should show the startup message.
-
-Default: `false`
 
 #### **rpc.ignoreWorkspaces**
 
@@ -138,13 +131,19 @@ Default: `Idling`
 
 -   `{null}` will be replaced with an empty space.
 
-#### **rpc.detailsIdleInExplorer**
+#### **rpc.detailsViewing**
 
-Custom string for the details section of the rich presence when idling browsing the explorer.
+Custom string for the details section of the rich presence when viewing.
 
-Default: `Idling`
+Default: `In {workspace} {problems}`
 
--   `{null}` will be replaced with an empty space.
+-   `{null}` will be replaced with an empty space
+-   `{filename}` will be replaced with the current file name
+-   `{workspace}` will be replaced with the current workspace name, if any
+-   `{currentcolumn}` will get replaced with the current column of the current line
+-   `{currentline}` will get replaced with the current line number
+-   `{totallines}` will get replaced with the total line number
+-   `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace
 
 #### **rpc.lowerDetailsEditing**
 
@@ -182,13 +181,19 @@ Default: `Idling`
 
 -   `{null}` will be replaced with an empty space.
 
-#### **rpc.lowerDetailsIdleInExplorer**
+#### **rpc.lowerDetailsViewing**
 
-Custom string for the state section of the rich presence when idling browsing the explorer.
+Custom string for the state section of the rich presence when viewing.
 
-Default: `Idling`
+Default: `Viewing {filename}`
 
--   `{null}` will be replaced with an empty space.
+-   `{null}` will be replaced with an empty space
+-   `{filename}` will be replaced with the current file name
+-   `{workspace}` will be replaced with the current workspace name, if any
+-   `{currentcolumn}` will get replaced with the current column of the current line
+-   `{currentline}` will get replaced with the current line number
+-   `{totallines}` will get replaced with the total line number
+-   `{problems}` will be replaced with the count of problems (warnings, errors) present in your workspace
 
 #### **rpc.largeImage**
 
@@ -216,9 +221,10 @@ Default: `Idling`
 
 Custom string for the smallImageText section of the rich presence.
 
-Default: `{appname}`
+Default: `{appname} v${appversion}`
 
 -   `{appname}` will get replaced with NeoVim text.
+-   `{appversion}` will be replaced with the installed version of NeoVim.
 
 #### **rpc.showProblems**
 
@@ -233,6 +239,16 @@ Custom string of the text displaying the amount of problems in your workspace.
 Default: `- {count} problems found`
 
 -   `{count}` will be replaced by the respective amount of problems.
+
+#### **rpc.lowerDetailsNotFound**
+
+Custom string for the state section of the rich presence when no workspace is found.
+
+Default: `No workspace.`
+
+-   `{null}` will be replaced with an empty space
+-   `{currentline}` will get replaced with the current line number
+-   `{totallines}` will get replaced with the total line number
 
 ## 👨‍💻 Contributing
 

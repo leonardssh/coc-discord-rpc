@@ -15,13 +15,18 @@ interface FileDetail {
 
 const enum defaultIcons {
 	standard_neovim = 'neovim-logo',
-	standard_neovim_idle = 'idle-neovim'
+	standard_neovim_idle = 'idle-neovim',
+	standard_idle = 'idle'
 }
 
 const empty = '\u200b\u200b';
 
 const knownExtensions: { [key: string]: { image: string } } = icon.knownExtensions;
 const knownLanguages: string[] = icon.knownLanguages;
+
+const isNeoVim = workspace.isNvim ? 'NeoVim' : 'Vim';
+
+let idleCheckTimeout: NodeJS.Timer | undefined = undefined;
 
 const resolveIcon = (document: Document) => {
 	const filename = basename(document.uri);
@@ -61,8 +66,6 @@ export class Activity implements Disposable {
 			this.presence.startTimestamp = Date.now();
 		}
 
-		const isNeoVim = workspace.isNvim ? 'NeoVim' : 'Vim';
-
 		this.presence.details = detailsIdle.replace('{null}', empty);
 		this.presence.state = lowerDetailsIdle.replace('{null}', empty);
 		this.presence.largeImageKey = defaultIcons.standard_neovim_idle;
@@ -72,6 +75,7 @@ export class Activity implements Disposable {
 			.replace('{appname}', isNeoVim)
 			.replace('{appversion}', workspace.env.version);
 
+		await this.checkIdle(true);
 		await this.update();
 	}
 
@@ -122,6 +126,7 @@ export class Activity implements Disposable {
 						.replace('{LANG}', icon.toUpperCase()) || document.textDocument.languageId.padEnd(2, '\u200b')
 				: largeImageIdle;
 
+			await this.checkIdle(true);
 			await this.update();
 		}
 	}
@@ -167,6 +172,7 @@ export class Activity implements Disposable {
 				)
 				.replace('{LANG}', icon.toUpperCase()) || document.textDocument.languageId.padEnd(2, '\u200b');
 
+		await this.checkIdle(true);
 		await this.update();
 	}
 
@@ -174,6 +180,11 @@ export class Activity implements Disposable {
 		if (document) {
 			await this.onFileSwitch(document.uri);
 		}
+	}
+
+	public async onFileWrite(bufnr: number) {
+		await this.onFileEdit(bufnr);
+		await this.checkIdle(true);
 	}
 
 	public dispose() {
@@ -261,6 +272,43 @@ export class Activity implements Disposable {
 		}
 
 		return fileDetail;
+	}
+
+	private async checkIdle(focused: boolean) {
+		const { idleTimeout, checkIdle } = this.client.config;
+
+		if (!checkIdle) {
+			if (idleCheckTimeout) {
+				clearTimeout(idleCheckTimeout);
+			}
+
+			return;
+		}
+
+		if (focused) {
+			if (idleCheckTimeout) {
+				clearTimeout(idleCheckTimeout);
+			}
+
+			await this.idle(false);
+		}
+
+		idleCheckTimeout = setTimeout(async () => {
+			await this.idle(true);
+
+			idleCheckTimeout = undefined;
+		}, idleTimeout * 1000);
+	}
+
+	private async idle(status: boolean) {
+		const { smallImage, idleText } = this.client.config;
+
+		this.presence.smallImageKey = status ? defaultIcons.standard_idle : defaultIcons.standard_neovim;
+		this.presence.smallImageText = status
+			? idleText
+			: smallImage.replace('{appname}', isNeoVim).replace('{appversion}', workspace.env.version);
+
+		await this.update();
 	}
 
 	private async update() {

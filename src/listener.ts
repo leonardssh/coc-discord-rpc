@@ -13,6 +13,7 @@ export class Listener implements Disposable {
 		const fileSwitch = events;
 		const fileEdit = workspace.onDidChangeTextDocument;
 		const fileOpen = workspace.onDidOpenTextDocument;
+		const fileWrite = events;
 
 		const { enabled } = this.activity.client.config;
 
@@ -20,8 +21,9 @@ export class Listener implements Disposable {
 			const onFileSwitch = fileSwitch.on('BufEnter', (bufnr: number) => this.activity.onFileSwitch(bufnr));
 			const onFileEdit = fileEdit(({ bufnr }: DidChangeTextDocumentParams) => this.activity.onFileEdit(bufnr));
 			const onFileOpen = fileOpen((e: TextDocument) => this.activity.onFileOpen(e));
+			const onFileWrite = fileWrite.on('BufWritePost', (bufnr: number) => this.activity.onFileWrite(bufnr));
 
-			this.disposables.push(onFileSwitch, onFileEdit, onFileOpen);
+			this.disposables.push(onFileSwitch, onFileEdit, onFileOpen, onFileWrite);
 		}
 	}
 

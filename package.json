@@ -129,11 +129,6 @@
 					"default": "Idling",
 					"description": "Custom string for the details section of the rich presence when idling\n\t- {null} will be replaced with an empty space."
 				},
-				"rpc.detailsIdleInExplorer": {
-					"type": "string",
-					"default": "Idling",
-					"description": "Custom string for the details section of the rich presence when idling browsing the explorer\n\t- {null} will be replaced with an empty space."
-				},
 				"rpc.lowerDetailsEditing": {
 					"type": "string",
 					"default": "Working on {filename}:{currentline}:{currentcolumn}",
@@ -148,11 +143,6 @@
 					"type": "string",
 					"default": "Idling",
 					"description": "Custom string for the state section of the rich presence when idling\n\t- {null} will be replaced with an empty space."
-				},
-				"rpc.lowerDetailsIdleInExplorer": {
-					"type": "string",
-					"default": "Idling",
-					"description": "Custom string for the state section of the rich presence when idling browsing the explorer\n\t- {null} will be replaced with an empty space."
 				},
 				"rpc.largeImage": {
 					"type": "string",

@@ -36,7 +36,6 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 -   Respects Discords 15sec limit when it comes to updating your status
 -   Support for over 130+ of the most popular languages
 -   Enable/Disable RPC for individual workspaces
--   Enable/Disable RPC startup message
 -   [coc-explorer] support
 -   Custom string support
 
@@ -83,12 +82,6 @@ Default: `768090036633206815`
 Controls if the Discord Presence should show across all workspaces.
 
 Default: `true`
-
-#### **rpc.hideStartupMessage**
-
-Controls whether the RPC should show the startup message.
-
-Default: `false`
 
 #### **rpc.ignoreWorkspaces**
 

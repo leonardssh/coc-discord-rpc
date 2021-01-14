@@ -109,11 +109,6 @@
 					"default": true,
 					"description": "Controls if the Discord Presence should show across all workspaces."
 				},
-				"rpc.hideStartupMessage": {
-					"type": "boolean",
-					"default": false,
-					"description": "Controls whether the RPC should show the startup message."
-				},
 				"rpc.detailsEditing": {
 					"type": "string",
 					"default": "{workspace} {problems}",

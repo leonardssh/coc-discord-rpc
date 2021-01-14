@@ -38,6 +38,7 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 -   Enable/Disable RPC for individual workspaces
 -   [coc-explorer] support
 -   Custom string support
+-   Idle indication when you tab out for a while
 
 > All texts is fully customizable using variables and a multitude of config options
 

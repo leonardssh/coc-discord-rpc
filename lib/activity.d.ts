@@ -10,9 +10,12 @@ export declare class Activity implements Disposable {
     onFileSwitch(bufnr: number | string): Promise<void>;
     onFileEdit(bufnr: number): Promise<void>;
     onFileOpen(document: TextDocument): Promise<void>;
+    onFileWrite(bufnr: number): Promise<void>;
     dispose(): void;
     private generateDetails;
     private generateFileDetails;
+    private checkIdle;
+    private idle;
     private update;
 }
 //# sourceMappingURL=activity.d.ts.map

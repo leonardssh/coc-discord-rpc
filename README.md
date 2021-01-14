@@ -41,10 +41,11 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 
 > All texts is fully customizable using variables and a multitude of config options
 
-![a1](https://i.imgur.com/yJPCxMC.png)
-![a2](https://i.imgur.com/1Fy1xoK.png)
-![a3](https://i.imgur.com/TN3ezU1.png)
-![a4](https://i.imgur.com/NQsTHII.png)
+![1](https://cyberpunk.is-a.fail/1SvNnd.png)
+![2](https://cyberpunk.is-a.fail/WyHbMu.png)
+![3](https://cyberpunk.is-a.fail/pSCKrl.png)
+![4](https://cyberpunk.is-a.fail/Vg82G0.png)
+![5](https://cyberpunk.is-a.fail/BKX7RK.png)
 
 ## 📥 Installation
 
@@ -94,6 +95,24 @@ Default: `[]`
 Controls if the RPC should display elapsed time for a workspace or a single file.
 
 Default: `false`
+
+#### **rpc.checkIdle**
+
+Whether or not to check if you are still active or idle and react accordingly.
+
+Default: `true`
+
+#### **rpc.idleTimeout**
+
+How long the window should be unfocused (in seconds) to either disable rich presence or display you as idle.
+
+Default: `300`
+
+#### **rpc.idleText**
+
+Custom string of the text displaying if you're idle when hovering over the small icon.
+
+Default: `Idle`
 
 #### **rpc.detailsEditing**
 

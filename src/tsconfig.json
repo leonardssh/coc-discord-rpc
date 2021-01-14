@@ -8,5 +8,5 @@
 		"resolveJsonModule": true,
 		"esModuleInterop": true
 	},
-	"include": [".", "./language/languages.json"]
+	"include": [".", "./icons.json"]
 }

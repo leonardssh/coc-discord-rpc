@@ -260,6 +260,16 @@ Default: `- {count} problems found`
 
 -   `{count}` will be replaced by the respective amount of problems.
 
+#### **rpc.workspaceText**
+
+Custom string for the state section of the rich presence when a workspace is found.
+
+Default: `No workspace.`
+
+-   `{null}` will be replaced with an empty space
+-   `{currentline}` will get replaced with the current line number
+-   `{totallines}` will get replaced with the total line number
+
 #### **rpc.lowerDetailsNotFound**
 
 Custom string for the state section of the rich presence when no workspace is found.

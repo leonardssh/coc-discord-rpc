@@ -264,7 +264,7 @@ Default: `- {count} problems found`
 
 Custom string for the state section of the rich presence when a workspace is found.
 
-Default: `No workspace.`
+Default: `{workspace}`
 
 -   `{null}` will be replaced with an empty space
 -   `{currentline}` will get replaced with the current line number

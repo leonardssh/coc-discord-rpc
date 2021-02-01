@@ -216,7 +216,7 @@ export class Activity implements Disposable {
 		}
 
 		const { totalLines, currentLine, currentColumn } = await this.generateFileDetails(raw);
-		const { showProblems, problemsText, lowerDetailsNotFound } = this.client.config;
+		const { showProblems, problemsText, lowerDetailsNotFound, workspaceText } = this.client.config;
 
 		const problemsCount = diagnosticManager.getDiagnostics(document.uri).length;
 		const problems = showProblems ? problemsText.replace('{count}', problemsCount.toString()) : '';
@@ -224,7 +224,12 @@ export class Activity implements Disposable {
 		raw = raw
 			.replace('{null}', empty)
 			.replace('{filename}', basename(document.uri))
-			.replace('{workspace}', workspaceFolder ? workspaceFolder : lowerDetailsNotFound.replace('{null}', empty))
+			.replace(
+				'{workspace}',
+				workspaceFolder
+					? workspaceText.replace('{workspace}', workspaceFolder)
+					: lowerDetailsNotFound.replace('{null}', empty)
+			)
 			.replace('{lang}', largeImageKey ? largeImageKey.image || largeImageKey : 'txt')
 			.replace(
 				'{Lang}',

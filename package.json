@@ -197,6 +197,11 @@
 					"default": "No workspace.",
 					"description": "Custom string for the state section of the rich presence when no workspace is found.\n- {null} will be replaced with an empty space\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number."
 				},
+				"rpc.workspaceText": {
+					"type": "string",
+					"default": "{workspace}",
+					"description": "Custom string for the state section of the rich presence when a workspace is found.\n- {null} will be replaced with an empty space\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number."
+				},
 				"rpc.checkIdle": {
 					"type": "boolean",
 					"default": true,

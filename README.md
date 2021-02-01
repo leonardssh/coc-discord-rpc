@@ -303,11 +303,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/LeonardSSH"><img src="https://avatars1.githubusercontent.com/u/35312043?v=4" width="100px;" alt=""/><br /><sub><b>Narcis B.</b></sub></a><br /><a href="https://github.com/LeonardSSH/coc-discord-rpc/commits?author=LeonardSSH" title="Code">💻</a> <a href="https://github.com/LeonardSSH/coc-discord-rpc/commits?author=LeonardSSH" title="Documentation">📖</a> <a href="#design-LeonardSSH" title="Design">🎨</a> <a href="#ideas-LeonardSSH" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-LeonardSSH" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-LeonardSSH" title="Maintenance">🚧</a> <a href="#plugin-LeonardSSH" title="Plugin/utility libraries">🔌</a> <a href="#talk-LeonardSSH" title="Talks">📢</a> <a href="#tutorial-LeonardSSH" title="Tutorials">✅</a> <a href="#example-LeonardSSH" title="Examples">💡</a></td>
+    <td align="center"><a href="https://github.com/LeonardSSH"><img src="https://avatars1.githubusercontent.com/u/35312043?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Narcis B.</b></sub></a><br /><a href="https://github.com/LeonardSSH/coc-discord-rpc/commits?author=LeonardSSH" title="Code">💻</a> <a href="https://github.com/LeonardSSH/coc-discord-rpc/commits?author=LeonardSSH" title="Documentation">📖</a> <a href="#design-LeonardSSH" title="Design">🎨</a> <a href="#ideas-LeonardSSH" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-LeonardSSH" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-LeonardSSH" title="Maintenance">🚧</a> <a href="#plugin-LeonardSSH" title="Plugin/utility libraries">🔌</a> <a href="#talk-LeonardSSH" title="Talks">📢</a> <a href="#tutorial-LeonardSSH" title="Tutorials">✅</a> <a href="#example-LeonardSSH" title="Examples">💡</a></td>
+    <td align="center"><a href="https://github.com/Vendicated"><img src="https://avatars.githubusercontent.com/u/45497981?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ven</b></sub></a><br /><a href="https://github.com/LeonardSSH/coc-discord-rpc/commits?author=Vendicated" title="Code">💻</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->

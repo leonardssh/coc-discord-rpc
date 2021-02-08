@@ -14,9 +14,6 @@
     <a href="https://www.npmjs.com/package/coc-discord-rpc">
         <img src="https://img.shields.io/npm/dt/coc-discord-rpc.svg?maxAge=3600&logo=npm&style=flat-square" alt="NPM downloads" />
     </a>
-    <a href="#contributors-">
-        <img src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square" alt="NPM downloads" />
-    </a>
   </p>
 </div>
 

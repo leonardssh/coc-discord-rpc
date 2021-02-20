@@ -1,6 +1,6 @@
 {
 	"name": "coc-discord-rpc",
-	"version": "4.2.0",
+	"version": "4.2.1",
 	"description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
 	"main": "lib/index.js",
 	"private": false,

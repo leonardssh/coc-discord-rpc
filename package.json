@@ -43,7 +43,7 @@
 	"homepage": "https://github.com/LeonardSSH/coc-discord-rpc#readme",
 	"dependencies": {
 		"bufferutil": "^4.0.3",
-		"discord-rpc": "^3.1.4",
+		"discord-rpc": "^3.2.0",
 		"electron": "^11.2.0",
 		"utf-8-validate": "^5.0.4",
 		"vscode-languageserver-protocol": "^3.16.0",
@@ -55,7 +55,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^11.0.0",
 		"@commitlint/config-conventional": "^11.0.0",
-		"@types/discord-rpc": "^3.0.4",
+		"@types/discord-rpc": "^3.0.5",
 		"@types/node": "^14.14.0",
 		"@types/ws": "^7.2.9",
 		"@typescript-eslint/eslint-plugin": "^4.5.0",
@@ -216,6 +216,26 @@
 					"type": "string",
 					"default": "Idle",
 					"description": "Custom string of the text displaying if you're idle when hovering over the small icon."
+				},
+				"rpc.button.enable": {
+					"type": "boolean",
+					"default": "false",
+					"description": "Enable a button on your presence with a link to the Git repository you're working in."
+				},
+				"rpc.button.activeLabel": {
+					"type": "string",
+					"default": "View Repository",
+					"description": "The label to show on the button when the file you are currently editing is located in a Git repository. Set to null to disable."
+				},
+				"rpc.button.inactiveLabel": {
+					"type": "string",
+					"default": null,
+					"description": "The label to show on the button when you are not editing a file in a Git repository. Set to null to disable. (Disabled by default)"
+				},
+				"rpc.button.inactiveUrl": {
+					"type": "string",
+					"default": null,
+					"description": "The URL of the button when you are not editing a file in a Git repository. Set to null to disable. (Disabled by default)"
 				}
 			}
 		}

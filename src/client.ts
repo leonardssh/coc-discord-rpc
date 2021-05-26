@@ -3,6 +3,7 @@ import { Client as RPC, Presence } from 'discord-rpc';
 import { Activity } from './activity';
 import { Listener } from './listener';
 import { logInfo } from './logger';
+import { getGitRepo } from './util';
 
 export class Client implements Disposable {
 	private rpc?: RPC;
@@ -63,6 +64,18 @@ export class Client implements Disposable {
 	public async setActivity(presence: Presence) {
 		if (!this.rpc || !this.ready) {
 			return;
+		}
+
+		const { button } = this.config;
+
+		if (button.enable) {
+			const gitRepo = await getGitRepo();
+
+			if (gitRepo && button.activeLabel) {
+				presence.buttons = [{ label: button.activeLabel, url: gitRepo }];
+			} else if (!gitRepo && button.inactiveLabel && button.inactiveUrl) {
+				presence.buttons = [{ label: button.inactiveLabel, url: button.inactiveUrl }];
+			}
 		}
 
 		await this.rpc.setActivity(presence).catch(() => this.dispose());

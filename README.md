@@ -278,7 +278,31 @@ Default: `No workspace.`
 -   `{currentline}` will get replaced with the current line number
 -   `{totallines}` will get replaced with the total line number
 </details>
-    
+
+#### **rpc.button.enable**
+
+Enable a button on your presence with a link to the Git repository you're working in.
+
+Default: `false`
+
+#### **rpc.button.activeLabel**
+
+The label to show on the button when the file you are currently editing is located in a Git repository. Set to `null` to disable.
+
+Default: `View Repository`
+
+#### **rpc.button.inactiveLabel**
+
+The label to show on the button when you are not editing a file in a Git repository. Set to `null` to disable.
+
+Default: `null`
+
+#### **rpc.button.inactiveUrl**
+
+The URL of the button when you are not editing a file in a Git repository. Set to `null` to disable.
+
+Default: `null`
+
 ## 👨‍💻 Contributing
 
 To contribute to this repository, feel free to create a new fork of the repository and submit a pull request.

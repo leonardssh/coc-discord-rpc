@@ -30,14 +30,15 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 
 ## 📌 Features
 
+-   Highly customizable in using the extension settings
 -   Shows what you're working on in NeoVim
 -   Shows the amount of problems in your workspace
 -   Shows the number of lines in your file and which line you're editing
 -   Respects Discords 15sec limit when it comes to updating your status
 -   Support for over 130+ of the most popular languages
 -   Enable/Disable RPC for individual workspaces
--   [coc-explorer] support
 -   Custom string support
+-   Easily manually reconnect to Discord Gateway
 -   Idle indication when you tab out for a while
 
 > All texts is fully customizable using variables and a multitude of config options
@@ -51,9 +52,10 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 ## 📄 Wiki
 
 ### Checkout wiki for more details:
-- [📥 Installation](https://github.com/LeonardSSH/coc-discord-rpc/wiki/install)
-- [🤖 Commands](https://github.com/LeonardSSH/coc-discord-rpc/wiki/Using-the-commands)
-- [🔧 Settings](https://github.com/LeonardSSH/coc-discord-rpc/wiki/Using-the-configuration-file)
+
+-   [📥 Installation](https://github.com/LeonardSSH/coc-discord-rpc/wiki/install)
+-   [🤖 Commands](https://github.com/LeonardSSH/coc-discord-rpc/wiki/Using-the-commands)
+-   [🔧 Settings](https://github.com/LeonardSSH/coc-discord-rpc/wiki/Using-the-configuration-file)
 
 ## 👨‍💻 Contributing
 
@@ -72,4 +74,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [coc-cord]: https://github.com/dakyskye/coc-cord
 [discord-vscode]: https://github.com/iCrawl/discord-vscode/
 [vscode-discord]: https://github.com/Satoqz/vscode-discord
-[coc-explorer]: https://github.com/weirongxu/coc-explorer

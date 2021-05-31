@@ -1,33 +1,42 @@
-import { DidChangeTextDocumentParams, Disposable, events, workspace } from 'coc.nvim';
-import type { TextDocument } from 'vscode-languageserver-textdocument';
-import type { Activity } from './activity';
+import { Disposable, events, workspace } from 'coc.nvim';
+import { ActivityController } from './activity';
+import { throttle } from 'lodash-es';
 
-export class Listener implements Disposable {
-	private disposables: Disposable[] = [];
+export class ListenerController {
+	public static disposables: Disposable[] = [];
 
-	public constructor(private activity: Activity) {}
+	public static listen() {
+		const onFileSwitch = events.on(
+			'BufEnter',
+			throttle(() => ActivityController.toggleViewingMode(), 1000)
+		);
 
-	public listen() {
-		this.dispose();
+		const onChangeTextDocument = workspace.onDidChangeTextDocument(
+			throttle(() => ActivityController.toggleViewingMode(false), 1000)
+		);
 
-		const fileSwitch = events;
-		const fileEdit = workspace.onDidChangeTextDocument;
-		const fileOpen = workspace.onDidOpenTextDocument;
-		const fileWrite = events;
+		const onOpenTextDocument = workspace.onDidOpenTextDocument(
+			throttle(() => ActivityController.toggleViewingMode(), 1000)
+		);
 
-		const { enabled } = this.activity.client.config;
+		const onInsertEnter = events.on('InsertEnter', () => ActivityController.toggleViewingMode(false));
+		const onInsertLeave = events.on('InsertLeave', () => ActivityController.toggleViewingMode());
 
-		if (enabled) {
-			const onFileSwitch = fileSwitch.on('BufEnter', (bufnr: number) => this.activity.onFileSwitch(bufnr));
-			const onFileEdit = fileEdit(({ bufnr }: DidChangeTextDocumentParams) => this.activity.onFileEdit(bufnr));
-			const onFileOpen = fileOpen((e: TextDocument) => this.activity.onFileOpen(e));
-			const onFileWrite = fileWrite.on('BufWritePost', (bufnr: number) => this.activity.onFileWrite(bufnr));
-
-			this.disposables.push(onFileSwitch, onFileEdit, onFileOpen, onFileWrite);
-		}
+		ListenerController.disposables.push(
+			onFileSwitch,
+			onChangeTextDocument,
+			onOpenTextDocument,
+			onInsertEnter,
+			onInsertLeave
+		);
 	}
 
-	public dispose() {
-		this.disposables.forEach((disposable: Disposable) => disposable.dispose());
+	public static reset() {
+		ListenerController.disposables.forEach((disposable: Disposable) => disposable.dispose());
+		ListenerController.disposables = [];
+
+		if (ActivityController.interval) {
+			clearTimeout(ActivityController.interval);
+		}
 	}
 }

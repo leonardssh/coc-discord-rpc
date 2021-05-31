@@ -1,110 +1,90 @@
 import { commands, ExtensionContext, workspace } from 'coc.nvim';
-import { Client } from './client';
-import { logError, logInfo, logMessage } from './logger';
+import { ActivityController } from './activity';
+import { ClientController } from './client';
+import { CONFIG_KEYS } from './constants';
+import { ListenerController } from './listener';
+import { logError, logInfo } from './logger';
+import { getConfig } from './util';
+import * as Commands from './commands';
 
 const extensionName = process.env.EXTENSION_NAME || 'dev.coc-discord-rpc';
 const extensionVersion = process.env.EXTENSION_VERSION || '0.0.0';
 
-const config = workspace.getConfiguration('rpc');
-
-const client: Client = new Client(config);
-
-let loginTimeout: NodeJS.Timer | undefined = undefined;
+const config = getConfig();
 
 export const activate = async (ctx: ExtensionContext) => {
-	const { logger } = ctx;
+	ctx.logger.info(`=== Extension activated ===`);
+	ctx.logger.info(`Extension Name: ${extensionName}.`);
+	ctx.logger.info(`Extension Version: ${extensionVersion}.`);
 
-	logger.info(`=== Extension activated ===`);
-	logger.info(`Extension Name: ${extensionName}.`);
-	logger.info(`Extension Version: ${extensionVersion}.`);
+	ActivityController.setExtensionContext(ctx);
 
-	const enableCommand = commands.registerCommand('rpc.disable', async () => {
-		config.update('enabled', false);
-		client.config = workspace.getConfiguration('rpc');
+	let isWorkspaceIgnored = false;
 
-		await client.dispose();
+	for (const pattern of config[CONFIG_KEYS.IgnoreWorkspaces]) {
+		const regex = new RegExp(pattern);
+		const folders = workspace.workspaceFolders;
 
-		logInfo(`Disabled Discord Rich Presence for this workspace.`);
-	});
-
-	const disableCommand = commands.registerCommand('rpc.enable', async () => {
-		await client.dispose();
-
-		config.update('enabled', true);
-		client.config = workspace.getConfiguration('rpc');
-
-		await client.connect(ctx);
-
-		logInfo(`Enabled Discord Rich Presence for this workspace.`);
-	});
-
-	const disconnectCommand = commands.registerCommand('rpc.disconnect', async () => {
-		logInfo(`Trying to disconnect from Discord Gateway`);
-		await client.dispose();
-	});
-
-	const reconnectCommand = commands.registerCommand('rpc.reconnect', async () => {
-		if (loginTimeout) {
-			clearTimeout(loginTimeout);
+		if (!folders) {
+			break;
 		}
 
-		await client.dispose();
+		if (folders.some((folder) => regex.test(folder.name))) {
+			isWorkspaceIgnored = true;
+			break;
+		}
+	}
 
-		loginTimeout = setTimeout(async () => {
-			try {
-				await client.connect(ctx);
-			} catch (error) {
-				logError('Encountered following error after trying to login', ctx, error);
+	const enableCommand = commands.registerCommand(Commands.ENABLE_RPC, async () => {
+		config.update('enabled', true);
 
-				await client.dispose();
-			}
-		}, 1000);
+		ListenerController.reset();
+		await ClientController.login(ctx);
 
-		logInfo(`Trying to reconnect to Discord Gateway`);
-		await client.connect(ctx);
+		if (config[CONFIG_KEYS.SuppressNotifications]) {
+			await logInfo(`Enabled Discord Rich Presence for this workspace.`);
+		}
 	});
 
-	const versionCommand = commands.registerCommand('rpc.version', () => {
-		logInfo(`v${extensionVersion}`);
+	const disableCommand = commands.registerCommand(Commands.DISABLE_RPC, async () => {
+		config.update('enabled', false);
+
+		ListenerController.reset();
+		await ClientController.rpc.destroy();
+
+		if (config[CONFIG_KEYS.SuppressNotifications]) {
+			await logInfo(`Disabled Discord Rich Presence for this workspace.`);
+		}
+	});
+
+	const disconnectCommand = commands.registerCommand(Commands.DISCONNECT_RPC, async () => {
+		ListenerController.reset();
+		await ClientController.rpc.destroy();
+	});
+
+	const reconnectCommand = commands.registerCommand(Commands.RECONNECT_RPC, async () => {
+		ListenerController.reset();
+
+		await ClientController.rpc.destroy();
+		await ClientController.login(ctx);
+	});
+
+	const versionCommand = commands.registerCommand(Commands.VERSION_RPC, async () => {
+		await logInfo(`v${extensionVersion}`);
 	});
 
 	ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, versionCommand);
 
-	let isWorkspaceIgnored = false;
-
-	const { ignoreWorkspaces, enabled } = client.config;
-
-	if (ignoreWorkspaces?.length) {
-		for (const pattern of ignoreWorkspaces) {
-			const regex = new RegExp(pattern);
-			const folders = workspace.workspaceFolders;
-
-			if (!folders) {
-				break;
-			}
-
-			if (folders.some((folder) => regex.test(folder.name))) {
-				isWorkspaceIgnored = true;
-				break;
-			}
-		}
-	}
-
-	if (!isWorkspaceIgnored && enabled) {
-		try {
-			await client.connect(ctx);
-		} catch (error) {
-			logError('Encountered following error after trying to login', ctx, error);
-
-			await client.dispose();
-		}
+	if (!isWorkspaceIgnored && config[CONFIG_KEYS.Enabled]) {
+		await ClientController.login(ctx);
 	}
 };
 
-export const deactivate = async () => {
-	logInfo(`=== Extension deactivated ===`);
+export const deactivate = async (ctx: ExtensionContext) => {
+	ctx.logger.info(`=== Extension deactivated ===`);
 
-	await client.dispose();
+	ListenerController.reset();
+	await ClientController.rpc.destroy();
 };
 
-process.on('unhandledRejection', (err) => logMessage(err as string, 'error'));
+process.on('unhandledRejection', (error) => logError(`RPC: ${error}`));

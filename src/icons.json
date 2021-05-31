@@ -178,7 +178,7 @@
 		".reg": { "image": "bat" },
 		"/^(\\.bowerrc|bower\\.json|Bowerfile)$/i": { "image": "bower" },
 		"/\\.bf?$/i": { "image": "brainfuck" },
-		"/\\.c$/i": { "image": "c" },
+		"/\\.(c|h)$/i": { "image": "c" },
 		"/(cargo.toml|cargo.lock)/i": { "image": "cargo" },
 		"circle.yml": { "image": "circleci" },
 		".clj": { "image": "clojure" },

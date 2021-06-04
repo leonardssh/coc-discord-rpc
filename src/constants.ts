@@ -50,5 +50,8 @@ export const enum CONFIG_KEYS {
 	ButtonEnabled = 'buttonEnabled',
 	ButtonActiveLabel = 'buttonActiveLabel',
 	ButtonInactiveLabel = 'buttonInactiveLabel',
-	ButtonInactiveUrl = 'buttonInactiveUrl'
+	ButtonInactiveUrl = 'buttonInactiveUrl',
+	CheckIdle = 'checkIdle',
+	IdleTimeout = 'idleTimeout',
+	IdleText = 'idleText'
 }

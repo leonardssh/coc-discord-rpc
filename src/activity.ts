@@ -6,12 +6,15 @@ import { ClientController } from './client';
 import {
 	CONFIG_KEYS,
 	FAKE_EMPTY,
+	IDLE_IMAGE_KEY,
 	NEOVIM_IDLE_IMAGE_KEY,
 	NEOVIM_IMAGE_KEY,
 	REPLACE_KEYS,
 	SEND_ACTIVITY_TIMEOUT
 } from './constants';
 import { getConfig, getGitRepo, resolveFileIcon } from './util';
+
+let idleCheckTimeout: NodeJS.Timeout | undefined = undefined;
 
 export class ActivityController {
 	public static interval: NodeJS.Timeout | undefined;
@@ -56,8 +59,8 @@ export class ActivityController {
 				: previous.startTimestamp ?? Number(new Date()),
 			largeImageKey: NEOVIM_IDLE_IMAGE_KEY,
 			largeImageText: defaultLargeImageText,
-			smallImageKey: defaultSmallImageKey,
-			smallImageText: defaultSmallImageText
+			smallImageKey: previous.smallImageKey ?? defaultSmallImageKey,
+			smallImageText: previous.smallImageText ?? defaultSmallImageText
 		};
 
 		const document = await workspace.document;
@@ -120,6 +123,36 @@ export class ActivityController {
 	public static async toggleViewingMode(viewingState = true) {
 		ActivityController.viewing = viewingState;
 		await ActivityController.sendActivity();
+	}
+
+	public static async checkIdle(focused: boolean) {
+		const config = getConfig();
+
+		if (config[CONFIG_KEYS.CheckIdle]) {
+			if (focused) {
+				if (idleCheckTimeout) {
+					clearTimeout(idleCheckTimeout);
+				}
+
+				idleCheckTimeout = undefined;
+
+				await ActivityController.setIdle(false);
+			} else {
+				if (idleCheckTimeout) {
+					clearTimeout(idleCheckTimeout);
+				}
+
+				idleCheckTimeout = setInterval(async () => {
+					await ActivityController.setIdle(true);
+
+					if (idleCheckTimeout) {
+						clearTimeout(idleCheckTimeout);
+					}
+
+					idleCheckTimeout = undefined;
+				}, config[CONFIG_KEYS.IdleTimeout] * 1000);
+			}
+		}
 	}
 
 	private static async generateDetails(editing: CONFIG_KEYS, idling: CONFIG_KEYS, viewing: CONFIG_KEYS) {
@@ -191,5 +224,22 @@ export class ActivityController {
 		}
 
 		return raw;
+	}
+
+	private static async setIdle(status: boolean) {
+		if (status) {
+			const config = getConfig();
+
+			ActivityController.presence = {
+				...ActivityController.presence,
+				smallImageKey: IDLE_IMAGE_KEY,
+				smallImageText: config[CONFIG_KEYS.IdleText]
+			};
+		} else {
+			delete ActivityController.presence.smallImageKey;
+			delete ActivityController.presence.smallImageText;
+		}
+
+		await ActivityController.sendActivity();
 	}
 }

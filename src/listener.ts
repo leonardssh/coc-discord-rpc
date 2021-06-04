@@ -21,13 +21,17 @@ export class ListenerController {
 
 		const onInsertEnter = events.on('InsertEnter', () => ActivityController.toggleViewingMode(false));
 		const onInsertLeave = events.on('InsertLeave', () => ActivityController.toggleViewingMode());
+		const onFocusGained = events.on('FocusGained', () => ActivityController.checkIdle(true));
+		const onFocusLost = events.on('FocusLost', () => ActivityController.checkIdle(false));
 
 		ListenerController.disposables.push(
 			onFileSwitch,
 			onChangeTextDocument,
 			onOpenTextDocument,
 			onInsertEnter,
-			onInsertLeave
+			onInsertLeave,
+			onFocusGained,
+			onFocusLost
 		);
 	}
 

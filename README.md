@@ -43,11 +43,9 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 
 > All texts is fully customizable using variables and a multitude of config options
 
-![1](https://cyberpunk.is-a.fail/1SvNnd.png)
-![2](https://cyberpunk.is-a.fail/WyHbMu.png)
-![3](https://cyberpunk.is-a.fail/pSCKrl.png)
-![4](https://cyberpunk.is-a.fail/Vg82G0.png)
-![5](https://cyberpunk.is-a.fail/BKX7RK.png)
+![1](https://i.imgur.com/GsZcyEo.png)
+![2](https://i.imgur.com/ImVMp6j.png)
+![3](https://i.imgur.com/9noFU8f.png)
 
 ## 📄 Wiki
 

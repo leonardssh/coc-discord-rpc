@@ -1,103 +1,58 @@
-import type { Disposable, ExtensionContext, WorkspaceConfiguration } from 'coc.nvim';
-import { Client as RPC, Presence } from 'discord-rpc';
-import { Activity } from './activity';
-import { Listener } from './listener';
+import { Client } from 'discord-rpc';
+import { CONFIG_KEYS, RPC_CLIENT_CONFIG } from './constants';
+import { ListenerController } from './listener';
+import { ActivityController } from './activity';
+import type { ExtensionContext } from 'coc.nvim';
 import { logInfo } from './logger';
-import { getGitRepo } from './util';
+import { getConfig } from './util';
 
-export class Client implements Disposable {
-	private rpc?: RPC;
+const config = getConfig();
 
-	private ready?: boolean = false;
+export class ClientController {
+	public static rpc: Client = new Client(RPC_CLIENT_CONFIG);
 
-	private activity: Activity;
+	public static async login(ctx: ExtensionContext) {
+		ClientController.rpc = new Client(RPC_CLIENT_CONFIG);
 
-	private listener: Listener;
-
-	public constructor(public config: WorkspaceConfiguration) {
-		this.activity = new Activity(this);
-		this.listener = new Listener(this.activity);
-	}
-
-	public async connect(ctx: ExtensionContext) {
-		await this.dispose();
-
-		this.rpc = new RPC({ transport: 'ipc' });
-
-		this.ready = false;
-
-		this.rpc.once('ready', () => this.handleReady(ctx));
-
-		this.rpc.transport.once('close', () => this.handleTransport());
+		ClientController.rpc.once('ready', () => ClientController.handleLogin(ctx));
+		ClientController.rpc.once('disconnected', () => ClientController.handleDisconnected(ctx));
 
 		try {
-			const { id } = this.config;
-
-			await this.rpc.login({ clientId: id });
+			await ClientController.rpc.login({ clientId: config[CONFIG_KEYS.ClientId] });
 		} catch (error) {
-			throw error;
+			ctx.logger.error(error);
+
+			ListenerController.reset();
+			await ClientController.rpc.destroy();
 		}
 	}
 
-	public async handleTransport() {
-		const { enabled } = this.config;
+	private static async handleLogin(ctx: ExtensionContext) {
+		ctx.logger.info('Connected to Discord Gateway');
 
-		if (!enabled) {
-			return;
+		if (config[CONFIG_KEYS.SuppressNotifications]) {
+			await logInfo('Connected to Discord Gateway!');
 		}
 
-		await this.dispose();
+		ListenerController.reset();
+		await ActivityController.sendActivity();
+		ListenerController.listen();
 	}
 
-	public async handleReady(ctx: ExtensionContext) {
-		this.ready = true;
+	private static async handleDisconnected(ctx: ExtensionContext) {
+		ctx.logger.info('Disconnected from Discord Gateway');
 
-		const { logger } = ctx;
-
-		logger.info('Connected to Discord Gateway!');
-		logInfo('Connected to Discord Gateway!');
-
-		this.listener.listen();
-		await this.activity.init();
-	}
-
-	public async setActivity(presence: Presence) {
-		if (!this.rpc || !this.ready) {
-			return;
+		if (config[CONFIG_KEYS.SuppressNotifications]) {
+			await logInfo('Disconnected from Discord Gateway!');
 		}
 
-		const { button } = this.config;
-
-		if (button.enable) {
-			const gitRepo = await getGitRepo();
-
-			if (gitRepo && button.activeLabel) {
-				presence.buttons = [{ label: button.activeLabel, url: gitRepo }];
-			} else if (!gitRepo && button.inactiveLabel && button.inactiveUrl) {
-				presence.buttons = [{ label: button.inactiveLabel, url: button.inactiveUrl }];
-			}
-		}
-
-		await this.rpc.setActivity(presence).catch(() => this.dispose());
-	}
-
-	public async dispose() {
-		this.activity.dispose();
-		this.listener.dispose();
-
-		if (this.rpc && this.ready) {
-			await this.rpc.destroy();
-		}
-
-		this.rpc = undefined;
-		this.ready = false;
+		ListenerController.reset();
+		await ClientController.rpc.destroy();
 	}
 }
 
 declare module 'discord-rpc' {
 	interface Client {
-		transport: {
-			once(event: 'close', listener: () => void): void;
-		};
+		once(event: 'ready' | 'connected' | 'disconnected', listener: () => void): void;
 	}
 }

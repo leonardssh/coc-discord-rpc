@@ -32,6 +32,9 @@ jobs:
       - name: Install Dependencies
         run: yarn --ignore-scripts --frozen-lockfile
 
+      - name: Update COC DTS File
+        run: yarn update:coc
+
       - name: Run ESLint
         uses: icrawl/action-eslint@v1
 
@@ -58,6 +61,9 @@ jobs:
 
       - name: Install Dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+
+      - name: Update COC DTS File
+        run: yarn update:coc
 
       - name: Build Code
         run: yarn build

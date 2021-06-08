@@ -8,7 +8,7 @@ const commitHash = execSync('git rev-parse HEAD', { encoding: 'utf8' }).slice(0,
 module.exports = {
 	entry: './src/index.ts',
 	target: 'node',
-	mode: 'none',
+	mode: 'production',
 	resolve: {
 		mainFields: ['module', 'main'],
 		extensions: ['.js', '.ts']
@@ -35,7 +35,7 @@ module.exports = {
 		]
 	},
 	output: {
-		path: path.join(__dirname, 'lib'),
+		path: path.join(__dirname, 'dist'),
 		filename: 'index.js',
 		libraryTarget: 'commonjs'
 	},

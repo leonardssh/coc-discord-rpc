@@ -2,11 +2,7 @@
 	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
 		"rootDir": "./",
-		"outDir": "../lib",
-		"composite": true,
-		"preserveConstEnums": true,
-		"resolveJsonModule": true,
-		"esModuleInterop": true
+		"outDir": "../dist"
 	},
 	"include": [".", "./icons.json"]
 }

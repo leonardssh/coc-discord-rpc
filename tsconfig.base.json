@@ -3,8 +3,8 @@
 	"compilerOptions": {
 		"allowSyntheticDefaultImports": true,
 		"alwaysStrict": true,
-		"declaration": true,
-		"declarationMap": true,
+		"declaration": false,
+		"declarationMap": false,
 		"emitDecoratorMetadata": true,
 		"esModuleInterop": true,
 		"experimentalDecorators": true,

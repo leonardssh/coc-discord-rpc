@@ -17,7 +17,8 @@
 		"commit": "git-cz",
 		"cz": "git-cz",
 		"prepare": "husky install .github/husky",
-		"postinstall": "node ./scripts/update_coc.js"
+		"postinstall": "yarn update:coc",
+		"update:coc": "node ./scripts/update_coc.js"
 	},
 	"engines": {
 		"coc": "*"

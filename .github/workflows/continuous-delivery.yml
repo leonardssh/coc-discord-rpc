@@ -56,17 +56,17 @@ jobs:
           TARGET_BRANCH="build"
           git clone $REPO out -b $TARGET_BRANCH
 
-          echo -e "\n# Remove any old files in the lib folder"
-          rm -rfv out/lib/*
+          echo -e "\n# Remove any old files in the dist folder"
+          rm -rfv out/dist/*
 
           echo -e "\n# Move the generated code to the newly-checked-out repo, to be committed and pushed"
           rsync -vaI package.json out/
           rsync -vaI LICENSE out/
           rsync -vaI README.md out/
-          rsync -vaI lib/ out/lib
+          rsync -vaI dist/ out/dist
 
           echo -e "\n# Removing TSC incremental file"
-          rm -rfv out/lib/**/*.tsbuildinfo
+          rm -rfv out/dist/**/*.tsbuildinfo
 
           echo -e "\n# Commit and push"
           cd out

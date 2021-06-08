@@ -2,7 +2,7 @@
 	"name": "coc-discord-rpc",
 	"version": "4.2.1",
 	"description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
-	"main": "lib/index.js",
+	"main": "dist/index.js",
 	"private": false,
 	"publisher": "leonardssh",
 	"scripts": {
@@ -12,13 +12,16 @@
 		"update": "yarn upgrade-interactive --latest",
 		"prebuild": "yarn clean && yarn lint",
 		"build": "webpack",
-		"clean": "rimraf lib",
+		"clean": "rimraf dist",
 		"watch": "tsc -b src -w",
 		"commit": "git-cz",
-		"cz": "git-cz"
+		"cz": "git-cz",
+		"prepare": "husky install .github/husky",
+		"postinstall": "yarn update:coc",
+		"update:coc": "node ./scripts/update_coc.js"
 	},
 	"engines": {
-		"coc": ">=0.0.77"
+		"coc": "*"
 	},
 	"keywords": [
 		"discord",
@@ -44,8 +47,9 @@
 	"dependencies": {
 		"bufferutil": "^4.0.3",
 		"discord-rpc": "^3.2.0",
-		"electron": "^11.2.0",
-		"utf-8-validate": "^5.0.4",
+		"electron": "^13.1.1",
+		"lodash-es": "^4.17.21",
+		"utf-8-validate": "^5.0.5",
 		"vscode-languageserver-protocol": "^3.16.0",
 		"vscode-languageserver-textdocument": "^1.0.1"
 	},
@@ -53,33 +57,30 @@
 		"register-scheme": "devsnek/node-register-scheme"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^11.0.0",
-		"@commitlint/config-conventional": "^11.0.0",
+		"@commitlint/cli": "^12.1.4",
+		"@commitlint/config-conventional": "^12.1.4",
 		"@types/discord-rpc": "^3.0.5",
-		"@types/node": "^14.14.0",
-		"@types/ws": "^7.2.9",
-		"@typescript-eslint/eslint-plugin": "^4.5.0",
-		"@typescript-eslint/parser": "^4.5.0",
-		"coc.nvim": "^0.0.79",
+		"@types/lodash-es": "^4.17.4",
+		"@types/node": "^15.12.2",
+		"@types/ws": "^7.4.4",
+		"@typescript-eslint/eslint-plugin": "^4.26.1",
+		"@typescript-eslint/parser": "^4.26.1",
+		"coc.nvim": "^0.0.80",
 		"cz-conventional-changelog": "^3.3.0",
-		"eslint": "^7.11.0",
-		"eslint-config-prettier": "^6.13.0",
-		"eslint-plugin-import": "^2.22.1",
-		"eslint-plugin-prettier": "^3.1.4",
-		"husky": "^4.3.8",
-		"lint-staged": "^10.5.4",
-		"prettier": "^2.1.2",
+		"download": "^8.0.0",
+		"esbuild": "^0.12.7",
+		"eslint": "^7.28.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-import": "^2.23.4",
+		"eslint-plugin-prettier": "^3.4.0",
+		"husky": "^6.0.0",
+		"lint-staged": "^11.0.0",
+		"prettier": "^2.3.1",
 		"pretty-quick": "^3.1.0",
-		"ts-loader": "^8.0.14",
-		"typescript": "^4.0.3",
-		"webpack": "^5.13.0",
-		"webpack-cli": "^4.3.1"
-	},
-	"husky": {
-		"hooks": {
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-			"pre-commit": "yarn pretty-quick --staged && yarn lint-staged"
-		}
+		"ts-loader": "^9.2.3",
+		"typescript": "^4.2.4",
+		"webpack": "^5.38.1",
+		"webpack-cli": "^4.7.2"
 	},
 	"commitlint": {
 		"extends": [
@@ -99,10 +100,10 @@
 			"title": "RPC Configuration",
 			"type": "Object",
 			"properties": {
-				"rpc.id": {
+				"rpc.clientId": {
 					"type": "string",
 					"default": "768090036633206815",
-					"description": "Application ID. Change only if you known exactly what you're doing."
+					"description": "Application ClientId. Change only if you known exactly what you're doing."
 				},
 				"rpc.enabled": {
 					"type": "boolean",
@@ -111,30 +112,20 @@
 				},
 				"rpc.detailsEditing": {
 					"type": "string",
-					"default": "{workspace} {problems}",
-					"description": "Custom string for the details section of the rich presence\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
+					"default": "{workspace_folder} {problems}",
+					"description": "Custom string for the details section of the rich presence\n\t- {null} will be replaced with an empty space\n\t- {file_name} will be replaced with the current file name\n\t- {workspace_folder} will be replaced with the current workspace name, if any\n\t- {current_column} will get replaced with the current column of the current line\n\t- {current_line} will get replaced with the current line number\n\t- {total_lines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
 				},
-				"rpc.detailsInExplorer": {
-					"type": "string",
-					"default": "Workspace: {workspace}",
-					"description": "Custom string for the details section of the rich presence when browsing the explorer.\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
-				},
-				"rpc.detailsIdle": {
+				"rpc.detailsIdling": {
 					"type": "string",
 					"default": "Idling",
 					"description": "Custom string for the details section of the rich presence when idling\n\t- {null} will be replaced with an empty space."
 				},
 				"rpc.lowerDetailsEditing": {
 					"type": "string",
-					"default": "Working on {filename}:{currentline}:{currentcolumn}",
-					"description": "Custom string for the state section of the rich presence\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
+					"default": "Working on {file_name}:{current_line}:{current_column}",
+					"description": "Custom string for the state section of the rich presence\n\t- {null} will be replaced with an empty space\n\t- {file_name} will be replaced with the current file name\n\t- {workspace_folder} will be replaced with the current workspace name, if any\n\t- {current_column} will get replaced with the current column of the current line\n\t- {current_line} will get replaced with the current line number\n\t- {total_lines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
 				},
-				"rpc.lowerDetailsInExplorer": {
-					"type": "string",
-					"default": "In explorer",
-					"description": "Custom string for the state section of the rich presence when browsing the explorer."
-				},
-				"rpc.lowerDetailsIdle": {
+				"rpc.lowerDetailsIdling": {
 					"type": "string",
 					"default": "Idling",
 					"description": "Custom string for the state section of the rich presence when idling\n\t- {null} will be replaced with an empty space."
@@ -149,15 +140,10 @@
 					"default": "Idling",
 					"description": "Custom string for the largeImageText section of the rich presence when idling."
 				},
-				"rpc.largeImageInExplorer": {
-					"type": "string",
-					"default": "In explorer",
-					"description": "Custom string for the largeImageText section of the rich presence when browsing the explorer."
-				},
 				"rpc.smallImage": {
 					"type": "string",
-					"default": "{appname} v{appversion}",
-					"description": "Custom string for the smallImageText section of the rich presence\n\t- {appname} will get replaced with NeoVim text\n\t- ${appversion} will be replaced with the installed version of NeoVim."
+					"default": "{app_name} v{app_version}",
+					"description": "Custom string for the smallImageText section of the rich presence\n\t- {app_name} will get replaced with NeoVim text\n\t- ${app_version} will be replaced with the installed version of NeoVim."
 				},
 				"rpc.showProblems": {
 					"type": "boolean",
@@ -184,23 +170,18 @@
 				},
 				"rpc.detailsViewing": {
 					"type": "string",
-					"default": "In {workspace} {problems}",
-					"description": "Custom string for the details section of the rich presence when viewing\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
+					"default": "In {workspace_folder} {problems}",
+					"description": "Custom string for the details section of the rich presence when viewing\n\t- {null} will be replaced with an empty space\n\t- {file_name} will be replaced with the current file name\n\t- {workspace_folder} will be replaced with the current workspace name, if any\n\t- {current_column} will get replaced with the current column of the current line\n\t- {current_line} will get replaced with the current line number\n\t- {total_lines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
 				},
 				"rpc.lowerDetailsViewing": {
 					"type": "string",
-					"default": "Viewing {filename}",
-					"description": "Custom string for the state section of the rich presence when viewing\n\t- {null} will be replaced with an empty space\n\t- {filename} will be replaced with the current file name\n\t- {workspace} will be replaced with the current workspace name, if any\n\t- {currentcolumn} will get replaced with the current column of the current line\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
+					"default": "Viewing {file_name}",
+					"description": "Custom string for the state section of the rich presence when viewing\n\t- {null} will be replaced with an empty space\n\t- {file_name} will be replaced with the current file name\n\t- {workspace_folder} will be replaced with the current workspace name, if any\n\t- {current_column} will get replaced with the current column of the current line\n\t- {current_line} will get replaced with the current line number\n\t- {total_lines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
 				},
 				"rpc.lowerDetailsNotFound": {
 					"type": "string",
 					"default": "No workspace.",
-					"description": "Custom string for the state section of the rich presence when no workspace is found.\n- {null} will be replaced with an empty space\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number."
-				},
-				"rpc.workspaceText": {
-					"type": "string",
-					"default": "{workspace}",
-					"description": "Custom string for the state section of the rich presence when a workspace is found.\n- {null} will be replaced with an empty space\n\t- {currentline} will get replaced with the current line number\n\t- {totallines} will get replaced with the total line number."
+					"description": "Custom string for the state section of the rich presence when no workspace is found.\n- {null} will be replaced with an empty space\n\t- {current_line} will get replaced with the current line number\n\t- {total_lines} will get replaced with the total line number."
 				},
 				"rpc.checkIdle": {
 					"type": "boolean",
@@ -217,22 +198,27 @@
 					"default": "Idle",
 					"description": "Custom string of the text displaying if you're idle when hovering over the small icon."
 				},
-				"rpc.button.enable": {
+				"rpc.suppressNotifications": {
 					"type": "boolean",
-					"default": "false",
+					"default": true,
+					"description": "Controls if info/warn/error messages are shown to the user."
+				},
+				"rpc.buttonEnabled": {
+					"type": "boolean",
+					"default": true,
 					"description": "Enable a button on your presence with a link to the Git repository you're working in."
 				},
-				"rpc.button.activeLabel": {
+				"rpc.buttonActiveLabel": {
 					"type": "string",
 					"default": "View Repository",
 					"description": "The label to show on the button when the file you are currently editing is located in a Git repository. Set to null to disable."
 				},
-				"rpc.button.inactiveLabel": {
+				"rpc.buttonInactiveLabel": {
 					"type": "string",
 					"default": null,
 					"description": "The label to show on the button when you are not editing a file in a Git repository. Set to null to disable. (Disabled by default)"
 				},
-				"rpc.button.inactiveUrl": {
+				"rpc.buttonInactiveUrl": {
 					"type": "string",
 					"default": null,
 					"description": "The URL of the button when you are not editing a file in a Git repository. Set to null to disable. (Disabled by default)"

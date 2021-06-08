@@ -16,7 +16,8 @@
 		"watch": "tsc -b src -w",
 		"commit": "git-cz",
 		"cz": "git-cz",
-		"prepare": "husky install .github/husky"
+		"prepare": "husky install .github/husky",
+		"postinstall": "node ./scripts/update_coc.js"
 	},
 	"engines": {
 		"coc": "*"
@@ -45,7 +46,7 @@
 	"dependencies": {
 		"bufferutil": "^4.0.3",
 		"discord-rpc": "^3.2.0",
-		"electron": "^13.1.0",
+		"electron": "^13.1.1",
 		"lodash-es": "^4.17.21",
 		"utf-8-validate": "^5.0.5",
 		"vscode-languageserver-protocol": "^3.16.0",
@@ -59,25 +60,26 @@
 		"@commitlint/config-conventional": "^12.1.4",
 		"@types/discord-rpc": "^3.0.5",
 		"@types/lodash-es": "^4.17.4",
-		"@types/node": "^15.12.1",
+		"@types/node": "^15.12.2",
 		"@types/ws": "^7.4.4",
-		"@typescript-eslint/eslint-plugin": "^4.26.0",
-		"@typescript-eslint/parser": "^4.26.0",
+		"@typescript-eslint/eslint-plugin": "^4.26.1",
+		"@typescript-eslint/parser": "^4.26.1",
 		"coc.nvim": "^0.0.80",
 		"cz-conventional-changelog": "^3.3.0",
-		"esbuild": "^0.12.6",
-		"eslint": "^7.27.0",
+		"download": "^8.0.0",
+		"esbuild": "^0.12.7",
+		"eslint": "^7.28.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-import": "^2.23.4",
 		"eslint-plugin-prettier": "^3.4.0",
 		"husky": "^6.0.0",
 		"lint-staged": "^11.0.0",
-		"prettier": "^2.3.0",
+		"prettier": "^2.3.1",
 		"pretty-quick": "^3.1.0",
-		"ts-loader": "^9.2.2",
+		"ts-loader": "^9.2.3",
 		"typescript": "^4.2.4",
 		"webpack": "^5.38.1",
-		"webpack-cli": "^4.7.0"
+		"webpack-cli": "^4.7.2"
 	},
 	"commitlint": {
 		"extends": [

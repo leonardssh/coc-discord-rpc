@@ -1,5 +1,5 @@
 // /* eslint-disable prefer-destructuring */
-import { diagnosticManager, Document, ExtensionContext, window, workspace } from 'coc.nvim';
+import { DiagnosticItem, diagnosticManager, Document, ExtensionContext, window, workspace } from 'coc.nvim';
 import type { Presence } from 'discord-rpc';
 import { basename } from 'path';
 import { ClientController } from './client';
@@ -16,6 +16,22 @@ import { getConfig, getGitRepo, resolveFileIcon } from './util';
 
 let idleCheckTimeout: NodeJS.Timeout | undefined = undefined;
 
+let totalProblems = 0;
+
+export function generateDiagnostics() {
+	const diagnostics = diagnosticManager.getDiagnosticList();
+
+	let counted = 0;
+
+	diagnostics.forEach((diagnostic: DiagnosticItem) => {
+		if (diagnostic.severity === 'Warning' || diagnostic.severity === 'Error') {
+			counted++;
+		}
+	});
+
+	totalProblems = counted;
+}
+
 export class ActivityController {
 	public static interval: NodeJS.Timeout | undefined;
 
@@ -30,6 +46,8 @@ export class ActivityController {
 	}
 
 	public static async sendActivity() {
+		generateDiagnostics();
+
 		if (ActivityController.interval) {
 			clearTimeout(ActivityController.interval);
 		}
@@ -175,10 +193,8 @@ export class ActivityController {
 			const workspaceFolder = workspace.getWorkspaceFolder(document.uri);
 			const workspaceFolderName = workspaceFolder?.name ?? noWorkspaceFound;
 
-			const problemsCount = diagnosticManager.getDiagnostics(document.uri).length;
-
 			const problems = config[CONFIG_KEYS.ShowProblems]
-				? config[CONFIG_KEYS.ProblemsText].replace(REPLACE_KEYS.ProblemsCount, problemsCount.toString())
+				? config[CONFIG_KEYS.ProblemsText].replace(REPLACE_KEYS.ProblemsCount, totalProblems.toString())
 				: '';
 
 			try {

@@ -176,8 +176,11 @@ export class ActivityController {
 			const workspaceFolderName = workspaceFolder?.name ?? noWorkspaceFound;
 
 			const problemsCount = diagnosticManager.getDiagnostics(document.uri).length;
+
 			const problems = config[CONFIG_KEYS.ShowProblems]
-				? config[CONFIG_KEYS.ProblemsText].replace(REPLACE_KEYS.ProblemsCount, problemsCount.toString())
+				? problemsCount
+					? config[CONFIG_KEYS.ProblemsText].replace(REPLACE_KEYS.ProblemsCount, problemsCount.toString())
+					: ''
 				: '';
 
 			try {

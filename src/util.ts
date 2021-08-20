@@ -49,16 +49,23 @@ export async function getGitRepo(): Promise<string | null> {
 			return null;
 		}
 
-		const matched =
-			/^(?:git@|https?:\/\/)(?<provider>[a-zA-Z_.~-]+\.[a-z]{2,})(?::|\/)(?<user>.*?)\/(?<repo>.*)$/.exec(
-				remoteUrl.stdout.trim()
-			);
+		let repo = null;
 
-		if (!matched || !matched.groups?.provider || !matched.groups?.user || !matched.groups?.repo) {
-			return null;
+		if (remoteUrl.stdout.startsWith('git@') || remoteUrl.stdout.startsWith('ssh://')) {
+			repo = remoteUrl.stdout
+				.replace('ssh://', '')
+				.replace(':', '/')
+				.replace('git@', 'https://')
+				.replace('.git', '')
+				.replace('\n', '');
+		} else {
+			repo = remoteUrl.stdout
+				.replace(/(https:\/\/)([^@]*)@(.*?$)/, '$1$3')
+				.replace('.git', '')
+				.replace('\n', '');
 		}
 
-		return `https://${matched.groups.provider}/${matched.groups.user}/${matched.groups.repo}`;
+		return repo;
 	} catch {
 		return null;
 	}

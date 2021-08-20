@@ -178,9 +178,7 @@ export class ActivityController {
 			const problemsCount = diagnosticManager.getDiagnostics(document.uri).length;
 
 			const problems = config[CONFIG_KEYS.ShowProblems]
-				? problemsCount
-					? config[CONFIG_KEYS.ProblemsText].replace(REPLACE_KEYS.ProblemsCount, problemsCount.toString())
-					: ''
+				? config[CONFIG_KEYS.ProblemsText].replace(REPLACE_KEYS.ProblemsCount, problemsCount.toString())
 				: '';
 
 			try {

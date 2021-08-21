@@ -1,6 +1,6 @@
 {
 	"name": "coc-discord-rpc",
-	"version": "5.0.4",
+	"version": "5.0.5",
 	"description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
 	"main": "dist/index.js",
 	"private": false,
@@ -48,6 +48,7 @@
 		"bufferutil": "^4.0.3",
 		"discord-rpc": "^4.0.1",
 		"electron": "^13.2.1",
+		"git-url-parse": "^11.5.0",
 		"lodash-es": "^4.17.21",
 		"utf-8-validate": "^5.0.5",
 		"vscode-languageserver-protocol": "^3.16.0",
@@ -60,6 +61,7 @@
 		"@commitlint/cli": "^13.1.0",
 		"@commitlint/config-conventional": "^13.1.0",
 		"@types/discord-rpc": "^4.0.0",
+		"@types/git-url-parse": "^9.0.1",
 		"@types/lodash-es": "^4.17.4",
 		"@types/node": "^16.6.2",
 		"@types/ws": "^7.4.7",

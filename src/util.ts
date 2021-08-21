@@ -4,6 +4,7 @@ import { Document, workspace, WorkspaceConfiguration } from 'coc.nvim';
 import { basename } from 'path';
 import { promisify } from 'util';
 import icon from './icons.json';
+import gitUrlParse from 'git-url-parse';
 
 const asyncExec = promisify(exec);
 
@@ -49,23 +50,7 @@ export async function getGitRepo(): Promise<string | null> {
 			return null;
 		}
 
-		let repo = null;
-
-		if (remoteUrl.stdout.startsWith('git@') || remoteUrl.stdout.startsWith('ssh://')) {
-			repo = remoteUrl.stdout
-				.replace('ssh://', '')
-				.replace(':', '/')
-				.replace('git@', 'https://')
-				.replace('.git', '')
-				.replace('\n', '');
-		} else {
-			repo = remoteUrl.stdout
-				.replace(/(https:\/\/)([^@]*)@(.*?$)/, '$1$3')
-				.replace('.git', '')
-				.replace('\n', '');
-		}
-
-		return repo;
+		return gitUrlParse(remoteUrl.stdout).toString('https').replace('.git', '');
 	} catch {
 		return null;
 	}

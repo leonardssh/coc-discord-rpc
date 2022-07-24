@@ -18,8 +18,8 @@ let idleCheckTimeout: NodeJS.Timeout | undefined = undefined;
 
 let totalProblems = 0;
 
-export function generateDiagnostics() {
-	const diagnostics = diagnosticManager.getDiagnosticList();
+export async function generateDiagnostics() {
+	const diagnostics = await diagnosticManager.getDiagnosticList();
 
 	let counted = 0;
 
@@ -46,7 +46,7 @@ export class ActivityController {
 	}
 
 	public static async sendActivity() {
-		generateDiagnostics();
+		await generateDiagnostics();
 
 		if (ActivityController.interval) {
 			clearTimeout(ActivityController.interval);

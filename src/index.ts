@@ -6,6 +6,25 @@ import { ListenerController } from './listener';
 import { logError, logInfo } from './logger';
 import { getConfig } from './util';
 import * as Commands from './commands';
+import path from 'path';
+import fs from 'fs';
+
+// Hacky patch for #56, #59
+// For some reason, nvim set $TMPDIR to /var/folders/tg/*/T/nvim*
+// This change it back to /var/folders/tg/T/*
+// Then the macOS is weird and the real tmp path is /private/var/folders/tg/T/* but $TMPDIR returns /var/folders/tg/**/T/*
+// So we use fs.realpathSync to get the real path
+for (const key of ['XDG_RUNTIME_DIR', 'TMPDIR', 'TMP', 'TEMP']) {
+	if (process.env[key]) {
+		let realPath = fs.realpathSync(process.env[key] as string);
+		if (realPath.includes('/nvim')) {
+			const modifiedRealPath = realPath.split(path.sep);
+			modifiedRealPath.pop();
+			realPath = modifiedRealPath.join(path.sep);
+		}
+		process.env[key] = realPath;
+	}
+}
 
 const extensionName = process.env.EXTENSION_NAME || 'dev.coc-discord-rpc';
 const extensionVersion = process.env.EXTENSION_VERSION || '0.0.0';

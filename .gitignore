@@ -109,3 +109,6 @@ lib
 old_src
 
 build.sh
+
+# lock file
+yarn.lock

@@ -9,7 +9,7 @@ import * as Commands from './commands';
 import path from 'path';
 import fs from 'fs';
 
-// Hacky patch for #56, #59
+// Hacky patch for "Cannot read properties of null reading "write""
 // For some reason, nvim set $TMPDIR to /var/folders/tg/*/T/nvim*
 // This change it back to /var/folders/tg/T/*
 // Then the macOS is weird and the real tmp path is /private/var/folders/tg/T/* but $TMPDIR returns /var/folders/tg/**/T/*

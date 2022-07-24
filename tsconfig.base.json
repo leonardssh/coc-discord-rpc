@@ -14,7 +14,6 @@
 		"lib": ["esnext"],
 		"module": "CommonJS",
 		"moduleResolution": "Node",
-		"newLine": "lf",
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,

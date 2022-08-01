@@ -1,6 +1,6 @@
 // /* eslint-disable prefer-destructuring */
+import type { SetActivity } from '@xhayper/discord-rpc/dist/structures/ClientUser';
 import { DiagnosticItem, diagnosticManager, Document, ExtensionContext, window, workspace } from 'coc.nvim';
-import type { Presence } from 'discord-rpc';
 import { basename } from 'path';
 import { ClientController } from './client';
 import {
@@ -37,7 +37,7 @@ export class ActivityController {
 
 	public static extensionContext: ExtensionContext;
 
-	private static presence: Presence = {};
+	private static presence: SetActivity = {};
 
 	private static viewing = true;
 
@@ -58,10 +58,10 @@ export class ActivityController {
 			...(await ActivityController.generateActivity(ActivityController.presence))
 		};
 
-		await ClientController.rpc.setActivity(ActivityController.presence);
+		await ClientController.rpc.user?.setActivity(ActivityController.presence);
 	}
 
-	public static async generateActivity(previous: Presence = {}) {
+	public static async generateActivity(previous: SetActivity = {}) {
 		const config = getConfig();
 
 		const appName = workspace.isNvim ? 'NeoVim' : 'Vim';
@@ -71,7 +71,7 @@ export class ActivityController {
 			.replace(REPLACE_KEYS.AppName, appName)
 			.replace(REPLACE_KEYS.AppVersion, workspace.env.version);
 
-		let state: Presence = {
+		let state: SetActivity = {
 			startTimestamp: config[CONFIG_KEYS.WorkspaceElapsedTime]
 				? undefined
 				: previous.startTimestamp ?? Number(new Date()),

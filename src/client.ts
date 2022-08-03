@@ -11,14 +11,17 @@ import path from 'path';
 const config = getConfig();
 
 const pathList: FormatFunction[] = [
-	(id: number): string =>
+	(id: number): [string, boolean] => {
 		// Windows path
 
-		process.platform === 'win32' ? `\\\\?\\pipe\\discord-ipc-${id}` : '',
-	(id: number): string => {
+		const isWindows = process.platform === 'win32';
+
+		return [isWindows ? `\\\\?\\pipe\\discord-ipc-${id}` : '', isWindows];
+	},
+	(id: number): [string] => {
 		// macOS/Linux path
 
-		if (process.platform === 'win32') return '';
+		if (process.platform === 'win32') return [''];
 
 		const {
 			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
@@ -27,12 +30,12 @@ const pathList: FormatFunction[] = [
 		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
 		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
 
-		return path.join(prefix, `discord-ipc-${id}`);
+		return [path.join(prefix, `discord-ipc-${id}`)];
 	},
-	(id: number): string => {
+	(id: number): [string] => {
 		// Snap path
 
-		if (process.platform === 'win32') return '';
+		if (process.platform === 'win32') return [''];
 
 		const {
 			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
@@ -41,12 +44,12 @@ const pathList: FormatFunction[] = [
 		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
 		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
 
-		return path.join(prefix, 'snap.discord', `discord-ipc-${id}`);
+		return [path.join(prefix, 'snap.discord', `discord-ipc-${id}`)];
 	},
-	(id: number): string => {
+	(id: number): [string] => {
 		// Alternative snap path
 
-		if (process.platform === 'win32') return '';
+		if (process.platform === 'win32') return [''];
 
 		const {
 			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
@@ -55,7 +58,7 @@ const pathList: FormatFunction[] = [
 		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
 		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
 
-		return path.join(prefix, 'app', 'com.discordapp.Discord', `discord-ipc-${id}`);
+		return [path.join(prefix, 'app', 'com.discordapp.Discord', `discord-ipc-${id}`)];
 	}
 ];
 

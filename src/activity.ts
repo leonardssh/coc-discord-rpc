@@ -1,5 +1,5 @@
 // /* eslint-disable prefer-destructuring */
-import type { SetActivity } from '@xhayper/discord-rpc/dist/structures/ClientUser';
+import type { SetActivity } from '@xhayper/discord-rpc';
 import { DiagnosticItem, diagnosticManager, Document, ExtensionContext, window, workspace } from 'coc.nvim';
 import { basename } from 'path';
 import { ClientController } from './client';

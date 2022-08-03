@@ -1,4 +1,4 @@
-import { Client } from '@xhayper/discord-rpc';
+import { Client, FormatFunction } from '@xhayper/discord-rpc';
 import { CONFIG_KEYS } from './constants';
 import { ListenerController } from './listener';
 import { ActivityController } from './activity';
@@ -10,29 +10,60 @@ import path from 'path';
 
 const config = getConfig();
 
-function formatPath(id: number, snap = false) {
-	if (process.platform === 'win32') return `\\\\?\\pipe\\discord-ipc-${id}`;
+const pathList: FormatFunction[] = [
+	(id: number): string =>
+		// Windows path
 
-	const {
-		env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
-	} = process;
+		process.platform === 'win32' ? `\\\\?\\pipe\\discord-ipc-${id}` : '',
+	(id: number): string => {
+		// macOS/Linux path
 
-	let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
+		if (process.platform === 'win32') return '';
 
-	if (prefix.includes('/nvim')) {
-		const modifiedPrefix = prefix.split(path.sep);
-		modifiedPrefix.pop();
-		prefix = modifiedPrefix.join(path.sep);
+		const {
+			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
+		} = process;
+
+		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
+		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
+
+		return path.join(prefix, `discord-ipc-${id}`);
+	},
+	(id: number): string => {
+		// Snap path
+
+		if (process.platform === 'win32') return '';
+
+		const {
+			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
+		} = process;
+
+		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
+		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
+
+		return path.join(prefix, 'snap.discord', `discord-ipc-${id}`);
+	},
+	(id: number): string => {
+		// Alternative snap path
+
+		if (process.platform === 'win32') return '';
+
+		const {
+			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
+		} = process;
+
+		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
+		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
+
+		return path.join(prefix, 'app', 'com.discordapp.Discord', `discord-ipc-${id}`);
 	}
-
-	return `${prefix}${snap ? `${path.sep}snap.discord` : ''}${path.sep}discord-ipc-${id}`;
-}
+];
 
 export class ClientController {
-	public static rpc: Client = new Client({ clientId: config[CONFIG_KEYS.ClientId], transport: { formatPath } });
+	public static rpc: Client = new Client({ clientId: config[CONFIG_KEYS.ClientId], transport: { pathList } });
 
 	public static async login(ctx: ExtensionContext) {
-		ClientController.rpc = new Client({ clientId: config[CONFIG_KEYS.ClientId], transport: { formatPath } });
+		ClientController.rpc = new Client({ clientId: config[CONFIG_KEYS.ClientId], transport: { pathList } });
 
 		ClientController.rpc.once('ready', () => ClientController.handleLogin(ctx));
 		ClientController.rpc.once('disconnected', () => ClientController.handleDisconnected(ctx));

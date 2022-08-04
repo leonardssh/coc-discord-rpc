@@ -7,8 +7,8 @@ import { logError, logInfo } from './logger';
 import { getConfig } from './util';
 import * as Commands from './commands';
 
-const extensionName = process.env.EXTENSION_NAME || 'dev.coc-discord-rpc';
-const extensionVersion = process.env.EXTENSION_VERSION || '0.0.0';
+const extensionName = process.env.EXTENSION_NAME ?? 'dev.coc-discord-rpc';
+const extensionVersion = process.env.EXTENSION_VERSION ?? '0.0.0';
 
 const config = getConfig();
 

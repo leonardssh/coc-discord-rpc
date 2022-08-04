@@ -27,7 +27,7 @@ const pathList: FormatFunction[] = [
 			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
 		} = process;
 
-		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
+		let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
 		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
 
 		return [path.join(prefix, `discord-ipc-${id}`)];
@@ -41,7 +41,7 @@ const pathList: FormatFunction[] = [
 			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
 		} = process;
 
-		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
+		let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
 		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
 
 		return [path.join(prefix, 'snap.discord', `discord-ipc-${id}`)];
@@ -55,7 +55,7 @@ const pathList: FormatFunction[] = [
 			env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
 		} = process;
 
-		let prefix = fs.realpathSync(XDG_RUNTIME_DIR || TMPDIR || TMP || TEMP || `${path.sep}tmp`);
+		let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
 		if (path.basename(prefix).startsWith('nvim')) prefix = path.dirname(prefix);
 
 		return [path.join(prefix, 'app', 'com.discordapp.Discord', `discord-ipc-${id}`)];

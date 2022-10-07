@@ -27,7 +27,7 @@ jobs:
           key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Dependencies
-        run: yarn --immutable
+        run: yarn install --immutable
 
       - name: Build Code
         run: yarn build

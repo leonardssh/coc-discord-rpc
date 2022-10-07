@@ -1,6 +1,3 @@
-import { URLSearchParams } from "url";
-global.URLSearchParams = URLSearchParams;
-
 import { commands, ExtensionContext, workspace } from "coc.nvim";
 import { ActivityController } from "./activity";
 import { ListenerController } from "./listener";

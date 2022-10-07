@@ -35,7 +35,7 @@
         "prepare": "husky install"
     },
     "dependencies": {
-        "@xhayper/discord-rpc": "^1.0.8",
+        "@xhayper/discord-rpc": "^1.0.5",
         "git-url-parse": "^13.1.0",
         "lodash": "^4.17.21"
     },

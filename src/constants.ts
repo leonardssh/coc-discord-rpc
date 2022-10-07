@@ -28,8 +28,13 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
         } = process;
 
-        let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
-        if (["nvim", "vim"].some((start) => path.basename(prefix).startsWith(start))) prefix = path.dirname(prefix);
+        let prefix = "";
+
+        let tempPrefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`).split(path.sep);
+        for (const p of tempPrefix) {
+            if (["nvim", "vim"].some((pp) => pp.startsWith(p))) break;
+            prefix += `${p}${path.sep}`;
+        }
 
         return [path.join(prefix, `discord-ipc-${id}`)];
     },
@@ -42,8 +47,13 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
         } = process;
 
-        let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
-        if (["nvim", "vim"].some((start) => path.basename(prefix).startsWith(start))) prefix = path.dirname(prefix);
+        let prefix = "";
+
+        let tempPrefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`).split(path.sep);
+        for (const p of tempPrefix) {
+            if (["nvim", "vim"].some((pp) => pp.startsWith(p))) break;
+            prefix += `${p}${path.sep}`;
+        }
 
         return [path.join(prefix, "snap.discord", `discord-ipc-${id}`)];
     },
@@ -56,8 +66,13 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
         } = process;
 
-        let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
-        if (["nvim", "vim"].some((start) => path.basename(prefix).startsWith(start))) prefix = path.dirname(prefix);
+        let prefix = "";
+
+        let tempPrefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`).split(path.sep);
+        for (const p of tempPrefix) {
+            if (["nvim", "vim"].some((pp) => pp.startsWith(p))) break;
+            prefix += `${p}${path.sep}`;
+        }
 
         return [path.join(prefix, "app", "com.discordapp.Discord", `discord-ipc-${id}`)];
     }

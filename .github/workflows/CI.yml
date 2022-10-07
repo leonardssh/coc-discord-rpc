@@ -5,29 +5,54 @@ on:
   pull_request:
 
 jobs:
-  Building:
-    name: Compile source code
+  lint:
     runs-on: ubuntu-latest
 
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js 16
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
       - name: Restore CI Cache
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Dependencies
         run: yarn --ignore-scripts --frozen-lockfile
+
+      - name: Linting
+        run: yarn run lint
+
+  build:
+    runs-on: ubuntu-latest
+
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Restore CI Cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install Dependencies
+        run: yarn --immutable
 
       - name: Build Code
         run: yarn build

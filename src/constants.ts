@@ -1,3 +1,7 @@
+import type { FormatFunction } from "@xhayper/discord-rpc";
+import path from "node:path";
+import fs from "node:fs";
+
 export const EMPTY = "" as const;
 export const FAKE_EMPTY = "\u200b\u200b" as const;
 
@@ -6,6 +10,58 @@ export const NEOVIM_IMAGE_KEY = "neovim-logo" as const;
 export const NEOVIM_IDLE_IMAGE_KEY = "idle-neovim" as const;
 
 export const SEND_ACTIVITY_TIMEOUT = 5000;
+
+export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
+    (id: number): [string, boolean] => {
+        // Windows path
+
+        const isWindows = process.platform === "win32";
+
+        return [isWindows ? `\\\\?\\pipe\\discord-ipc-${id}` : "", isWindows];
+    },
+    (id: number): [string] => {
+        // macOS/Linux path
+
+        if (process.platform === "win32") return [""];
+
+        const {
+            env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
+        } = process;
+
+        let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
+        if (path.basename(prefix).startsWith("nvim")) prefix = path.dirname(prefix);
+
+        return [path.join(prefix, `discord-ipc-${id}`)];
+    },
+    (id: number): [string] => {
+        // snapstore
+
+        if (process.platform === "win32") return [""];
+
+        const {
+            env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
+        } = process;
+
+        let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
+        if (path.basename(prefix).startsWith("nvim")) prefix = path.dirname(prefix);
+
+        return [path.join(prefix, "snap.discord", `discord-ipc-${id}`)];
+    },
+    (id: number): [string] => {
+        // flatpak
+
+        if (process.platform === "win32") return [""];
+
+        const {
+            env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
+        } = process;
+
+        let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
+        if (path.basename(prefix).startsWith("nvim")) prefix = path.dirname(prefix);
+
+        return [path.join(prefix, "app", "com.discordapp.Discord", `discord-ipc-${id}`)];
+    }
+];
 
 export const enum REPLACE_KEYS {
     AppName = "{app_name}",

@@ -37,11 +37,11 @@
     "dependencies": {
         "@xhayper/discord-rpc": "^1.0.8",
         "git-url-parse": "^13.1.0",
-        "lodash-es": "^4.17.21"
+        "lodash": "^4.17.21"
     },
     "devDependencies": {
         "@types/git-url-parse": "^9.0.1",
-        "@types/lodash-es": "^4.17.6",
+        "@types/lodash": "^4.14.186",
         "@types/node": "^18.8.3",
         "coc.nvim": "^0.0.82",
         "download": "^8.0.0",

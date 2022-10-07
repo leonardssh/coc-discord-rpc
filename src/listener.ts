@@ -1,6 +1,6 @@
 import { Disposable, events, workspace } from "coc.nvim";
 import { ActivityController } from "./activity";
-import { throttle } from "lodash-es";
+import { throttle } from "lodash";
 
 export class ListenerController {
     public static disposables: Disposable[] = [];

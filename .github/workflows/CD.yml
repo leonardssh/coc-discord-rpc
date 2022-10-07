@@ -1,9 +1,11 @@
-name: Continuous Delivery
-
 on:
   push:
     branches:
       - dev
+
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:

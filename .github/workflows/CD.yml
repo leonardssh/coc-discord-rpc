@@ -3,7 +3,7 @@ name: CD
 on:
   push:
     branches:
-      - dev
+      - main
 
 concurrency: 
   group: ${{ github.ref }}
@@ -38,7 +38,7 @@ jobs:
 
       - name: Push new code
 
-        if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
         run: |
           echo -e "\n# Initialize some useful variables"
@@ -53,7 +53,7 @@ jobs:
           fi
 
           echo -e "\n# Checkout the repo in the target branch"
-          TARGET_BRANCH="build-dev"
+          TARGET_BRANCH="build"
           git clone $REPO out -b $TARGET_BRANCH
 
           echo -e "\n# Remove any old files in the dist folder"

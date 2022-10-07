@@ -34,7 +34,7 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             .realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
             .split(path.sep);
         for (const p of prefixSplitted) {
-            if (["nvim", "vim"].some((pp) => pp.startsWith(p))) break;
+            if (["nvim", "vim"].some((pp) => p.startsWith(pp))) break;
             prefix += `${p}${path.sep}`;
         }
 
@@ -55,7 +55,7 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             .realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
             .split(path.sep);
         for (const p of prefixSplitted) {
-            if (["nvim", "vim"].some((pp) => pp.startsWith(p))) break;
+            if (["nvim", "vim"].some((pp) => p.startsWith(pp))) break;
             prefix += `${p}${path.sep}`;
         }
 
@@ -76,7 +76,7 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             .realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
             .split(path.sep);
         for (const p of prefixSplitted) {
-            if (["nvim", "vim"].some((pp) => pp.startsWith(p))) break;
+            if (["nvim", "vim"].some((pp) => p.startsWith(pp))) break;
             prefix += `${p}${path.sep}`;
         }
 

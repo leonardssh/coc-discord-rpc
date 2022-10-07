@@ -1,10 +1,7 @@
-name: Continuous Integration
+name: CI
 
 on:
   push:
-    branches:
-      - main
-
   pull_request:
 
 jobs:
@@ -27,7 +24,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: node_modules
-          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Dependencies
         run: yarn --ignore-scripts --frozen-lockfile

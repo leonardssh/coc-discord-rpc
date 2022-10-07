@@ -103,9 +103,10 @@ dist
 # TernJS port file
 .tern-port
 
-lib
-
-# old src
-old_src
-
-build.sh
+.yarn/*
+!.yarn/releases
+!.yarn/patches
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

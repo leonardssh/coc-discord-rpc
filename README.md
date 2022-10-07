@@ -1,6 +1,6 @@
 <p align="center">
     <img src="https://i.imgur.com/gpcIEF4.png" alt="Icon" align="center" width="256">
-<p>
+</p>
 
 <h3 align="center">
     😎 An awesome and fully customizable coc-extension to get Discord Rich Presence integration with <a href="https://neovim.io/"><b>NeoVim</b></a>.

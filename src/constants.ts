@@ -29,7 +29,7 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
         } = process;
 
         let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
-        if (path.basename(prefix).startsWith("nvim")) prefix = path.dirname(prefix);
+        if (["nvim", "vim"].some((start) => path.basename(prefix).startsWith(start))) prefix = path.dirname(prefix);
 
         return [path.join(prefix, `discord-ipc-${id}`)];
     },
@@ -43,7 +43,7 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
         } = process;
 
         let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
-        if (path.basename(prefix).startsWith("nvim")) prefix = path.dirname(prefix);
+        if (["nvim", "vim"].some((start) => path.basename(prefix).startsWith(start))) prefix = path.dirname(prefix);
 
         return [path.join(prefix, "snap.discord", `discord-ipc-${id}`)];
     },
@@ -57,7 +57,7 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
         } = process;
 
         let prefix = fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`);
-        if (path.basename(prefix).startsWith("nvim")) prefix = path.dirname(prefix);
+        if (["nvim", "vim"].some((start) => path.basename(prefix).startsWith(start))) prefix = path.dirname(prefix);
 
         return [path.join(prefix, "app", "com.discordapp.Discord", `discord-ipc-${id}`)];
     }

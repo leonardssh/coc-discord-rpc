@@ -7,7 +7,7 @@ import icon from "./icons.json";
 
 const asyncExec = promisify(exec);
 
-type WorkspaceExtensionConfiguration = WorkspaceConfiguration & {
+interface WorkspaceExtensionConfiguration extends WorkspaceConfiguration {
     enabled: boolean;
     suppressNotifications: boolean;
     clientId: string;
@@ -29,9 +29,9 @@ type WorkspaceExtensionConfiguration = WorkspaceConfiguration & {
     buttonActiveLabel: string;
     buttonInactiveLabel: string;
     buttonInactiveUrl: string;
-};
+}
 
-export function getConfig() {
+export function getConfig(): WorkspaceExtensionConfiguration {
     return workspace.getConfiguration("rpc") as WorkspaceExtensionConfiguration;
 }
 
@@ -58,7 +58,7 @@ export async function getGitRepo(): Promise<string | null> {
 const knownExtensions: { [key: string]: { image: string } } = icon.knownExtensions;
 const knownLanguages: string[] = icon.knownLanguages;
 
-export function resolveFileIcon(document: Document) {
+export function resolveFileIcon(document: Document): string {
     const filename = basename(document.uri);
     const { languageId } = document.textDocument;
 

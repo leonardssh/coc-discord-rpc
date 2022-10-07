@@ -60,7 +60,7 @@ export class ActivityController {
         await ClientController.rpc.user?.setActivity(ActivityController.presence);
     }
 
-    public static async generateActivity(previous: SetActivity = {}) {
+    public static async generateActivity(previous: SetActivity = {}): Promise<SetActivity> {
         const config = getConfig();
 
         const appName = workspace.isNvim ? "NeoVim" : "Vim";
@@ -172,7 +172,11 @@ export class ActivityController {
         }
     }
 
-    private static async generateDetails(editing: CONFIG_KEYS, idling: CONFIG_KEYS, viewing: CONFIG_KEYS) {
+    private static async generateDetails(
+        editing: CONFIG_KEYS,
+        idling: CONFIG_KEYS,
+        viewing: CONFIG_KEYS
+    ): Promise<string> {
         const config = getConfig();
         const document = await workspace.document;
 
@@ -217,7 +221,7 @@ export class ActivityController {
         return raw;
     }
 
-    private static async generateFileDetails(_raw: string, document: Document) {
+    private static async generateFileDetails(_raw: string, document: Document): Promise<string> {
         let raw = _raw.slice();
 
         if (!raw) {

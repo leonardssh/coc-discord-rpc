@@ -1,4 +1,5 @@
-import "url-search-params-polyfill";
+import { URLSearchParams } from "url";
+global.URLSearchParams = URLSearchParams;
 
 import { commands, ExtensionContext, workspace } from "coc.nvim";
 import { ActivityController } from "./activity";

@@ -1,3 +1,5 @@
+import "url-search-params-polyfill";
+
 import { commands, ExtensionContext, workspace } from "coc.nvim";
 import { ActivityController } from "./activity";
 import { ListenerController } from "./listener";

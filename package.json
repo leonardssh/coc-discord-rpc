@@ -37,7 +37,8 @@
     "dependencies": {
         "@xhayper/discord-rpc": "^1.0.8",
         "git-url-parse": "^13.1.0",
-        "lodash": "^4.17.21"
+        "lodash": "^4.17.21",
+        "url-search-params-polyfill": "^8.1.1"
     },
     "devDependencies": {
         "@types/git-url-parse": "^9.0.1",

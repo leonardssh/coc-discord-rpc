@@ -243,6 +243,7 @@ __metadata:
     pretty-quick: ^3.1.3
     rimraf: ^3.0.2
     typescript: ^4.8.4
+    url-search-params-polyfill: ^8.1.1
     vscode-languageserver-protocol: ^3.17.2
   languageName: unknown
   linkType: soft
@@ -1486,6 +1487,13 @@ __metadata:
   dependencies:
     prepend-http: ^2.0.0
   checksum: 1040e357750451173132228036aff1fd04abbd43eac1fb3e4fca7495a078bcb8d33cb765fe71ad7e473d9c94d98fd67adca63bd2716c815a2da066198dd37217
+  languageName: node
+  linkType: hard
+
+"url-search-params-polyfill@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "url-search-params-polyfill@npm:8.1.1"
+  checksum: c63169a8a70a256e73203c4404acf4fdbb38075f3f888ea38f92b09dc896190180cc9c072c927d7bb995c5a35e7729be8c4f7e876f83f8f8ab6fac263c971725
   languageName: node
   linkType: hard
 

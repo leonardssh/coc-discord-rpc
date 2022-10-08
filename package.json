@@ -154,7 +154,7 @@
                 "rpc.useCWDAsFallback": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Controls if the we should use the current working directory as a fallback if no workspace is found."
+                    "description": "Controls if the RPC should use the current working directory as a fallback if no workspace is found."
                 },
                 "rpc.suppressNotifications": {
                     "type": "boolean",

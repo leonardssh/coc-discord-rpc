@@ -1,37 +1,37 @@
-name: Continuous Delivery
+name: CD
 
 on:
   push:
     branches:
       - main
 
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  Build:
-    name: Publish Build
+  build:
     runs-on: ubuntu-latest
 
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
 
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Use Node.js 12
-        uses: actions/setup-node@v1
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 16
 
       - name: Restore CI Cache
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: node_modules
-          key: ${{ runner.os }}-12-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Dependencies
-        run: yarn --ignore-scripts --frozen-lockfile
-
-      - name: Update COC DTS File
-        run: yarn update:coc
+        run: yarn install --immutable
 
       - name: Build Code
         run: yarn build
@@ -65,15 +65,12 @@ jobs:
           rsync -vaI README.md out/
           rsync -vaI dist/ out/dist
 
-          echo -e "\n# Removing TSC incremental file"
-          rm -rfv out/dist/**/*.tsbuildinfo
-
           echo -e "\n# Commit and push"
           cd out
           git add --all .
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git commit -m "build: output for ${GITHUB_SHA}" || true
+          git config user.name "github-actions"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "build: ${GITHUB_SHA}" || true
           git push origin $TARGET_BRANCH
         env:
           GITHUB_TOKEN: ${{ secrets.COMMIT_TOKEN }}

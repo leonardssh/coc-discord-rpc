@@ -124,5 +124,6 @@ export const enum CONFIG_KEYS {
     ButtonInactiveUrl = "buttonInactiveUrl",
     CheckIdle = "checkIdle",
     IdleTimeout = "idleTimeout",
-    IdleText = "idleText"
+    IdleText = "idleText",
+    UseCWDAsFallback = "useCWDAsFallback"
 }

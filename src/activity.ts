@@ -193,8 +193,10 @@ export class ActivityController {
             const fileIcon = resolveFileIcon(document);
 
             const noWorkspaceFound = config[CONFIG_KEYS.LowerDetailsNotFound].replace(REPLACE_KEYS.Empty, FAKE_EMPTY);
-            const workspaceFolder = workspace.getWorkspaceFolder(document.uri);
-            const workspaceFolderName = workspaceFolder?.name ?? noWorkspaceFound;
+            const workspaceFolderName =
+                workspace.getWorkspaceFolder(document.uri)?.name ??
+                (config[CONFIG_KEYS.UseCWDAsFallback] ? basename(workspace.cwd) : null) ??
+                noWorkspaceFound;
 
             const problems = config[CONFIG_KEYS.ShowProblems]
                 ? config[CONFIG_KEYS.ProblemsText].replace(REPLACE_KEYS.ProblemsCount, totalProblems.toString())

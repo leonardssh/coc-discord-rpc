@@ -151,6 +151,11 @@
                     "default": "Idle",
                     "description": "Custom string of the text displaying if you're idle when hovering over the small icon."
                 },
+                "rpc.useCWDAsFallback": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Controls if the we should use the current working directory as a fallback if no workspace is found."
+                },
                 "rpc.suppressNotifications": {
                     "type": "boolean",
                     "default": true,

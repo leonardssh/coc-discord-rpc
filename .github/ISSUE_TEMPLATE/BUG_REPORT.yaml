@@ -1,0 +1,59 @@
+name: Bug Report
+description: File a bug report
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+ - type: input
+    id: os
+    attributes:
+      label: Operating system
+      description: What operating system are you using?
+      placeholder: ArchLinux, arm64 and linux 6.0
+    validations:
+      required: true
+  - type: input
+    id: nvim-version
+    attributes:
+      label: NeoVim version
+      description: What version of neovim are you using?
+      placeholder: 0.8.0
+    validations:
+      required: true
+ - type: input
+    id: coc-version
+    attributes:
+      label: coc version
+      description: What version of coc are you using?
+      placeholder: 0.0.82
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduce step
+      description: How can this bug be re-produced?
+    validations:
+      required: true
+  - type: textarea
+    id: expected-result
+    attributes:
+      label: Expected result
+      description: What was the expected result?
+    validations:
+      required: true
+  - type: textarea
+    id: actual-result
+    attributes:
+      label: Actual result
+      description: What happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell

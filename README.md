@@ -9,13 +9,13 @@
 <div align="center">
   <p>
     <a href="https://www.npmjs.com/package/coc-discord-rpc">
-        <img src="https://img.shields.io/npm/v/coc-discord-rpc.svg?maxAge=3600&color=crimson&logo=npm" alt="NPM version" />
+        <img src="https://img.shields.io/npm/v/coc-discord-rpc.svg?maxAge=3600&color=crimson&logo=npm" alt="npm" />
     </a>
     <a href="https://www.npmjs.com/package/coc-discord-rpc">
-        <img src="https://img.shields.io/npm/dt/coc-discord-rpc.svg?maxAge=3600&logo=npm" alt="NPM downloads" />
+        <img src="https://img.shields.io/npm/dt/coc-discord-rpc.svg?maxAge=3600&logo=npm" alt="npm" />
     </a>
-    <a href="https://badges.depfu.com/github/LeonardSSH/coc-discord-rpc?project_id=27132">
-        <img src="https://badges.depfu.com/badges/258280819557424040567538cf5942d9/count.svg" alt="Depfu" />
+    <a href="https://libraries.io/npm/coc-discord-rpc">
+        <img src="https://img.shields.io/librariesio/release/npm/coc-discord-rpc" alt="Libraries.io dependency status for latest release" />
     </a>
   </p>
 </div>

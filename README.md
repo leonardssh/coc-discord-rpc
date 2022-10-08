@@ -40,6 +40,7 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 -   Custom string support
 -   Easily manually reconnect to Discord Gateway
 -   Idle indication when you tab out for a while
+-   Support flatpak/snapstore version of Discord
 
 > All texts is fully customizable using variables and a multitude of config options
 

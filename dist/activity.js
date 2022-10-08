@@ -136,8 +136,9 @@ class ActivityController {
             const fileName = (0, node_path_1.basename)(document.uri);
             const fileIcon = (0, util_1.resolveFileIcon)(document);
             const noWorkspaceFound = config["lowerDetailsNotFound" /* CONFIG_KEYS.LowerDetailsNotFound */].replace("{empty}" /* REPLACE_KEYS.Empty */, constants_1.FAKE_EMPTY);
-            const workspaceFolder = coc_nvim_1.workspace.getWorkspaceFolder(document.uri);
-            const workspaceFolderName = workspaceFolder?.name ?? noWorkspaceFound;
+            const workspaceFolderName = coc_nvim_1.workspace.getWorkspaceFolder(document.uri)?.name ??
+                (config["useCWDAsFallback" /* CONFIG_KEYS.UseCWDAsFallback */] ? (0, node_path_1.basename)(coc_nvim_1.workspace.cwd) : null) ??
+                noWorkspaceFound;
             const problems = config["showProblems" /* CONFIG_KEYS.ShowProblems */]
                 ? config["problemsText" /* CONFIG_KEYS.ProblemsText */].replace("{count}" /* REPLACE_KEYS.ProblemsCount */, totalProblems.toString())
                 : "";

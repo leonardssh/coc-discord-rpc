@@ -1,6 +1,6 @@
 {
     "name": "coc-discord-rpc",
-    "version": "5.1.0",
+    "version": "5.1.1",
     "description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
     "main": "dist/index.js",
     "publisher": "leonardssh",
@@ -150,6 +150,11 @@
                     "type": "string",
                     "default": "Idle",
                     "description": "Custom string of the text displaying if you're idle when hovering over the small icon."
+                },
+                "rpc.useCWDAsFallback": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Controls if the we should use the current working directory as a fallback if no workspace is found."
                 },
                 "rpc.suppressNotifications": {
                     "type": "boolean",

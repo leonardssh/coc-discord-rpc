@@ -15,7 +15,7 @@
         <img src="https://img.shields.io/npm/dt/coc-discord-rpc.svg?maxAge=3600&logo=npm" alt="npm" />
     </a>
     <a href="https://libraries.io/npm/coc-discord-rpc">
-        <img src="https://img.shields.io/librariesio/release/npm/coc-discord-rpc" alt="Libraries.io dependency status for latest release" />
+        <img src="https://img.shields.io/librariesio/release/npm/coc-discord-rpc?maxAge=3600&logo=Libraries.io" alt="Libraries.io dependency status for latest release" />
     </a>
   </p>
 </div>

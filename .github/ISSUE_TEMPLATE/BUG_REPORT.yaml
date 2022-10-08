@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
- - type: input
+  - type: input
     id: os
     attributes:
       label: Operating system
@@ -22,7 +22,7 @@ body:
       placeholder: 0.8.0
     validations:
       required: true
- - type: input
+  - type: input
     id: coc-version
     attributes:
       label: coc version
@@ -56,4 +56,4 @@ body:
     attributes:
       label: Relevant log output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
+      render: shell-script

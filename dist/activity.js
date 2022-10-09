@@ -12,9 +12,8 @@ async function generateDiagnostics() {
     const diagnostics = await coc_nvim_1.diagnosticManager.getDiagnosticList();
     let counted = 0;
     diagnostics.forEach((diagnostic) => {
-        if (diagnostic.severity === "Warning" || diagnostic.severity === "Error") {
+        if (constants_1.ACCEPTED_DIAGNOSTIC_SEVERITY.includes(diagnostic.severity))
             counted++;
-        }
     });
     totalProblems = counted;
 }
@@ -29,9 +28,8 @@ class ActivityController {
     }
     static async sendActivity() {
         await generateDiagnostics();
-        if (ActivityController.interval) {
+        if (ActivityController.interval)
             clearTimeout(ActivityController.interval);
-        }
         ActivityController.interval = setTimeout(() => void ActivityController.sendActivity(), constants_1.SEND_ACTIVITY_TIMEOUT);
         ActivityController.presence = {
             ...(await ActivityController.generateActivity(ActivityController.presence))
@@ -44,8 +42,8 @@ class ActivityController {
         const defaultLargeImageText = config["largeImageIdling" /* CONFIG_KEYS.LargeImageIdling */];
         const defaultSmallImageKey = coc_nvim_1.workspace.isNvim ? constants_1.NEOVIM_IMAGE_KEY : constants_1.VIM_IMAGE_KEY;
         const defaultSmallImageText = config["smallImage" /* CONFIG_KEYS.SmallImage */]
-            .replace("{app_name}" /* REPLACE_KEYS.AppName */, appName)
-            .replace("{app_version}" /* REPLACE_KEYS.AppVersion */, coc_nvim_1.workspace.env.version);
+            .replaceAll("{app_name}" /* REPLACE_KEYS.AppName */, appName)
+            .replaceAll("{app_version}" /* REPLACE_KEYS.AppVersion */, coc_nvim_1.workspace.env.version);
         let state = {
             startTimestamp: config["workspaceElapsedTime" /* CONFIG_KEYS.WorkspaceElapsedTime */]
                 ? undefined
@@ -59,9 +57,9 @@ class ActivityController {
         if (document) {
             const largeImageKey = (0, util_1.resolveFileIcon)(document);
             const largeImageText = config["largeImage" /* CONFIG_KEYS.LargeImage */]
-                .replace("{lang}" /* REPLACE_KEYS.LanguageLowerCase */, largeImageKey.toLocaleLowerCase())
-                .replace("{LANG}" /* REPLACE_KEYS.LanguageUpperCase */, largeImageKey.toLocaleUpperCase())
-                .replace("{Lang}" /* REPLACE_KEYS.LanguageTitleCase */, largeImageKey.toLocaleLowerCase().replace(/^\w/, (c) => c.toLocaleUpperCase()));
+                .replaceAll("{lang}" /* REPLACE_KEYS.LanguageLowerCase */, largeImageKey.toLocaleLowerCase())
+                .replaceAll("{LANG}" /* REPLACE_KEYS.LanguageUpperCase */, largeImageKey.toLocaleUpperCase())
+                .replaceAll("{Lang}" /* REPLACE_KEYS.LanguageTitleCase */, largeImageKey.toLocaleLowerCase().replace(/^\w/, (c) => c.toLocaleUpperCase()));
             state = {
                 ...state,
                 details: await ActivityController.generateDetails("detailsEditing" /* CONFIG_KEYS.DetailsEditing */, "detailsIdling" /* CONFIG_KEYS.DetailsIdling */, "detailsViewing" /* CONFIG_KEYS.DetailsViewing */),
@@ -100,47 +98,37 @@ class ActivityController {
     }
     static async checkIdle(focused) {
         const config = (0, util_1.getConfig)();
-        if (config["checkIdle" /* CONFIG_KEYS.CheckIdle */]) {
-            if (focused) {
-                if (idleCheckTimeout) {
+        if (!config["checkIdle" /* CONFIG_KEYS.CheckIdle */])
+            return;
+        if (idleCheckTimeout)
+            clearTimeout(idleCheckTimeout);
+        idleCheckTimeout = undefined;
+        if (focused) {
+            await ActivityController.setIdle(false);
+        }
+        else {
+            idleCheckTimeout = setInterval(async () => {
+                await ActivityController.setIdle(true);
+                if (idleCheckTimeout)
                     clearTimeout(idleCheckTimeout);
-                }
                 idleCheckTimeout = undefined;
-                await ActivityController.setIdle(false);
-            }
-            else {
-                if (idleCheckTimeout) {
-                    clearTimeout(idleCheckTimeout);
-                }
-                idleCheckTimeout = setInterval(async () => {
-                    await ActivityController.setIdle(true);
-                    if (idleCheckTimeout) {
-                        clearTimeout(idleCheckTimeout);
-                    }
-                    idleCheckTimeout = undefined;
-                }, config["idleTimeout" /* CONFIG_KEYS.IdleTimeout */] * 1000);
-            }
+            }, config["idleTimeout" /* CONFIG_KEYS.IdleTimeout */] * 1000);
         }
     }
     static async generateDetails(editing, idling, viewing) {
         const config = (0, util_1.getConfig)();
         const document = await coc_nvim_1.workspace.document;
-        let raw = config[idling].replace("{empty}" /* REPLACE_KEYS.Empty */, constants_1.FAKE_EMPTY);
+        let raw = config[idling].replaceAll("{empty}" /* REPLACE_KEYS.Empty */, constants_1.FAKE_EMPTY);
         if (document) {
-            if (ActivityController.viewing) {
-                raw = config[viewing];
-            }
-            else {
-                raw = config[editing];
-            }
+            raw = (ActivityController.viewing ? config[viewing] : config[editing]);
             const fileName = (0, node_path_1.basename)(document.uri);
             const fileIcon = (0, util_1.resolveFileIcon)(document);
-            const noWorkspaceFound = config["lowerDetailsNotFound" /* CONFIG_KEYS.LowerDetailsNotFound */].replace("{empty}" /* REPLACE_KEYS.Empty */, constants_1.FAKE_EMPTY);
+            const noWorkspaceFound = config["lowerDetailsNotFound" /* CONFIG_KEYS.LowerDetailsNotFound */].replaceAll("{empty}" /* REPLACE_KEYS.Empty */, constants_1.FAKE_EMPTY);
             const workspaceFolderName = coc_nvim_1.workspace.getWorkspaceFolder(document.uri)?.name ??
                 (config["useCWDAsFallback" /* CONFIG_KEYS.UseCWDAsFallback */] ? (0, node_path_1.basename)(coc_nvim_1.workspace.cwd) : null) ??
                 noWorkspaceFound;
             const problems = config["showProblems" /* CONFIG_KEYS.ShowProblems */]
-                ? config["problemsText" /* CONFIG_KEYS.ProblemsText */].replace("{count}" /* REPLACE_KEYS.ProblemsCount */, totalProblems.toString())
+                ? config["problemsText" /* CONFIG_KEYS.ProblemsText */].replaceAll("{count}" /* REPLACE_KEYS.ProblemsCount */, totalProblems.toString())
                 : "";
             try {
                 raw = await ActivityController.generateFileDetails(raw, document);
@@ -149,29 +137,25 @@ class ActivityController {
                 ActivityController.extensionContext.logger.error(`Failed to generate file details: ${error}`);
             }
             raw = raw
-                .replace("{file_name}" /* REPLACE_KEYS.FileName */, fileName)
-                .replace("{problems}" /* REPLACE_KEYS.Problems */, problems)
-                .replace("{workspace_folder}" /* REPLACE_KEYS.WorkspaceFolder */, workspaceFolderName)
-                .replace("{lang}" /* REPLACE_KEYS.LanguageLowerCase */, fileIcon.toLocaleLowerCase())
-                .replace("{LANG}" /* REPLACE_KEYS.LanguageUpperCase */, fileIcon.toLocaleUpperCase())
-                .replace("{Lang}" /* REPLACE_KEYS.LanguageTitleCase */, fileIcon.toLocaleLowerCase().replace(/^\w/, (c) => c.toLocaleUpperCase()));
+                .replaceAll("{file_name}" /* REPLACE_KEYS.FileName */, fileName)
+                .replaceAll("{problems}" /* REPLACE_KEYS.Problems */, problems)
+                .replaceAll("{workspace_folder}" /* REPLACE_KEYS.WorkspaceFolder */, workspaceFolderName)
+                .replaceAll("{lang}" /* REPLACE_KEYS.LanguageLowerCase */, fileIcon.toLocaleLowerCase())
+                .replaceAll("{LANG}" /* REPLACE_KEYS.LanguageUpperCase */, fileIcon.toLocaleUpperCase())
+                .replaceAll("{Lang}" /* REPLACE_KEYS.LanguageTitleCase */, fileIcon.toLocaleLowerCase().replace(/^\w/, (c) => c.toLocaleUpperCase()));
         }
         return raw;
     }
     static async generateFileDetails(_raw, document) {
         let raw = _raw.slice();
-        if (!raw) {
+        if (!raw)
             return raw;
-        }
-        if (raw.includes("{total_lines}" /* REPLACE_KEYS.TotalLines */)) {
-            raw = raw.replace("{total_lines}" /* REPLACE_KEYS.TotalLines */, document.lineCount.toLocaleString());
-        }
-        if (raw.includes("{current_line}" /* REPLACE_KEYS.CurrentLine */)) {
-            raw = raw.replace("{current_line}" /* REPLACE_KEYS.CurrentLine */, ((await coc_nvim_1.window.getCursorPosition()).line + 1).toLocaleString());
-        }
-        if (raw.includes("{current_column}" /* REPLACE_KEYS.CurrentColumn */)) {
-            raw = raw.replace("{current_column}" /* REPLACE_KEYS.CurrentColumn */, ((await coc_nvim_1.window.getCursorPosition()).character + 1).toLocaleString());
-        }
+        if (raw.includes("{total_lines}" /* REPLACE_KEYS.TotalLines */))
+            raw = raw.replaceAll("{total_lines}" /* REPLACE_KEYS.TotalLines */, document.lineCount.toLocaleString());
+        if (raw.includes("{current_line}" /* REPLACE_KEYS.CurrentLine */))
+            raw = raw.replaceAll("{current_line}" /* REPLACE_KEYS.CurrentLine */, ((await coc_nvim_1.window.getCursorPosition()).line + 1).toLocaleString());
+        if (raw.includes("{current_column}" /* REPLACE_KEYS.CurrentColumn */))
+            raw = raw.replaceAll("{current_column}" /* REPLACE_KEYS.CurrentColumn */, ((await coc_nvim_1.window.getCursorPosition()).character + 1).toLocaleString());
         return raw;
     }
     static async setIdle(status) {

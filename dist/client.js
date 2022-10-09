@@ -31,18 +31,16 @@ class ClientController {
     }
     static async handleLogin(ctx) {
         ctx.logger.info("Connected to Discord Gateway");
-        if (config["suppressNotifications" /* CONFIG_KEYS.SuppressNotifications */]) {
+        if (config["suppressNotifications" /* CONFIG_KEYS.SuppressNotifications */])
             await (0, logger_1.logInfo)("Connected to Discord Gateway!");
-        }
         listener_1.ListenerController.reset();
         await activity_1.ActivityController.sendActivity();
         listener_1.ListenerController.listen();
     }
     static async handleDisconnected(ctx) {
         ctx.logger.info("Disconnected from Discord Gateway");
-        if (config["suppressNotifications" /* CONFIG_KEYS.SuppressNotifications */]) {
+        if (config["suppressNotifications" /* CONFIG_KEYS.SuppressNotifications */])
             await (0, logger_1.logInfo)("Disconnected from Discord Gateway!");
-        }
         listener_1.ListenerController.reset();
         await ClientController.rpc.destroy();
     }

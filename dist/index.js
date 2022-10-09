@@ -31,13 +31,13 @@ const logger_1 = require("./logger");
 const client_1 = require("./client");
 const Commands = __importStar(require("./commands"));
 const util_1 = require("./util");
-const extensionName = process.env.EXTENSION_NAME || "dev.coc-discord-rpc";
-const extensionVersion = process.env.EXTENSION_VERSION || "0.0.0";
+const extensionName = "dev.coc-discord-rpc";
+const extensionVersion = "0.0.0";
 const config = (0, util_1.getConfig)();
 const activate = async (ctx) => {
     ctx.logger.info(`=== Extension activated ===`);
-    ctx.logger.info(`Extension Name: ${extensionName}.`);
-    ctx.logger.info(`Extension Version: ${extensionVersion}.`);
+    // ctx.logger.info(`Extension Name: ${extensionName}.`);
+    // ctx.logger.info(`Extension Version: ${extensionVersion}.`);
     activity_1.ActivityController.setExtensionContext(ctx);
     let isWorkspaceIgnored = false;
     for (const pattern of config["ignoreWorkspaces" /* CONFIG_KEYS.IgnoreWorkspaces */]) {
@@ -77,7 +77,8 @@ const activate = async (ctx) => {
         await client_1.ClientController.login(ctx);
     });
     const versionCommand = coc_nvim_1.commands.registerCommand(Commands.VERSION_RPC, async () => {
-        await (0, logger_1.logInfo)(`v${extensionVersion}`);
+        // await logInfo(`v${extensionVersion}`);
+        await (0, logger_1.logInfo)(`v0.0.0`);
     });
     ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, versionCommand);
     if (!isWorkspaceIgnored && config["enabled" /* CONFIG_KEYS.Enabled */]) {

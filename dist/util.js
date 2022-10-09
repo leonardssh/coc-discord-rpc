@@ -18,13 +18,11 @@ exports.getConfig = getConfig;
 async function getGitRepo() {
     try {
         const isInit = await asyncExec("git rev-parse --git-dir");
-        if (!isInit.stdout.trim()) {
+        if (!isInit.stdout.trim())
             return null;
-        }
         const remoteUrl = await asyncExec("git config --get remote.origin.url");
-        if (!remoteUrl.stdout) {
+        if (!remoteUrl.stdout)
             return null;
-        }
         return (0, git_url_parse_1.default)(remoteUrl.stdout).toString("https").replace(".git", "");
     }
     catch {
@@ -38,13 +36,11 @@ function resolveFileIcon(document) {
     const filename = (0, node_path_1.basename)(document.uri);
     const { languageId } = document.textDocument;
     const icon = knownExtensions[Object.keys(knownExtensions).find((key) => {
-        if (filename.endsWith(key)) {
+        if (filename.endsWith(key))
             return true;
-        }
         const match = /^\/(.*)\/([mgiy]+)$/.exec(key);
-        if (!match) {
+        if (!match)
             return false;
-        }
         const regex = new RegExp(match[1], match[2]);
         return regex.test(filename);
     })] ?? (knownLanguages.includes(languageId) ? languageId : null);

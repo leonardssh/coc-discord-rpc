@@ -19,9 +19,8 @@ class ListenerController {
     static reset() {
         ListenerController.disposables.forEach((disposable) => disposable.dispose());
         ListenerController.disposables = [];
-        if (activity_1.ActivityController.interval) {
+        if (activity_1.ActivityController.interval)
             clearTimeout(activity_1.ActivityController.interval);
-        }
     }
 }
 exports.ListenerController = ListenerController;

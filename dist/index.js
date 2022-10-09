@@ -39,9 +39,8 @@ const activate = async (ctx) => {
     for (const pattern of config["ignoreWorkspaces" /* CONFIG_KEYS.IgnoreWorkspaces */]) {
         const regex = new RegExp(pattern);
         const folders = coc_nvim_1.workspace.workspaceFolders;
-        if (!folders) {
+        if (!folders)
             break;
-        }
         if (folders.some((folder) => regex.test(folder.name))) {
             isWorkspaceIgnored = true;
             break;
@@ -70,8 +69,11 @@ const activate = async (ctx) => {
         await client_1.ClientController.rpc.destroy();
         await client_1.ClientController.login(ctx);
     });
-    const versionCommand = coc_nvim_1.commands.registerCommand(Commands.VERSION_RPC, async () => void (await (0, logger_1.logInfo)("v0.0.0")));
-    ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, versionCommand);
+    const statusCommand = coc_nvim_1.commands.registerCommand(Commands.STATUS_RPC, async () => {
+        listener_1.ListenerController.reset();
+        await (0, logger_1.logInfo)(`Currently ${client_1.ClientController.rpc.isConnected ? "not connected" : "connected"} to Discord Gateway!`);
+    });
+    ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, statusCommand);
     if (!isWorkspaceIgnored && config["enabled" /* CONFIG_KEYS.Enabled */])
         await client_1.ClientController.login(ctx);
 };

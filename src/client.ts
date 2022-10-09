@@ -1,24 +1,23 @@
+import { Client, type ClientOptions } from "@xhayper/discord-rpc";
 import { FORMAT_FUNCTION_LIST, CONFIG_KEYS } from "./constants";
 import type { ExtensionContext } from "coc.nvim";
 import { ListenerController } from "./listener";
 import { ActivityController } from "./activity";
-import { Client } from "@xhayper/discord-rpc";
 import { logInfo } from "./logger";
 import { getConfig } from "./util";
 
 const config = getConfig();
 
+const clientOptions: ClientOptions = {
+    clientId: config[CONFIG_KEYS.ClientId],
+    transport: { pathList: FORMAT_FUNCTION_LIST }
+};
+
 export class ClientController {
-    public static rpc: Client = new Client({
-        clientId: config[CONFIG_KEYS.ClientId],
-        transport: { pathList: FORMAT_FUNCTION_LIST }
-    });
+    public static rpc: Client = new Client(clientOptions);
 
     public static async login(ctx: ExtensionContext) {
-        ClientController.rpc = new Client({
-            clientId: config[CONFIG_KEYS.ClientId],
-            transport: { pathList: FORMAT_FUNCTION_LIST }
-        });
+        ClientController.rpc = new Client(clientOptions);
 
         ClientController.rpc.once("ready", () => ClientController.handleLogin(ctx));
         ClientController.rpc.once("disconnected", () => ClientController.handleDisconnected(ctx));

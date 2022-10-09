@@ -62,7 +62,7 @@ export const activate = async (ctx: ExtensionContext) => {
         ListenerController.reset();
 
         await logInfo(
-            `Currently ${ClientController.rpc.isConnected ? "not connected" : "connected"} to Discord Gateway!`
+            `Currently ${ClientController.rpc.isConnected ? "connected" : "not connected"} to Discord Gateway!`
         );
     });
 

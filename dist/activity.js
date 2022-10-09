@@ -4,7 +4,7 @@ exports.ActivityController = exports.generateDiagnostics = void 0;
 const coc_nvim_1 = require("coc.nvim");
 const util_1 = require("./util");
 const client_1 = require("./client");
-const path_1 = require("path");
+const node_path_1 = require("node:path");
 const constants_1 = require("./constants");
 let idleCheckTimeout;
 let totalProblems = 0;
@@ -121,11 +121,11 @@ class ActivityController {
         let raw = config[idling].replaceAll("{empty}" /* REPLACE_KEYS.Empty */, constants_1.FAKE_EMPTY);
         if (document) {
             raw = (ActivityController.viewing ? config[viewing] : config[editing]);
-            const fileName = (0, path_1.basename)(document.uri);
+            const fileName = (0, node_path_1.basename)(document.uri);
             const fileIcon = (0, util_1.resolveFileIcon)(document);
             const noWorkspaceFound = config["lowerDetailsNotFound" /* CONFIG_KEYS.LowerDetailsNotFound */].replaceAll("{empty}" /* REPLACE_KEYS.Empty */, constants_1.FAKE_EMPTY);
             const workspaceFolderName = coc_nvim_1.workspace.getWorkspaceFolder(document.uri)?.name ??
-                (config["useCWDAsFallback" /* CONFIG_KEYS.UseCWDAsFallback */] ? (0, path_1.basename)(coc_nvim_1.workspace.cwd) : null) ??
+                (config["useCWDAsFallback" /* CONFIG_KEYS.UseCWDAsFallback */] ? (0, node_path_1.basename)(coc_nvim_1.workspace.cwd) : null) ??
                 noWorkspaceFound;
             const problems = config["showProblems" /* CONFIG_KEYS.ShowProblems */]
                 ? config["problemsText" /* CONFIG_KEYS.ProblemsText */].replaceAll("{count}" /* REPLACE_KEYS.ProblemsCount */, totalProblems.toString())

@@ -5,12 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolveFileIcon = exports.getGitRepo = exports.getConfig = void 0;
 const coc_nvim_1 = require("coc.nvim");
+const node_child_process_1 = require("node:child_process");
 const git_url_parse_1 = __importDefault(require("git-url-parse"));
-const child_process_1 = require("child_process");
-const util_1 = require("util");
-const path_1 = require("path");
+const node_util_1 = require("node:util");
+const node_path_1 = require("node:path");
 const icons_json_1 = __importDefault(require("./icons.json"));
-const asyncExec = (0, util_1.promisify)(child_process_1.exec);
+const asyncExec = (0, node_util_1.promisify)(node_child_process_1.exec);
 function getConfig() {
     return coc_nvim_1.workspace.getConfiguration("rpc");
 }
@@ -33,7 +33,7 @@ exports.getGitRepo = getGitRepo;
 const knownExtensions = icons_json_1.default.knownExtensions;
 const knownLanguages = icons_json_1.default.knownLanguages;
 function resolveFileIcon(document) {
-    const filename = (0, path_1.basename)(document.uri);
+    const filename = (0, node_path_1.basename)(document.uri);
     const { languageId } = document.textDocument;
     const icon = knownExtensions[Object.keys(knownExtensions).find((key) => {
         if (filename.endsWith(key))

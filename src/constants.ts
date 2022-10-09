@@ -6,11 +6,12 @@ export const EMPTY = "" as const;
 export const FAKE_EMPTY = "\u200b\u200b" as const;
 
 export const IDLE_IMAGE_KEY = "idle" as const;
+
 export const NEOVIM_IMAGE_KEY = "neovim-logo" as const;
 export const NEOVIM_IDLE_IMAGE_KEY = "idle-neovim" as const;
 
 export const VIM_IMAGE_KEY = "vim" as const;
-export const VIM_IDLE_IMAGE_KEY = "vim" as const;
+export const VIM_IDLE_IMAGE_KEY = "idle-neovim" as const;
 
 export const SEND_ACTIVITY_TIMEOUT = 5000;
 

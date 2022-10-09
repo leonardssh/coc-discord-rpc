@@ -71,7 +71,7 @@ const activate = async (ctx) => {
     });
     const statusCommand = coc_nvim_1.commands.registerCommand(Commands.STATUS_RPC, async () => {
         listener_1.ListenerController.reset();
-        await (0, logger_1.logInfo)(`Currently ${client_1.ClientController.rpc.isConnected ? "not connected" : "connected"} to Discord Gateway!`);
+        await (0, logger_1.logInfo)(`Currently ${client_1.ClientController.rpc.isConnected ? "connected" : "not connected"} to Discord Gateway!`);
     });
     ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, statusCommand);
     if (!isWorkspaceIgnored && config["enabled" /* CONFIG_KEYS.Enabled */])

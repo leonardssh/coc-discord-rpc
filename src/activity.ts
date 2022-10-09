@@ -2,7 +2,7 @@ import { DiagnosticItem, diagnosticManager, Document, ExtensionContext, window, 
 import { getConfig, getGitRepo, resolveFileIcon } from "./util";
 import type { SetActivity } from "@xhayper/discord-rpc";
 import { ClientController } from "./client";
-import { basename } from "path";
+import { basename } from "node:path";
 import {
     CONFIG_KEYS,
     FAKE_EMPTY,

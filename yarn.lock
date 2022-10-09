@@ -19,10 +19,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^12.12.0":
-  version: 12.20.55
-  resolution: "@types/node@npm:12.20.55"
-  checksum: e4f86785f4092706e0d3b0edff8dca5a13b45627e4b36700acd8dfe6ad53db71928c8dee914d4276c7fd3b6ccd829aa919811c9eb708a2c8e4c6eb3701178c37
+"@types/node@npm:^14.14.31":
+  version: 14.18.31
+  resolution: "@types/node@npm:14.18.31"
+  checksum: df33021d673a5e3c943cf96c9f3fbccf364d20f487b2ab7eb49db144974c2049f0a91e9358df09235f543c1f0b11388c5b0b636ae1f2ed55a27c75f63bc3d2c5
   languageName: node
   linkType: hard
 
@@ -78,7 +78,7 @@ __metadata:
   dependencies:
     "@types/git-url-parse": ^9.0.1
     "@types/lodash": ^4.14.186
-    "@types/node": ^12.12.0
+    "@types/node": ^14.14.31
     "@xhayper/discord-rpc": ^1.0.9
     coc.nvim: ^0.0.82
     git-url-parse: ^13.1.0

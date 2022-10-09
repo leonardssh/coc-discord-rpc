@@ -16,8 +16,8 @@ class ClientController {
     static rpc = new discord_rpc_1.Client(clientOptions);
     static async login(ctx) {
         ClientController.rpc = new discord_rpc_1.Client(clientOptions);
-        ClientController.rpc.once("ready", () => ClientController.handleLogin(ctx));
-        ClientController.rpc.once("disconnected", () => ClientController.handleDisconnected(ctx));
+        ClientController.rpc.once("ready", () => void ClientController.handleLogin(ctx));
+        ClientController.rpc.once("disconnected", () => void ClientController.handleDisconnected(ctx));
         try {
             await ClientController.rpc.login();
         }

@@ -1,23 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClientController = void 0;
+const discord_rpc_1 = require("@xhayper/discord-rpc");
 const constants_1 = require("./constants");
 const listener_1 = require("./listener");
 const activity_1 = require("./activity");
-const discord_rpc_1 = require("@xhayper/discord-rpc");
 const logger_1 = require("./logger");
 const util_1 = require("./util");
 const config = (0, util_1.getConfig)();
+const clientOptions = {
+    clientId: config["clientId" /* CONFIG_KEYS.ClientId */],
+    transport: { pathList: constants_1.FORMAT_FUNCTION_LIST }
+};
 class ClientController {
-    static rpc = new discord_rpc_1.Client({
-        clientId: config["clientId" /* CONFIG_KEYS.ClientId */],
-        transport: { pathList: constants_1.FORMAT_FUNCTION_LIST }
-    });
+    static rpc = new discord_rpc_1.Client(clientOptions);
     static async login(ctx) {
-        ClientController.rpc = new discord_rpc_1.Client({
-            clientId: config["clientId" /* CONFIG_KEYS.ClientId */],
-            transport: { pathList: constants_1.FORMAT_FUNCTION_LIST }
-        });
+        ClientController.rpc = new discord_rpc_1.Client(clientOptions);
         ClientController.rpc.once("ready", () => ClientController.handleLogin(ctx));
         ClientController.rpc.once("disconnected", () => ClientController.handleDisconnected(ctx));
         try {

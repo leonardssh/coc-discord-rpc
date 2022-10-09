@@ -71,7 +71,7 @@ export class ActivityController {
         let state: SetActivity = {
             startTimestamp: config[CONFIG_KEYS.WorkspaceElapsedTime]
                 ? undefined
-                : previous.startTimestamp ?? Number(new Date()),
+                : previous.startTimestamp ?? new Date(),
             largeImageKey: workspace.isNvim ? NEOVIM_IDLE_IMAGE_KEY : VIM_IDLE_IMAGE_KEY,
             largeImageText: defaultLargeImageText,
             smallImageKey: previous.smallImageKey ?? defaultSmallImageKey,

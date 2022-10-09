@@ -19,8 +19,8 @@ export class ClientController {
     public static async login(ctx: ExtensionContext) {
         ClientController.rpc = new Client(clientOptions);
 
-        ClientController.rpc.once("ready", () => ClientController.handleLogin(ctx));
-        ClientController.rpc.once("disconnected", () => ClientController.handleDisconnected(ctx));
+        ClientController.rpc.once("ready", () => void ClientController.handleLogin(ctx));
+        ClientController.rpc.once("disconnected", () => void ClientController.handleDisconnected(ctx));
 
         try {
             await ClientController.rpc.login();

@@ -7,15 +7,10 @@ import { CONFIG_KEYS } from "./constants";
 import * as Commands from "./commands";
 import { getConfig } from "./util";
 
-const extensionName = "dev.coc-discord-rpc";
-const extensionVersion = "0.0.0";
-
 const config = getConfig();
 
 export const activate = async (ctx: ExtensionContext) => {
-    ctx.logger.info(`=== Extension activated ===`);
-    // ctx.logger.info(`Extension Name: ${extensionName}.`);
-    // ctx.logger.info(`Extension Version: ${extensionVersion}.`);
+    ctx.logger.info("coc-discord-rpc is activated!");
 
     ActivityController.setExtensionContext(ctx);
 
@@ -41,9 +36,7 @@ export const activate = async (ctx: ExtensionContext) => {
         ListenerController.reset();
         await ClientController.login(ctx);
 
-        if (config[CONFIG_KEYS.SuppressNotifications]) {
-            await logInfo(`Enabled Discord Rich Presence for this workspace.`);
-        }
+        if (config[CONFIG_KEYS.SuppressNotifications]) await logInfo("Enabled rich presence for this workspace!");
     });
 
     const disableCommand = commands.registerCommand(Commands.DISABLE_RPC, async () => {
@@ -52,9 +45,7 @@ export const activate = async (ctx: ExtensionContext) => {
         ListenerController.reset();
         await ClientController.rpc.destroy();
 
-        if (config[CONFIG_KEYS.SuppressNotifications]) {
-            await logInfo(`Disabled Discord Rich Presence for this workspace.`);
-        }
+        if (config[CONFIG_KEYS.SuppressNotifications]) await logInfo("Disabled rich presence for this workspace!");
     });
 
     const disconnectCommand = commands.registerCommand(Commands.DISCONNECT_RPC, async () => {
@@ -69,23 +60,18 @@ export const activate = async (ctx: ExtensionContext) => {
         await ClientController.login(ctx);
     });
 
-    const versionCommand = commands.registerCommand(Commands.VERSION_RPC, async () => {
-        // await logInfo(`v${extensionVersion}`);
-        await logInfo(`v0.0.0`);
-    });
+    const versionCommand = commands.registerCommand(Commands.VERSION_RPC, async () => void (await logInfo("v0.0.0")));
 
     ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, versionCommand);
 
-    if (!isWorkspaceIgnored && config[CONFIG_KEYS.Enabled]) {
-        await ClientController.login(ctx);
-    }
+    if (!isWorkspaceIgnored && config[CONFIG_KEYS.Enabled]) await ClientController.login(ctx);
 };
 
 export const deactivate = async (ctx: ExtensionContext) => {
-    ctx.logger.info(`=== Extension deactivated ===`);
+    ctx.logger.info("coc-discord-rpc is deactivated!");
 
     ListenerController.reset();
     await ClientController.rpc.destroy();
 };
 
-process.on("unhandledRejection", (error) => logError(`RPC: ${error}`));
+process.on("unhandledRejection", (error) => void logError(`RPC: ${error}`));

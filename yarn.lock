@@ -26,14 +26,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@xhayper/discord-rpc@npm:^1.0.9":
-  version: 1.0.9
-  resolution: "@xhayper/discord-rpc@npm:1.0.9"
+"@xhayper/discord-rpc@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "@xhayper/discord-rpc@npm:1.0.12"
   dependencies:
     axios: ^1.1.2
-    discord-api-types: ^0.37.11
+    discord-api-types: ^0.37.12
     ws: ^8.9.0
-  checksum: 259dbce1434008d7f70ff3e3db5d899bd7f8bb27b610f812f60454f97e467df6cc374a60f145d63e5b14575afe31d44c225b19fca6f049fb8512baf298baf7fc
+  checksum: 6ec3f1284e8a9075da3b81b9538f9957fc8f1abd34b7e8d20da506081cb685e6e31ae1c2e513a8eedbd44cb6781a8a64fab9f9a708edbfd83ebb432317278c57
   languageName: node
   linkType: hard
 
@@ -79,7 +79,7 @@ __metadata:
     "@types/git-url-parse": ^9.0.1
     "@types/lodash": ^4.14.186
     "@types/node": ^14.18.31
-    "@xhayper/discord-rpc": ^1.0.9
+    "@xhayper/discord-rpc": ^1.0.12
     coc.nvim: ^0.0.82
     git-url-parse: ^13.1.0
     husky: ^8.0.1
@@ -124,7 +124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-api-types@npm:^0.37.11":
+"discord-api-types@npm:^0.37.12":
   version: 0.37.12
   resolution: "discord-api-types@npm:0.37.12"
   checksum: 0dd6bd5ad9e80708e020904fd3fc0e538df89549ea398559e51fdb562428aaddd07b3b218c7aac574c18153fe5e3bed45860ba6af6c8ccc5f4e408ffc25e3d58

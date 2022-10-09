@@ -8,21 +8,21 @@ export class ListenerController {
     public static listen() {
         const onFileSwitch = events.on(
             "BufEnter",
-            throttle(() => ActivityController.toggleViewingMode(), 1000)
+            throttle(() => void ActivityController.toggleViewingMode(), 1000)
         );
 
         const onChangeTextDocument = workspace.onDidChangeTextDocument(
-            throttle(() => ActivityController.toggleViewingMode(false), 1000)
+            throttle(() => void ActivityController.toggleViewingMode(false), 1000)
         );
 
         const onOpenTextDocument = workspace.onDidOpenTextDocument(
-            throttle(() => ActivityController.toggleViewingMode(), 1000)
+            throttle(() => void ActivityController.toggleViewingMode(), 1000)
         );
 
-        const onInsertEnter = events.on("InsertEnter", () => ActivityController.toggleViewingMode(false));
-        const onInsertLeave = events.on("InsertLeave", () => ActivityController.toggleViewingMode());
-        const onFocusGained = events.on("FocusGained", () => ActivityController.checkIdle(true));
-        const onFocusLost = events.on("FocusLost", () => ActivityController.checkIdle(false));
+        const onInsertEnter = events.on("InsertEnter", () => void ActivityController.toggleViewingMode(false));
+        const onInsertLeave = events.on("InsertLeave", () => void ActivityController.toggleViewingMode());
+        const onFocusGained = events.on("FocusGained", () => void ActivityController.checkIdle(true));
+        const onFocusLost = events.on("FocusLost", () => void ActivityController.checkIdle(false));
 
         ListenerController.disposables.push(
             onFileSwitch,
@@ -36,9 +36,10 @@ export class ListenerController {
     }
 
     public static reset() {
-        ListenerController.disposables.forEach((disposable: Disposable) => disposable.dispose());
+        ListenerController.disposables.forEach((disposable: Disposable) => void disposable.dispose());
         ListenerController.disposables = [];
 
         if (ActivityController.interval) clearTimeout(ActivityController.interval);
+        ActivityController.interval = undefined;
     }
 }

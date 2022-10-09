@@ -20,9 +20,7 @@ export const activate = async (ctx: ExtensionContext) => {
         const regex = new RegExp(pattern);
         const folders = workspace.workspaceFolders;
 
-        if (!folders) {
-            break;
-        }
+        if (!folders) break;
 
         if (folders.some((folder) => regex.test(folder.name))) {
             isWorkspaceIgnored = true;
@@ -60,9 +58,15 @@ export const activate = async (ctx: ExtensionContext) => {
         await ClientController.login(ctx);
     });
 
-    const versionCommand = commands.registerCommand(Commands.VERSION_RPC, async () => void (await logInfo("v0.0.0")));
+    const statusCommand = commands.registerCommand(Commands.STATUS_RPC, async () => {
+        ListenerController.reset();
 
-    ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, versionCommand);
+        await logInfo(
+            `Currently ${ClientController.rpc.isConnected ? "not connected" : "connected"} to Discord Gateway!`
+        );
+    });
+
+    ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, statusCommand);
 
     if (!isWorkspaceIgnored && config[CONFIG_KEYS.Enabled]) await ClientController.login(ctx);
 };

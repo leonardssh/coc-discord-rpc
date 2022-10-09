@@ -1,6 +1,6 @@
 import type { FormatFunction } from "@xhayper/discord-rpc";
-import path from "node:path";
-import fs from "node:fs";
+import path from "path";
+import fs from "fs";
 
 export const EMPTY = "" as const;
 export const FAKE_EMPTY = "\u200b\u200b" as const;

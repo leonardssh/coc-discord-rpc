@@ -1,8 +1,8 @@
 import { Document, workspace, WorkspaceConfiguration } from "coc.nvim";
-import { exec } from "node:child_process";
 import gitUrlParse from "git-url-parse";
-import { promisify } from "node:util";
-import { basename } from "node:path";
+import { exec } from "child_process";
+import { promisify } from "util";
+import { basename } from "path";
 import icon from "./icons.json";
 
 const asyncExec = promisify(exec);

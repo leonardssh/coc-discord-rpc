@@ -2,7 +2,7 @@ import { DiagnosticItem, diagnosticManager, Document, ExtensionContext, window, 
 import { getConfig, getGitRepo, resolveFileIcon } from "./util";
 import type { SetActivity } from "@xhayper/discord-rpc";
 import { ClientController } from "./client";
-import { basename } from "node:path";
+import { basename } from "path";
 import {
     CONFIG_KEYS,
     FAKE_EMPTY,
@@ -16,7 +16,7 @@ import {
     ACCEPTED_DIAGNOSTIC_SEVERITY
 } from "./constants";
 
-let idleCheckTimeout: NodeJS.Timer | undefined = undefined;
+let idleCheckTimeout: NodeJS.Timer | undefined;
 let totalProblems = 0;
 
 export async function generateDiagnostics() {

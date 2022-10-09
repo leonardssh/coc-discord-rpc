@@ -39,8 +39,6 @@ export class ListenerController {
         ListenerController.disposables.forEach((disposable: Disposable) => disposable.dispose());
         ListenerController.disposables = [];
 
-        if (ActivityController.interval) {
-            clearTimeout(ActivityController.interval);
-        }
+        if (ActivityController.interval) clearTimeout(ActivityController.interval);
     }
 }

@@ -14,6 +14,21 @@ export const VIM_IDLE_IMAGE_KEY = "vim" as const;
 
 export const SEND_ACTIVITY_TIMEOUT = 5000;
 
+export const ACCEPTED_DIAGNOSTIC_SEVERITY = ["Warning", "Error"];
+
+const NVIM_ANNOYING_PREFIX = ["nvim", "vim"];
+
+const CUT_PREFIX_UNTIL_ANNOYING_NVIM = (fullpath: string) => {
+    let prefix = "";
+
+    for (const p of fullpath.split(path.sep)) {
+        if (NVIM_ANNOYING_PREFIX.some((pp) => p.startsWith(pp))) break;
+        prefix += `${p}${path.sep}`;
+    }
+
+    return prefix;
+};
+
 export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
     (id: number): [string, boolean] => {
         // Windows path
@@ -31,15 +46,9 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
         } = process;
 
-        let prefix = "";
-
-        const prefixSplitted = fs
-            .realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
-            .split(path.sep);
-        for (const p of prefixSplitted) {
-            if (["nvim", "vim"].some((pp) => p.startsWith(pp))) break;
-            prefix += `${p}${path.sep}`;
-        }
+        const prefix = CUT_PREFIX_UNTIL_ANNOYING_NVIM(
+            fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
+        );
 
         return [path.join(prefix, `discord-ipc-${id}`)];
     },
@@ -52,15 +61,9 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
         } = process;
 
-        let prefix = "";
-
-        const prefixSplitted = fs
-            .realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
-            .split(path.sep);
-        for (const p of prefixSplitted) {
-            if (["nvim", "vim"].some((pp) => p.startsWith(pp))) break;
-            prefix += `${p}${path.sep}`;
-        }
+        const prefix = CUT_PREFIX_UNTIL_ANNOYING_NVIM(
+            fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
+        );
 
         return [path.join(prefix, "snap.discord", `discord-ipc-${id}`)];
     },
@@ -73,15 +76,9 @@ export const FORMAT_FUNCTION_LIST: FormatFunction[] = [
             env: { XDG_RUNTIME_DIR, TMPDIR, TMP, TEMP }
         } = process;
 
-        let prefix = "";
-
-        const prefixSplitted = fs
-            .realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
-            .split(path.sep);
-        for (const p of prefixSplitted) {
-            if (["nvim", "vim"].some((pp) => p.startsWith(pp))) break;
-            prefix += `${p}${path.sep}`;
-        }
+        const prefix = CUT_PREFIX_UNTIL_ANNOYING_NVIM(
+            fs.realpathSync(XDG_RUNTIME_DIR ?? TMPDIR ?? TMP ?? TEMP ?? `${path.sep}tmp`)
+        );
 
         return [path.join(prefix, "app", "com.discordapp.Discord", `discord-ipc-${id}`)];
     }

@@ -36,9 +36,7 @@ export class ClientController {
     private static async handleLogin(ctx: ExtensionContext) {
         ctx.logger.info("Connected to Discord Gateway");
 
-        if (config[CONFIG_KEYS.SuppressNotifications]) {
-            await logInfo("Connected to Discord Gateway!");
-        }
+        if (config[CONFIG_KEYS.SuppressNotifications]) await logInfo("Connected to Discord Gateway!");
 
         ListenerController.reset();
         await ActivityController.sendActivity();
@@ -48,9 +46,7 @@ export class ClientController {
     private static async handleDisconnected(ctx: ExtensionContext) {
         ctx.logger.info("Disconnected from Discord Gateway");
 
-        if (config[CONFIG_KEYS.SuppressNotifications]) {
-            await logInfo("Disconnected from Discord Gateway!");
-        }
+        if (config[CONFIG_KEYS.SuppressNotifications]) await logInfo("Disconnected from Discord Gateway!");
 
         ListenerController.reset();
         await ClientController.rpc.destroy();

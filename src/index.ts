@@ -7,15 +7,15 @@ import { CONFIG_KEYS } from "./constants";
 import * as Commands from "./commands";
 import { getConfig } from "./util";
 
-const extensionName = process.env.EXTENSION_NAME || "dev.coc-discord-rpc";
-const extensionVersion = process.env.EXTENSION_VERSION || "0.0.0";
+const extensionName = "dev.coc-discord-rpc";
+const extensionVersion = "0.0.0";
 
 const config = getConfig();
 
 export const activate = async (ctx: ExtensionContext) => {
     ctx.logger.info(`=== Extension activated ===`);
-    ctx.logger.info(`Extension Name: ${extensionName}.`);
-    ctx.logger.info(`Extension Version: ${extensionVersion}.`);
+    // ctx.logger.info(`Extension Name: ${extensionName}.`);
+    // ctx.logger.info(`Extension Version: ${extensionVersion}.`);
 
     ActivityController.setExtensionContext(ctx);
 
@@ -70,7 +70,8 @@ export const activate = async (ctx: ExtensionContext) => {
     });
 
     const versionCommand = commands.registerCommand(Commands.VERSION_RPC, async () => {
-        await logInfo(`v${extensionVersion}`);
+        // await logInfo(`v${extensionVersion}`);
+        await logInfo(`v0.0.0`);
     });
 
     ctx.subscriptions.push(enableCommand, disableCommand, reconnectCommand, disconnectCommand, versionCommand);

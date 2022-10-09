@@ -12,11 +12,11 @@ import {
     REPLACE_KEYS,
     SEND_ACTIVITY_TIMEOUT,
     VIM_IDLE_IMAGE_KEY,
-    VIM_IMAGE_KEY
+    VIM_IMAGE_KEY,
+    ACCEPTED_DIAGNOSTIC_SEVERITY
 } from "./constants";
 
-let idleCheckTimeout: NodeJS.Timeout | undefined = undefined;
-
+let idleCheckTimeout: NodeJS.Timer | undefined = undefined;
 let totalProblems = 0;
 
 export async function generateDiagnostics() {
@@ -25,16 +25,14 @@ export async function generateDiagnostics() {
     let counted = 0;
 
     diagnostics.forEach((diagnostic: DiagnosticItem) => {
-        if (diagnostic.severity === "Warning" || diagnostic.severity === "Error") {
-            counted++;
-        }
+        if (ACCEPTED_DIAGNOSTIC_SEVERITY.includes(diagnostic.severity)) counted++;
     });
 
     totalProblems = counted;
 }
 
 export class ActivityController {
-    public static interval: NodeJS.Timeout | undefined;
+    public static interval: NodeJS.Timer | undefined;
 
     public static extensionContext: ExtensionContext;
 
@@ -49,9 +47,7 @@ export class ActivityController {
     public static async sendActivity() {
         await generateDiagnostics();
 
-        if (ActivityController.interval) {
-            clearTimeout(ActivityController.interval);
-        }
+        if (ActivityController.interval) clearTimeout(ActivityController.interval);
 
         ActivityController.interval = setTimeout(() => void ActivityController.sendActivity(), SEND_ACTIVITY_TIMEOUT);
 
@@ -69,8 +65,8 @@ export class ActivityController {
         const defaultLargeImageText = config[CONFIG_KEYS.LargeImageIdling];
         const defaultSmallImageKey = workspace.isNvim ? NEOVIM_IMAGE_KEY : VIM_IMAGE_KEY;
         const defaultSmallImageText = (config[CONFIG_KEYS.SmallImage] as string)
-            .replace(REPLACE_KEYS.AppName, appName)
-            .replace(REPLACE_KEYS.AppVersion, workspace.env.version);
+            .replaceAll(REPLACE_KEYS.AppName, appName)
+            .replaceAll(REPLACE_KEYS.AppVersion, workspace.env.version);
 
         let state: SetActivity = {
             startTimestamp: config[CONFIG_KEYS.WorkspaceElapsedTime]
@@ -87,9 +83,9 @@ export class ActivityController {
         if (document) {
             const largeImageKey = resolveFileIcon(document);
             const largeImageText = (config[CONFIG_KEYS.LargeImage] as string)
-                .replace(REPLACE_KEYS.LanguageLowerCase, largeImageKey.toLocaleLowerCase())
-                .replace(REPLACE_KEYS.LanguageUpperCase, largeImageKey.toLocaleUpperCase())
-                .replace(
+                .replaceAll(REPLACE_KEYS.LanguageLowerCase, largeImageKey.toLocaleLowerCase())
+                .replaceAll(REPLACE_KEYS.LanguageUpperCase, largeImageKey.toLocaleUpperCase())
+                .replaceAll(
                     REPLACE_KEYS.LanguageTitleCase,
                     largeImageKey.toLocaleLowerCase().replace(/^\w/, (c) => c.toLocaleUpperCase())
                 );
@@ -147,30 +143,20 @@ export class ActivityController {
     public static async checkIdle(focused: boolean) {
         const config = getConfig();
 
-        if (config[CONFIG_KEYS.CheckIdle]) {
-            if (focused) {
-                if (idleCheckTimeout) {
-                    clearTimeout(idleCheckTimeout);
-                }
+        if (!config[CONFIG_KEYS.CheckIdle]) return;
 
+        if (idleCheckTimeout) clearTimeout(idleCheckTimeout);
+        idleCheckTimeout = undefined;
+
+        if (focused) {
+            await ActivityController.setIdle(false);
+        } else {
+            idleCheckTimeout = setInterval(async () => {
+                await ActivityController.setIdle(true);
+
+                if (idleCheckTimeout) clearTimeout(idleCheckTimeout);
                 idleCheckTimeout = undefined;
-
-                await ActivityController.setIdle(false);
-            } else {
-                if (idleCheckTimeout) {
-                    clearTimeout(idleCheckTimeout);
-                }
-
-                idleCheckTimeout = setInterval(async () => {
-                    await ActivityController.setIdle(true);
-
-                    if (idleCheckTimeout) {
-                        clearTimeout(idleCheckTimeout);
-                    }
-
-                    idleCheckTimeout = undefined;
-                }, config[CONFIG_KEYS.IdleTimeout] * 1000);
-            }
+            }, config[CONFIG_KEYS.IdleTimeout] * 1000);
         }
     }
 
@@ -182,26 +168,25 @@ export class ActivityController {
         const config = getConfig();
         const document = await workspace.document;
 
-        let raw = (config[idling] as string).replace(REPLACE_KEYS.Empty, FAKE_EMPTY);
+        let raw = (config[idling] as string).replaceAll(REPLACE_KEYS.Empty, FAKE_EMPTY);
 
         if (document) {
-            if (ActivityController.viewing) {
-                raw = config[viewing] as string;
-            } else {
-                raw = config[editing] as string;
-            }
+            raw = (ActivityController.viewing ? config[viewing] : config[editing]) as string;
 
             const fileName = basename(document.uri);
             const fileIcon = resolveFileIcon(document);
 
-            const noWorkspaceFound = config[CONFIG_KEYS.LowerDetailsNotFound].replace(REPLACE_KEYS.Empty, FAKE_EMPTY);
+            const noWorkspaceFound = config[CONFIG_KEYS.LowerDetailsNotFound].replaceAll(
+                REPLACE_KEYS.Empty,
+                FAKE_EMPTY
+            );
             const workspaceFolderName =
                 workspace.getWorkspaceFolder(document.uri)?.name ??
                 (config[CONFIG_KEYS.UseCWDAsFallback] ? basename(workspace.cwd) : null) ??
                 noWorkspaceFound;
 
             const problems = config[CONFIG_KEYS.ShowProblems]
-                ? config[CONFIG_KEYS.ProblemsText].replace(REPLACE_KEYS.ProblemsCount, totalProblems.toString())
+                ? config[CONFIG_KEYS.ProblemsText].replaceAll(REPLACE_KEYS.ProblemsCount, totalProblems.toString())
                 : "";
 
             try {
@@ -211,12 +196,12 @@ export class ActivityController {
             }
 
             raw = raw
-                .replace(REPLACE_KEYS.FileName, fileName)
-                .replace(REPLACE_KEYS.Problems, problems)
-                .replace(REPLACE_KEYS.WorkspaceFolder, workspaceFolderName)
-                .replace(REPLACE_KEYS.LanguageLowerCase, fileIcon.toLocaleLowerCase())
-                .replace(REPLACE_KEYS.LanguageUpperCase, fileIcon.toLocaleUpperCase())
-                .replace(
+                .replaceAll(REPLACE_KEYS.FileName, fileName)
+                .replaceAll(REPLACE_KEYS.Problems, problems)
+                .replaceAll(REPLACE_KEYS.WorkspaceFolder, workspaceFolderName)
+                .replaceAll(REPLACE_KEYS.LanguageLowerCase, fileIcon.toLocaleLowerCase())
+                .replaceAll(REPLACE_KEYS.LanguageUpperCase, fileIcon.toLocaleUpperCase())
+                .replaceAll(
                     REPLACE_KEYS.LanguageTitleCase,
                     fileIcon.toLocaleLowerCase().replace(/^\w/, (c) => c.toLocaleUpperCase())
                 );
@@ -228,24 +213,22 @@ export class ActivityController {
     private static async generateFileDetails(_raw: string, document: Document): Promise<string> {
         let raw = _raw.slice();
 
-        if (!raw) {
-            return raw;
-        }
+        if (!raw) return raw;
 
-        if (raw.includes(REPLACE_KEYS.TotalLines)) {
-            raw = raw.replace(REPLACE_KEYS.TotalLines, document.lineCount.toLocaleString());
-        }
+        if (raw.includes(REPLACE_KEYS.TotalLines))
+            raw = raw.replaceAll(REPLACE_KEYS.TotalLines, document.lineCount.toLocaleString());
 
-        if (raw.includes(REPLACE_KEYS.CurrentLine)) {
-            raw = raw.replace(REPLACE_KEYS.CurrentLine, ((await window.getCursorPosition()).line + 1).toLocaleString());
-        }
+        if (raw.includes(REPLACE_KEYS.CurrentLine))
+            raw = raw.replaceAll(
+                REPLACE_KEYS.CurrentLine,
+                ((await window.getCursorPosition()).line + 1).toLocaleString()
+            );
 
-        if (raw.includes(REPLACE_KEYS.CurrentColumn)) {
-            raw = raw.replace(
+        if (raw.includes(REPLACE_KEYS.CurrentColumn))
+            raw = raw.replaceAll(
                 REPLACE_KEYS.CurrentColumn,
                 ((await window.getCursorPosition()).character + 1).toLocaleString()
             );
-        }
 
         return raw;
     }

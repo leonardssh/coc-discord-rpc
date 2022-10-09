@@ -39,15 +39,11 @@ export async function getGitRepo(): Promise<string | null> {
     try {
         const isInit = await asyncExec("git rev-parse --git-dir");
 
-        if (!isInit.stdout.trim()) {
-            return null;
-        }
+        if (!isInit.stdout.trim()) return null;
 
         const remoteUrl = await asyncExec("git config --get remote.origin.url");
 
-        if (!remoteUrl.stdout) {
-            return null;
-        }
+        if (!remoteUrl.stdout) return null;
 
         return gitUrlParse(remoteUrl.stdout).toString("https").replace(".git", "");
     } catch {
@@ -65,14 +61,10 @@ export function resolveFileIcon(document: Document): string {
     const icon =
         knownExtensions[
             Object.keys(knownExtensions).find((key) => {
-                if (filename.endsWith(key)) {
-                    return true;
-                }
+                if (filename.endsWith(key)) return true;
 
                 const match = /^\/(.*)\/([mgiy]+)$/.exec(key);
-                if (!match) {
-                    return false;
-                }
+                if (!match) return false;
 
                 const regex = new RegExp(match[1], match[2]);
                 return regex.test(filename);

@@ -10,7 +10,9 @@ import {
     NEOVIM_IDLE_IMAGE_KEY,
     NEOVIM_IMAGE_KEY,
     REPLACE_KEYS,
-    SEND_ACTIVITY_TIMEOUT
+    SEND_ACTIVITY_TIMEOUT,
+    VIM_IDLE_IMAGE_KEY,
+    VIM_IMAGE_KEY
 } from "./constants";
 
 let idleCheckTimeout: NodeJS.Timeout | undefined = undefined;
@@ -65,7 +67,7 @@ export class ActivityController {
 
         const appName = workspace.isNvim ? "NeoVim" : "Vim";
         const defaultLargeImageText = config[CONFIG_KEYS.LargeImageIdling];
-        const defaultSmallImageKey = NEOVIM_IMAGE_KEY;
+        const defaultSmallImageKey = workspace.isNvim ? NEOVIM_IMAGE_KEY : VIM_IMAGE_KEY;
         const defaultSmallImageText = (config[CONFIG_KEYS.SmallImage] as string)
             .replace(REPLACE_KEYS.AppName, appName)
             .replace(REPLACE_KEYS.AppVersion, workspace.env.version);
@@ -74,7 +76,7 @@ export class ActivityController {
             startTimestamp: config[CONFIG_KEYS.WorkspaceElapsedTime]
                 ? undefined
                 : previous.startTimestamp ?? Number(new Date()),
-            largeImageKey: NEOVIM_IDLE_IMAGE_KEY,
+            largeImageKey: workspace.isNvim ? NEOVIM_IDLE_IMAGE_KEY : VIM_IDLE_IMAGE_KEY,
             largeImageText: defaultLargeImageText,
             smallImageKey: previous.smallImageKey ?? defaultSmallImageKey,
             smallImageText: previous.smallImageText ?? defaultSmallImageText

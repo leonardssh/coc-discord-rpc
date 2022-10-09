@@ -1,30 +1,34 @@
 {
     "name": "coc-discord-rpc",
-    "version": "5.1.1",
-    "description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim.",
+    "version": "5.1.2",
+    "description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim / Vim.",
     "main": "dist/index.js",
+    "license": "MIT",
     "publisher": "leonardssh",
+    "author": "LeonardSSH <leonardssh22@gmail.com> (https://leonard.sh)",
+    "contributors": [
+        "xhayper <hayper1919@gmail.com>"
+    ],
+    "homepage": "https://github.com/LeonardSSH/coc-discord-rpc#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LeonardSSH/coc-discord-rpc.git"
+    },
+    "bugs": {
+        "url": "https://github.com/LeonardSSH/coc-discord-rpc/issues"
+    },
     "keywords": [
         "discord",
         "rich",
         "presence",
-        "rich presence",
+        "rich-presence",
         "rpc",
+        "vim",
         "neovim",
         "nvim",
         "coc",
         "coc.nvim"
     ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/LeonardSSH/coc-discord-rpc.git"
-    },
-    "author": "LeonardSSH <leonardssh22@gmail.com> (https://leonard.sh)",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/LeonardSSH/coc-discord-rpc/issues"
-    },
-    "homepage": "https://github.com/LeonardSSH/coc-discord-rpc#readme",
     "scripts": {
         "lint": "prettier --check src/**/*",
         "format": "prettier --write src/**/*",
@@ -42,7 +46,7 @@
     "devDependencies": {
         "@types/git-url-parse": "^9.0.1",
         "@types/lodash": "^4.14.186",
-        "@types/node": "^18.8.3",
+        "@types/node": "^12.12.0",
         "coc.nvim": "^0.0.82",
         "husky": "^8.0.1",
         "prettier": "^2.7.1",

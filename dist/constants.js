@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FORMAT_FUNCTION_LIST = exports.SEND_ACTIVITY_TIMEOUT = exports.NEOVIM_IDLE_IMAGE_KEY = exports.NEOVIM_IMAGE_KEY = exports.IDLE_IMAGE_KEY = exports.FAKE_EMPTY = exports.EMPTY = void 0;
+exports.FORMAT_FUNCTION_LIST = exports.SEND_ACTIVITY_TIMEOUT = exports.VIM_IDLE_IMAGE_KEY = exports.VIM_IMAGE_KEY = exports.NEOVIM_IDLE_IMAGE_KEY = exports.NEOVIM_IMAGE_KEY = exports.IDLE_IMAGE_KEY = exports.FAKE_EMPTY = exports.EMPTY = void 0;
 const node_path_1 = __importDefault(require("node:path"));
 const node_fs_1 = __importDefault(require("node:fs"));
 exports.EMPTY = "";
@@ -11,6 +11,8 @@ exports.FAKE_EMPTY = "\u200b\u200b";
 exports.IDLE_IMAGE_KEY = "idle";
 exports.NEOVIM_IMAGE_KEY = "neovim-logo";
 exports.NEOVIM_IDLE_IMAGE_KEY = "idle-neovim";
+exports.VIM_IMAGE_KEY = "vim";
+exports.VIM_IDLE_IMAGE_KEY = "vim";
 exports.SEND_ACTIVITY_TIMEOUT = 5000;
 exports.FORMAT_FUNCTION_LIST = [
     (id) => {

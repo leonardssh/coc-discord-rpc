@@ -42,7 +42,7 @@ class ActivityController {
         const config = (0, util_1.getConfig)();
         const appName = coc_nvim_1.workspace.isNvim ? "NeoVim" : "Vim";
         const defaultLargeImageText = config["largeImageIdling" /* CONFIG_KEYS.LargeImageIdling */];
-        const defaultSmallImageKey = constants_1.NEOVIM_IMAGE_KEY;
+        const defaultSmallImageKey = coc_nvim_1.workspace.isNvim ? constants_1.NEOVIM_IMAGE_KEY : constants_1.VIM_IMAGE_KEY;
         const defaultSmallImageText = config["smallImage" /* CONFIG_KEYS.SmallImage */]
             .replace("{app_name}" /* REPLACE_KEYS.AppName */, appName)
             .replace("{app_version}" /* REPLACE_KEYS.AppVersion */, coc_nvim_1.workspace.env.version);
@@ -50,7 +50,7 @@ class ActivityController {
             startTimestamp: config["workspaceElapsedTime" /* CONFIG_KEYS.WorkspaceElapsedTime */]
                 ? undefined
                 : previous.startTimestamp ?? Number(new Date()),
-            largeImageKey: constants_1.NEOVIM_IDLE_IMAGE_KEY,
+            largeImageKey: coc_nvim_1.workspace.isNvim ? constants_1.NEOVIM_IDLE_IMAGE_KEY : constants_1.VIM_IDLE_IMAGE_KEY,
             largeImageText: defaultLargeImageText,
             smallImageKey: previous.smallImageKey ?? defaultSmallImageKey,
             smallImageText: previous.smallImageText ?? defaultSmallImageText

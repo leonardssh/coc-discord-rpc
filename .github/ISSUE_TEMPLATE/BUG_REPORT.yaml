@@ -19,7 +19,7 @@ body:
     attributes:
       label: NeoVim/Vim version
       description: What version of neovim/vim are you using?
-      placeholder: 0.8.0
+      placeholder: NeoVim 0.8.0
     validations:
       required: true
   - type: input

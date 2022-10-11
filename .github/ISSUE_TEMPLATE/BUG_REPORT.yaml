@@ -11,7 +11,7 @@ body:
     attributes:
       label: Operating system
       description: What operating system are you using?
-      placeholder: ArchLinux, arm64 with Linux 6.0 kernel
+      placeholder: aarch64 ArchLinux with Linux 6.0 kernel
     validations:
       required: true
   - type: input
@@ -25,20 +25,21 @@ body:
   - type: input
     id: coc-version
     attributes:
-      label: Coc.nvim version
-      description: What version of coc.nvim are you using?
+      label: CoC version
+      description: What version of CoC are you using?
       placeholder: 0.0.82
     validations:
       required: true
   - type: dropdown
     id: discord-version
     attributes:
-      label: What version of Discord are you using?
+      label: Discord version
+      description: What version of Discord are you using?
       options:
-        - Official
+        - official
         - flatpak
         - snapstore
-        - Other (state it in the comment of issue)
+        - other (state it in the comment of issue)
     validations:
       required: true
   - type: textarea

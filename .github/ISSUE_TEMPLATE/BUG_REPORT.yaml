@@ -15,10 +15,10 @@ body:
     validations:
       required: true
   - type: input
-    id: nvim-version
+    id: editor-version
     attributes:
-      label: NeoVim version
-      description: What version of neovim are you using?
+      label: NeoVim/Vim version
+      description: What version of neovim/vim are you using?
       placeholder: 0.8.0
     validations:
       required: true

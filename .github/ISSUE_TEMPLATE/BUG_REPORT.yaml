@@ -11,23 +11,34 @@ body:
     attributes:
       label: Operating system
       description: What operating system are you using?
-      placeholder: ArchLinux, arm64 and linux 6.0
+      placeholder: ArchLinux, arm64 with Linux 6.0 kernel
     validations:
       required: true
   - type: input
     id: editor-version
     attributes:
       label: NeoVim/Vim version
-      description: What version of neovim/vim are you using?
+      description: What version of NeoVim/Vim are you using?
       placeholder: NeoVim 0.8.0
     validations:
       required: true
   - type: input
     id: coc-version
     attributes:
-      label: coc version
-      description: What version of coc are you using?
+      label: Coc.nvim version
+      description: What version of coc.nvim are you using?
       placeholder: 0.0.82
+    validations:
+      required: true
+  - type: dropdown
+    id: discord-version
+    attributes:
+      label: What version of Discord are you using?
+      options:
+        - Official
+        - flatpak
+        - snapstore
+        - Other (state it in the comment of issue)
     validations:
       required: true
   - type: textarea

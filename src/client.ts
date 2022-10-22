@@ -1,4 +1,4 @@
-import { type ClientOptions, Client} from "@xhayper/discord-rpc";
+import { type ClientOptions, Client } from "@xhayper/discord-rpc";
 import { FORMAT_FUNCTION_LIST, CONFIG_KEYS } from "./constants";
 import { type ExtensionContext } from "coc.nvim";
 import { ListenerController } from "./listener";

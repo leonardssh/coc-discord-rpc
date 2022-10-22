@@ -3,6 +3,7 @@
 .yarn/
 src/
 
+tsup.config.ts
 .gitattributes
 tsconfig.json
 .prettierrc

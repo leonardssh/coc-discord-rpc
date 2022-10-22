@@ -1,6 +1,6 @@
-import { DiagnosticItem, diagnosticManager, Document, ExtensionContext, window, workspace } from "coc.nvim";
+import { type Document, type ExtensionContext, DiagnosticItem, diagnosticManager, window, workspace } from "coc.nvim";
 import { getConfig, getGitRepo, resolveFileIcon } from "./util";
-import type { SetActivity } from "@xhayper/discord-rpc";
+import { type SetActivity } from "@xhayper/discord-rpc";
 import { ClientController } from "./client";
 import { basename } from "node:path";
 import {

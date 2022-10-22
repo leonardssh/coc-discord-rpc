@@ -1,4 +1,4 @@
-import { commands, ExtensionContext, workspace } from "coc.nvim";
+import { type ExtensionContext, commands, workspace } from "coc.nvim";
 import { ActivityController } from "./activity";
 import { ListenerController } from "./listener";
 import { logError, logInfo } from "./logger";

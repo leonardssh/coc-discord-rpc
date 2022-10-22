@@ -1,3 +1,5 @@
+import "source-map-support/register";
+
 import { type ExtensionContext, commands, workspace } from "coc.nvim";
 import { ActivityController } from "./activity";
 import { ListenerController } from "./listener";

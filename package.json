@@ -40,7 +40,7 @@
         "@types/git-url-parse": "^9.0.1",
         "@types/lodash": "^4.14.186",
         "@types/node": "14.18.32",
-        "@xhayper/discord-rpc": "^1.0.12",
+        "@xhayper/discord-rpc": "^1.0.13",
         "coc.nvim": "^0.0.82",
         "git-url-parse": "^13.1.0",
         "lodash": "^4.17.21",

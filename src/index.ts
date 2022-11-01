@@ -31,7 +31,7 @@ export const activate = async (ctx: ExtensionContext) => {
     }
 
     const enableCommand = commands.registerCommand(Commands.ENABLE_RPC, async () => {
-        await config.update("enabled", true);
+        config.update("enabled", true);
 
         ListenerController.reset();
         await ClientController.login(ctx);
@@ -40,7 +40,7 @@ export const activate = async (ctx: ExtensionContext) => {
     });
 
     const disableCommand = commands.registerCommand(Commands.DISABLE_RPC, async () => {
-        await config.update("enabled", false);
+        config.update("enabled", false);
 
         ListenerController.reset();
         await ClientController.rpc.destroy();

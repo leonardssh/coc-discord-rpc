@@ -341,7 +341,7 @@ __metadata:
     "@types/git-url-parse": ^9.0.1
     "@types/node": 14.x
     "@xhayper/discord-rpc": ^1.0.13
-    coc.nvim: ^0.0.83-next.9
+    coc.nvim: 0.0.82
     git-url-parse: ^13.1.0
     source-map-support: ^0.5.21
     tsup: ^6.5.0
@@ -350,12 +350,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"coc.nvim@npm:^0.0.83-next.9":
-  version: 0.0.83-next.14
-  resolution: "coc.nvim@npm:0.0.83-next.14"
+"coc.nvim@npm:0.0.82":
+  version: 0.0.82
+  resolution: "coc.nvim@npm:0.0.82"
   peerDependencies:
-    "@types/node": ^14.14.0
-  checksum: 0a41eaa328c984a71b105f76ac09f2f675a22bd1b0ce6abccb7004c627756765f062a9c2420a57a4e905d57c6ca3d420684d129a70f41e44091fbe7f0e77da32
+    "@types/node": ^12.12.0
+    typescript: ^4
+  checksum: 2abbf7da6813d4525ba0ff48b8968e3105b03fe381378a7b04b1d5203b3344f17af6475825a4d4dd2c386c6223ffbe85a1c35b9309f526703b3440447b9e2c9b
   languageName: node
   linkType: hard
 
@@ -736,11 +737,11 @@ __metadata:
   linkType: hard
 
 "fastq@npm:^1.6.0":
-  version: 1.13.0
-  resolution: "fastq@npm:1.13.0"
+  version: 1.14.0
+  resolution: "fastq@npm:1.14.0"
   dependencies:
     reusify: ^1.0.4
-  checksum: 32cf15c29afe622af187d12fc9cd93e160a0cb7c31a3bb6ace86b7dea3b28e7b72acde89c882663f307b2184e14782c6c664fa315973c03626c7d4bff070bb0b
+  checksum: da2c05ec1446ef77b8ba2b76619c90d483404f5087e71e77469fbee797280a1f4ef26a63be15b2377198bc20d09fdf25c7d6e1e492a1e568a29dfdd9bcb7538c
   languageName: node
   linkType: hard
 
@@ -1616,8 +1617,8 @@ __metadata:
   linkType: hard
 
 "rollup@npm:^3.2.5":
-  version: 3.5.0
-  resolution: "rollup@npm:3.5.0"
+  version: 3.5.1
+  resolution: "rollup@npm:3.5.1"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -1625,7 +1626,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 57aa8e17c7a8d5b80b7a26c8acd52779369826049dbc370b929d73a6015fb69161f5aca699e8c54f7ea410d4ce5b5a45b26b07d5c99724becd555eef0ffe35be
+  checksum: 9206af1fca3c05a519adf6cd81fa9c86d3262370256c2480b480e11f19dda212aac388d1893da6193d660071c54e57ae5981f54e0e52fe27e45245b991fbf6d3
   languageName: node
   linkType: hard
 

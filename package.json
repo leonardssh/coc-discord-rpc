@@ -1,7 +1,7 @@
 {
     "name": "coc-discord-rpc",
     "version": "5.1.5",
-    "description": "An awesome coc-extension to get Discord Rich Presence integration with NeoVim / Vim.",
+    "description": "An awesome coc-extension to get Discord Rich Presence integration with Neovim / Vim.",
     "main": "dist/index.js",
     "license": "MIT",
     "publisher": "leonardssh",
@@ -91,7 +91,7 @@
                 "rpc.smallImage": {
                     "type": "string",
                     "default": "{app_name} v{app_version}",
-                    "description": "Custom string for the smallImageText section of the rich presence\n\t- {app_name} will get replaced with NeoVim text\n\t- ${app_version} will be replaced with the installed version of NeoVim."
+                    "description": "Custom string for the smallImageText section of the rich presence\n\t- {app_name} will get replaced with Neovim text\n\t- ${app_version} will be replaced with the installed version of Neovim."
                 },
                 "rpc.showProblems": {
                     "type": "boolean",

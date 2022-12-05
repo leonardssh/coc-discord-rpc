@@ -3,7 +3,7 @@
 </p>
 
 <h3 align="center">
-    😎 An awesome and fully customizable coc-extension to get Discord Rich Presence integration with <a href="https://neovim.io/"><b>NeoVim</b></a> / <a href="https://www.vim.org/"><b>Vim</b></a>.
+    😎 An awesome and fully customizable coc-extension to get Discord Rich Presence integration with <a href="https://neovim.io/"><b>Neovim</b></a> / <a href="https://www.vim.org/"><b>Vim</b></a>.
 </h3>
 
 <div align="center">
@@ -31,7 +31,7 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 ## 📌 Features
 
 -   Highly customizable in using the extension settings
--   Shows what you're working on in NeoVim / Vim
+-   Shows what you're working on in Neovim / Vim
 -   Shows the amount of problems in your workspace
 -   Shows the number of lines in your file and which line you're editing
 -   Respects Discords 15sec limit when it comes to updating your status

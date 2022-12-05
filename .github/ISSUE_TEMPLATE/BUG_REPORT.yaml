@@ -17,9 +17,9 @@ body:
   - type: input
     id: editor-version
     attributes:
-      label: NeoVim/Vim version
-      description: What version of NeoVim/Vim are you using?
-      placeholder: NeoVim 0.8.0
+      label: Neovim/Vim version
+      description: What version of Neovim/Vim are you using?
+      placeholder: Neovim 0.8.0
     validations:
       required: true
   - type: input

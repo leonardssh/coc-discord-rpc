@@ -61,7 +61,7 @@ export class ActivityController {
     public static async generateActivity(previous: SetActivity = {}): Promise<SetActivity> {
         const config = getConfig();
 
-        const appName = workspace.isNvim ? "NeoVim" : "Vim";
+        const appName = workspace.isNvim ? "Neovim" : "Vim";
         const defaultLargeImageText = config[CONFIG_KEYS.LargeImageIdling];
         const defaultSmallImageKey = workspace.isNvim ? NEOVIM_IMAGE_KEY : VIM_IMAGE_KEY;
         const defaultSmallImageText = (config[CONFIG_KEYS.SmallImage] as string)

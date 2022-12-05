@@ -118,7 +118,7 @@
                 },
                 "rpc.detailsViewing": {
                     "type": "string",
-                    "default": "In {workspace_folder} {problems}",
+                    "default": "In workspace {workspace_folder} {problems}",
                     "description": "Custom string for the details section of the rich presence when viewing\n\t- {null} will be replaced with an empty space\n\t- {file_name} will be replaced with the current file name\n\t- {workspace_folder} will be replaced with the current workspace name, if any\n\t- {current_column} will get replaced with the current column of the current line\n\t- {current_line} will get replaced with the current line number\n\t- {total_lines} will get replaced with the total line number\n\t- {problems} will be replaced with the count of problems (warnings, errors) present in your workspace."
                 },
                 "rpc.lowerDetailsViewing": {

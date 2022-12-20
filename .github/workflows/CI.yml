@@ -19,14 +19,8 @@ jobs:
         with:
           node-version: 16
 
-      - name: Restore CI Cache
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-16-${{ hashFiles('**/yarn.lock') }}
-
       - name: Install Dependencies
-        run: yarn install --immutable
+        run: pnpm install --immutable
 
       - name: Build Code
-        run: yarn build
+        run: pnpm run build

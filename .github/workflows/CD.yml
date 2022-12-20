@@ -28,6 +28,7 @@ jobs:
         run: |
           npm i -g pnpm
           SHELL=bash pnpm setup
+          source /home/runner/.bashrc
 
       - name: Install Dependencies
         run: pnpm install

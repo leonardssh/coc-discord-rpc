@@ -20,10 +20,12 @@ jobs:
           node-version: 16
 
       - name: Install pnpm
-        run: npm i -g pnpm
+        run: |
+          npm i -g pnpm
+          pnpm setup
 
       - name: Install Dependencies
-        run: pnpm install --immutable
+        run: pnpm install
 
       - name: Build Code
         run: pnpm run build

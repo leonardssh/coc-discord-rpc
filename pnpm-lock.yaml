@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@types/git-url-parse': ^9.0.1
   '@types/node': 14.x
-  '@xhayper/discord-rpc': ^1.0.13
+  '@xhayper/discord-rpc': ^1.0.14
   coc.nvim: 0.0.82
   git-url-parse: ^13.1.0
   source-map-support: ^0.5.21
@@ -14,7 +14,7 @@ specifiers:
 devDependencies:
   '@types/git-url-parse': 9.0.1
   '@types/node': 14.18.35
-  '@xhayper/discord-rpc': 1.0.13
+  '@xhayper/discord-rpc': 1.0.14
   coc.nvim: 0.0.82_xplfzyzpegygk3axf4z63vz544
   git-url-parse: 13.1.0
   source-map-support: 0.5.21
@@ -71,8 +71,8 @@ packages:
     resolution: {integrity: sha512-2ATO8pfhG1kDvw4Lc4C0GXIMSQFFJBCo/R1fSgTwmUlq5oy95LXyjDQinsRVgQY6gp6ghh3H91wk9ES5/5C+Tw==}
     dev: true
 
-  /@xhayper/discord-rpc/1.0.13:
-    resolution: {integrity: sha512-e4lHTxJanQCwWFSKSrn7HOlyP2beKsilUOPKLvYrVLQrrx+tmEU5FIWs2bUv+3RJuHHB94hzH7GHGTyYp3NJ5A==}
+  /@xhayper/discord-rpc/1.0.14:
+    resolution: {integrity: sha512-+Q5QiNA8+9VOLlU+O71H5YKlgPoZuizCZhMjdtESVQ+WQ1mcXQd8MxMLbVymXxRpDtsfN1ym/sQHCUXLTahOvw==}
     engines: {node: '>=14.18.0'}
     dependencies:
       axios: 1.2.1

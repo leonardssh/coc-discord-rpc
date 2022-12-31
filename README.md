@@ -34,7 +34,7 @@ This may not be the best discord rpc, but it is a discord rpc. 😁
 -   Shows what you're working on in Neovim / Vim
 -   Shows the amount of problems in your workspace
 -   Shows the number of lines in your file and which line you're editing
--   Respects Discords 15sec limit when it comes to updating your status
+-   Respects Discord's 15sec limit when it comes to updating your status
 -   Support for over 130+ of the most popular languages
 -   Enable/Disable RPC for individual workspaces
 -   Custom string support

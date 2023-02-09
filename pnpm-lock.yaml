@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@types/git-url-parse': ^9.0.1
-  '@types/node': 18.x
+  '@types/node': 14.x
   '@xhayper/discord-rpc': ^1.0.15
   coc.nvim: 0.0.82
   git-url-parse: ^13.1.0
@@ -13,9 +13,9 @@ specifiers:
 
 devDependencies:
   '@types/git-url-parse': 9.0.1
-  '@types/node': 18.13.0
+  '@types/node': 14.18.36
   '@xhayper/discord-rpc': 1.0.15
-  coc.nvim: 0.0.82_4bewfcp2iebiwuold25d6rgcsy
+  coc.nvim: 0.0.82_7iyetdgfmqiorh7qupktbe7tm4
   git-url-parse: 13.1.0
   source-map-support: 0.5.21
   tsup: 6.6.0_typescript@4.9.5
@@ -247,8 +247,8 @@ packages:
     resolution: {integrity: sha512-Zf9mY4Mz7N3Nyi341nUkOtgVUQn4j6NS4ndqEha/lOgEbTkHzpD7wZuRagYKzrXNtvawWfsrojoC1nhsQexvNA==}
     dev: true
 
-  /@types/node/18.13.0:
-    resolution: {integrity: sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==}
+  /@types/node/14.18.36:
+    resolution: {integrity: sha512-FXKWbsJ6a1hIrRxv+FoukuHnGTgEzKYGi7kilfMae96AL9UNkPFNWJEEYWzdRI9ooIkbr4AKldyuSTLql06vLQ==}
     dev: true
 
   /@xhayper/discord-rpc/1.0.15:
@@ -352,14 +352,14 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /coc.nvim/0.0.82_4bewfcp2iebiwuold25d6rgcsy:
+  /coc.nvim/0.0.82_7iyetdgfmqiorh7qupktbe7tm4:
     resolution: {integrity: sha512-+70ap6FH8FSdaQ0CPijaasQzg6ue84j4/LkX6ZSpALX7YKBcGGDkCcd6adgaC/86b/ZqT3iTTEbMh3mdaI5qPA==}
     engines: {node: '>=12.12.0'}
     peerDependencies:
       '@types/node': ^12.12.0
       typescript: ^4
     dependencies:
-      '@types/node': 18.13.0
+      '@types/node': 14.18.36
       typescript: 4.9.5
     dev: true
 

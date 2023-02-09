@@ -179,5 +179,5 @@
             }
         }
     },
-    "packageManager": "pnpm@7.19.0"
+    "packageManager": "pnpm@7.26.2"
 }

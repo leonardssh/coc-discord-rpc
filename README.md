@@ -3,7 +3,7 @@
 </p>
 
 <h3 align="center">
-    😎 An awesome and fully customizable coc-extension to get Discord Rich Presence integration with <a href="https://neovim.io/"><b>Neovim</b></a> / <a href="https://www.vim.org/"><b>Vim</b></a>.
+    😎 An awesome and fully customizable coc-extension to get Discord Rich Presence integration with <a href="https://neovim.io/"><b>Neovim</b></a> / <a href="https://www.vim.org/"><b>Vim</b></a>
 </h3>
 
 <div align="center">

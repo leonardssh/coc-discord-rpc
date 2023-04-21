@@ -31,6 +31,17 @@ interface WorkspaceExtensionConfiguration extends WorkspaceConfiguration {
     buttonInactiveUrl: string;
 }
 
+export const stripCredential = (uri: string): string => {
+    try {
+        const url = new URL(uri);
+        url.username = "";
+        url.password = "";
+        return url.toString();
+    } catch (ignored) {
+        return uri;
+    }
+};
+
 export function getConfig(): WorkspaceExtensionConfiguration {
     return workspace.getConfiguration("rpc") as WorkspaceExtensionConfiguration;
 }
@@ -45,9 +56,11 @@ export async function getGitRepo(): Promise<string | null> {
 
         if (!remoteUrl.stdout) return null;
 
-        return gitUrlParse(remoteUrl.stdout.trim())
-            .toString("https")
-            .replace(/\.git$/, "");
+        return stripCredential(
+            gitUrlParse(remoteUrl.stdout.trim())
+                .toString("https")
+                .replace(/\.git$/, "")
+        );
     } catch {
         return null;
     }

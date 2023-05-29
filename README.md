@@ -1,3 +1,24 @@
+# ⚠️ Maintenance Mode Notice ⚠️
+Important: This project is currently in "Maintenance Mode Only." This means that the development of new features has been put on hold, and the focus will solely be on bug fixes and ensuring the extension remains compatible with NeoVim and Discord Rich Presence.
+
+## Maintenance Mode
+Due to time constraints and other commitments, the primary contributors of this project, [leonardssh](https://github.com/leonardssh) and [xhayper](https://github.com/xhayper), have decided to put coc-discord-rpc into "Maintenance Mode Only." This means that while we deeply appreciate the support and interest in the extension, we will not be actively developing new features at this time.
+
+## Bug Fixes
+While new feature development is on hold, we are committed to addressing any bugs or issues that arise to ensure the extension remains functional and reliable. We encourage you to report any bugs or problems you encounter by creating an issue in the GitHub repository. Please provide as much information as possible to help us reproduce and resolve the issue.
+
+## Community Support
+While we may not be actively developing new features, we welcome contributions from the community. If you're interested in helping with bug fixes, submitting patches, or improving documentation, we encourage you to fork the repository, make your changes, and submit a pull request. We'll do our best to review and merge the contributions in a timely manner.
+
+## Contact
+If you have any questions, concerns, or suggestions regarding coc-discord-rpc, please feel free to reach out to us through the GitHub repository's issue tracker or by contacting [leonardssh](https://github.com/leonardssh) and [xhayper](https://github.com/xhayper) directly. While we may not be able to provide immediate support, we'll do our best to assist you.
+
+Thank you for your understanding and continued support.
+
+Happy coding!
+
+---
+
 <p align="center">
     <img src="https://i.imgur.com/gpcIEF4.png" alt="Icon" align="center" width="256">
 </p>
